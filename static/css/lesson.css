@@ -1,0 +1,68 @@
+/* Header section */
+
+header {
+    font-size: 1rem;
+    overflow: hidden;
+    background-color: #245571;
+    padding: .5em .5em;
+}
+
+header a {
+    font-size: 1.2em;
+    float: left;
+    text-align: center;
+    padding: .25em 1.2em .25em 0;
+}
+
+/* Content section */
+
+li {
+    margin-left: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+li b {
+    font-weight: 600;
+    color: #4d7b96;
+}
+
+.article-mp {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.dropdown {
+    font-size: 1rem;
+    color: white;
+    background-color: #4d7b96;
+    height: 2em;
+    border-radius: .4em;
+    margin: 0px -5px 0px -5px;
+}
+
+.dropdown a {
+    font-size: 1.2em;
+    float: right;
+    padding: .25em .75em;
+}
+
+.dropdown p {
+    font-size: 1.1em;
+    float: left;
+    margin: 0;
+    padding: .25em .75em;
+}
+
+.dropdown-content {
+    margin: 0;
+    padding: .5rem 0;
+    display: none;
+    border-color: #e3ecf5;
+}
+
+.show {
+    display: block;
+}

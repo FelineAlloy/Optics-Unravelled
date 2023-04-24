@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0d4abc25aa.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lesson.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="s1-container">
+            <a href="index.html">Meniu</a>
+            <a href="#lessons">Lecții</a>
+            <a href="#exercices">Exerciții</a>
+        </div>
+    </header>
+    <article class="s1-container article-mp">
+        <div>
+            <h1>Optica geometrica</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non viverra purus. Integer lacinia enim sapien, sed vulputate dolor accumsan vel. Nunc non tincidunt elit, vitae consequat odio. Etiam dui enim, bibendum at rhoncus nec, eleifend id enim. Duis vehicula egestas risus eu euismod. Aenean turpis arcu, lacinia vel posuere porttitor, aliquam quis libero. Etiam ac ante ac libero aliquet ornare. Aliquam euismod justo quis est porta laoreet.</p>
+        </div>
+        <div>
+            <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div class="dropdown-content show">
+                <iframe
+                    id="canvasIframe"
+                    src="ray-optics/simulator/#apparent-depth"
+                    name="targetframe"
+                    allowTransparency="true"
+                    scrolling="no"
+                    frameborder="0"
+                >
+                </iframe>
+            </div>
+        </div>
+        <div>
+            <div class="dropdown"><p>Soluție</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div class="dropdown-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non viverra purus. Integer lacinia enim sapien, sed vulputate dolor accumsan vel. Nunc non tincidunt elit, vitae consequat odio. Etiam dui enim, bibendum at rhoncus nec, eleifend id enim. Duis vehicula egestas risus eu euismod. Aenean turpis arcu, lacinia vel posuere porttitor, aliquam quis libero. Etiam ac ante ac libero aliquet ornare. Aliquam euismod justo quis est porta laoreet.</p>
+            </div>
+        </div>
+    </article>
+
+    <script>
+        var area = 585225;
+        var iframe = document.getElementById("canvasIframe");
+        iframe.style.height = Math.min(3/2*iframe.offsetWidth, Math.round(area / iframe.offsetWidth)) + "px";
+        window.onresize = function() {
+            var area = 585225;
+            var iframe = document.getElementById("canvasIframe");
+            iframe.style.height = Math.min(3/2*iframe.offsetWidth, Math.round(area / iframe.offsetWidth)) + "px";
+        };
+    </script>
+
+    <script src="js/dropdown.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <section class="title-wraper">
+        <div class="s1-container">
+            <h1 style="color: white">Optică Geometrică</h1>
+            <div class="s1-container title-links-wrapper">
+                <a href="demo.html">Lecții</a>
+                <p>|</p>
+                <a href="#exercices">Exerciții</a>
+                <p>|</p>
+                <a href="#simulations">Simulări</a>
+            </div>
+        </div>
+    </section>
+    <section class="s1-container article-mp">
+        <div class="nav-wrapper" data-bind="foreach: tabs">
+            <!-- <menu class="main-menu">
+                <li><a class="bold" href="lesson.html">Noțiuni introductive</a></li>
+                <li><a href="">Natura luminii</a></li>
+                <li><a href="">Principiul lui Fermat</a></li>
+                <li><a href="">Legile refracției</a></li>
+                <li><a href="">Legile reflexiei</a></li>
+                <li><a href="">Aplicație: Imaginea unui obiect prin dioptrul plan</a></li>
+                <li><a href="">Aplicație: Prisma optică</a></li>
+
+                <li><a class="bold" href="">Dioptrul sferic</a></li>
+                <li><a href="">Relația punctelor conjugate - dioprul sferic</a></li>
+                <li><a href="">Focare: Focar obiect</a></li>
+                <li><a href="">Focare: Focar imagine</a></li>
+                <li><a href="">Marirea liniară transversală</a></li>
+                <li><a href="">Dioptrul plan</a></li>
+                <li><a href="">Oglinzi sferice</a></li>
+
+                <li><a class="bold" href="">Lentile groase și subțiri</a></li>
+
+                <li><a class="bold" href="">Instrumente optice</a></li>
+                <li><a href="">Lupa</a></li>
+                <li><a href="">Microscopul</a></li>
+                <li><a href="">Telescopul</a></li>
+            </menu> -->
+            <!-- ko if: selected -->
+                <menu class="main-menu" data-bind="foreach: content">
+                    <li><a data-bind="text: getLocaleName(), style: {'font-weight': 'bold'}, attr: { href: getURL('')}"></a></li>
+                    <!-- ko foreach: elem-->
+                        <li><a data-bind="text: getMsg($data), attr: { href: $parent.getURL($data)}"></a></li>
+                    <!-- /ko -->
+                </menu>
+            <!-- /ko -->
+        </div>
+        <article class="nav-article">
+            <h1>Noțiuni introductive</h1>
+            <p>Scurtă prezentare a lecției</p>
+        </article>
+    </section>
+
+    <!-- Import scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+    <!-- Localisation Scripts -->
+    <script src="js/locale.js"></script>
+    <script src="locale/en.js"></script>
+    <script src="locale/ro.js"></script>
+
+    <!-- View Models scripts -->
+    <script src="js/navViewModel.js"></script>
+</body>
+</html>

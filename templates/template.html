@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0d4abc25aa.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lesson.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="s1-container">
+            <a href="index.html">Meniu</a>
+            <a href="#lessons">Lecții</a>
+            <a href="#exercices">Exerciții</a>
+        </div>
+    </header>
+    <article class="s1-container article-mp">
+        <h1 style="text-align: center;">{{title}}</h1>
+        {% block content %}
+        {% endblock %}
+            
+                <!-- <div>
+                    <h1><a data-bind="text: getTitle()"></a></h1>
+                    <p data-bind="text: getContent()"></p>
+                </div>
+            
+
+             
+                <div>
+                    <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+                    <div class="dropdown-content show">
+                        <iframe
+                            id="canvasIframe"
+                            src="ray-optics/simulator/#apparent-depth"
+                            name="targetframe"
+                            allowTransparency="true"
+                            scrolling="no"
+                            frameborder="0"
+                        >
+                        </iframe>
+                    </div>
+                </div> -->
+            
+    </article>
+
+    <textarea id="textarea1"
+    style="position: absolute; bottom: 0; left: 0; width: 99%; height: 100px; display:none;"></textarea>
+
+    <!-- Import scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+    <!-- Localisation Scripts -->
+    <script src="js/locale.js"></script>
+    <script src="locale/en.js"></script>
+    <script src="locale/ro.js"></script>
+
+    <!-- View Models scripts -->
+    <script src="js/lessonViewModel.js"></script>
+
+    <script src="nunjucks.js"></script>
+</body>
+</html>
