@@ -1,0 +1,13 @@
+{% extends '../lessons/lesson.html' %}
+{% import '../lessons/templates.njk' as temp %}
+
+{% set title = 'Introduction' %}
+{% block content %}
+<div>
+    <h1><a>Introduction</a></h1>
+    {% block dropdown %}
+    hello
+    {% endblock %}
+    {{temp.dropdown}}
+</div>
+{% endblock %}

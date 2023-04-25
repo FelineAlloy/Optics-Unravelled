@@ -14,15 +14,21 @@ nunjucks.configure('.', {
     express: app
 });
 
-// app.engine( 'html', nunjucks.render ) ;
-// app.set( 'view engine', 'html' ) ;
+app.engine( 'html', nunjucks.render ) ;
+app.set( 'view engine', 'html' ) ;
 
-app.get('/template.html', (req, res) => {
+app.get('/lesson', (req, res) => {
 
-    var page = en.locales['en'][req.query.page].message;
-    console.log(en.locales['en']);
-    console.log(req.query.page);
-    return res.render('./templates/template.html', {title: page});
+    //sconsole.log(req);
+
+    var page = req.query.page;
+
+    var title = page;
+    try {
+        title = en.locales['en'][page].message;
+    } catch {}
+
+    return res.render('./lessons/'+page, {title: title});
 
 });
 
