@@ -1,0 +1,13 @@
+{% extends "./lesson.html" %}
+
+{% block content %}
+<div>
+    <h1 class='introduction' style='color: black'>Introduction</h1>
+    {% set type = 'dropdown' %}
+    {% set title = 'exemplu' %}
+    {% macro content() %}
+    <h4>hello</h4>
+    {% endmacro %}
+    {% include './templates.njk' %}
+</div>
+{% endblock %}

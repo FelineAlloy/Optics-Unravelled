@@ -1,7 +1,8 @@
+{% if type == 'dropdown' %}
 {% block dropdown %}
-<section>
-    <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
-        <div class="dropdown-content show">
+    <div class="dropdown"><p>{{title}}</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+        <div class="dropdown-content">
+            {{ content() }}
         </div>
-</section>
 {% endblock %}
+{% endif %}

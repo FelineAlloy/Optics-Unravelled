@@ -9,10 +9,10 @@ class entry {
     }
 
     getURL(page) {
-        var url = "/lesson.html?page=" + this.id;
+        var url = "/lesson?page=" + this.id;
         if(page.length)
         {
-            url += "#" + getMsg(page);
+            url += "#" + page;
         }
         
         return url;

@@ -2,10 +2,11 @@ const { readFile } = require('fs').promises;
 const path = require('path');
 const nunjucks = require('nunjucks');
 
-const en = require('./static/locale/en');
-
 const express = require('express');
 const app = express();
+
+const en = require('./static/locale/en');
+const ro = require('./static/locale/ro');
 
 app.use(express.static(__dirname + '/static'));
 
@@ -14,12 +15,7 @@ nunjucks.configure('.', {
     express: app
 });
 
-app.engine( 'html', nunjucks.render ) ;
-app.set( 'view engine', 'html' ) ;
-
 app.get('/lesson', (req, res) => {
-
-    //sconsole.log(req);
 
     var page = req.query.page;
 
@@ -28,7 +24,7 @@ app.get('/lesson', (req, res) => {
         title = en.locales['en'][page].message;
     } catch {}
 
-    return res.render('./lessons/'+page, {title: title});
+    return res.render('./lessons/'+page+'.njk', {title: title});
 
 });
 
