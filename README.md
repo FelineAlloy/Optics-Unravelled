@@ -1,4 +1,4 @@
-# Optics-Unravelled
+# Optics Unravelled
 ## Informații generale
 * Categorie: Web
 * Surse: https://github.com/FelineAlloy/Optics-Unravelled
