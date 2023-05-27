@@ -2,7 +2,7 @@
 ## Informații generale
 * Categorie: Web
 * Surse: https://github.com/FelineAlloy/Optics-Unravelled
-* Pagina princială: opticsunravelled.com
+* Pagina princială: https://opticsunravelled.com
 
 ## Descriere
 Optics Unravelled este o platforma ce facilitează procesul de învățare și predare a opticii geometrice, ajutănd în formarea unei mai bune intuiții a elevilor.
