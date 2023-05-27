@@ -8,42 +8,48 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0d4abc25aa.js" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/lesson.css">
 
-    <title>Document</title>
+    <script>
+        window.MathJax = {
+            loader: {load: ["input/tex", "output/svg", '[tex]/physics']},
+            tex: {packages: {'[+]': ['physics']}},
+        };
+    </script>
+
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <title>Despre</title>
 </head>
 <body>
-    <section class="title-wraper">
+    <header>
         <div class="s1-container">
-            <h1 style="color: white">Optică Geometrică</h1>
-            <div class="s1-container title-links-wrapper">
-                <!-- <a href="#lessons">Lecții</a>
-                <p>|</p>
-                <a href="#exercices">Exerciții</a>
-                <p>|</p>
-                <a href="#simulations">Simulări</a> -->
-                <a href="despre.html">Despre</a>
-            </div>
+            <a href="index.html">Meniu</a>
         </div>
-    </section>
-    <section class="s1-container article-mp">
-        <div class="nav-wrapper" data-bind="foreach: tabs">
-            <!-- ko if: selected -->
-                <menu class="main-menu" data-bind="foreach: content">
-                    <li><a data-bind="text: getLocaleName(), style: {'font-weight': 'bold'}, attr: { href: getURL('')}"></a></li>
-                    <!-- ko foreach: elem-->
-                        <li><a data-bind="text: getMsg($data), attr: { href: $parent.getURL($data)}"></a></li>
-                    <!-- /ko -->
-                </menu>
-            <!-- /ko -->
-        </div>
-        <!-- <article class="nav-article">
-            <h1>Noțiuni introductive</h1>
-            <p>Scurtă prezentare a lecției</p>
-        </article> -->
-    </section>
+    </header>
+    <article class="s1-container article-mp">
+        <h1 style="text-align: center;">Optics Unravelled</h1>
+        
+        <section>
+            <h2>Misiune</h2>
+            <li><b>Optics Unravelled</b> este o platformă destinată elevilor și profesorilor de fizica, 
+                menită să ușureze procesul de învățare și predare a opticii geometrice prin formarea intuiției 
+                asupra fenomenelor fizice prin simulari.</li>
+        </section>
+
+        <section>
+            <h2>Autori</h2>
+            <li><b>Luxin Gabriel Mătăsaru</b> - elev în clasa a XI-a la Colegiul Național de Informatică „Tudor Vianu”</li>
+        </section>
+
+        <section>
+            <h2>Mulțumiri</h2>
+            <li><b>Autorilor proiectului <a href="https://phydemo.app/ray-optics/" style="color: #4d7b96; font-size: 1em">Ray Optics Simulation</a>: </b> Tu Yi-Ting, Sun Wei-Fang</li>
+        </section>
+    </article>
 
     <!-- Import scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
@@ -54,6 +60,19 @@
     <script src="locale/ro.js"></script>
 
     <!-- View Models scripts -->
-    <script src="js/navViewModel.js"></script>
+    <script src="nunjucks.js"></script>
+
+    <!-- Utilities -->
+    <script src="js/dropdown.js"></script>
+    <script>
+        function calcWidth(){
+            var area = 585225;
+            var iframe = document.getElementById("canvasIframe");
+            iframe.style.height = Math.min(3/2*iframe.offsetWidth, Math.round(area / iframe.offsetWidth)) + "px";
+        }
+        
+        window.onresize = calcWidth();
+
+    </script>
 </body>
 </html>
