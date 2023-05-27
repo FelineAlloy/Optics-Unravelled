@@ -9,11 +9,11 @@ class entry {
     }
 
     getURL(page) {
-        var url = "/lesson?page=" + this.id;
+        var url = "/lesson?page=";
         if(page.length)
-        {
-            url += "#" + page;
-        }
+            url += page;
+        else
+            url += this.id;
         
         return url;
     }
@@ -34,8 +34,10 @@ class tab {
 function navViewModel () {
     this.tabs = [
         new tab("Lessons", true, [
-            new entry("introduction", ["natureOfLight", "fermatPrinciple"]),
-            new entry("sphericalDioptr", ["conjgatePoints", "objectFocus"])
+            new entry("fermatPrinciple", ["refractionLaws", "reflexionLaws", "opticalPrism"]),
+            new entry("sphericalDiopter", ["objectFocus", "imageFocus", "transverseGrowth", "planeDiopter"]),
+            //new entry("lenses", []),
+            //new entry("instruments", ["magnifyingGlass", "microscope", "telescope"])
         ]),
         new tab("Exercices", false, [
 

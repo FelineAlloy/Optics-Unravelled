@@ -1,0 +1,38 @@
+{% extends "./lesson.html" %}
+{% block content %}
+    <section>
+        <h2>Noțiuni introductive</h2>
+        <ul>
+            <li><b>Indicele de refracție absolut al unui mediu față de vid:</b>\( \ n = \frac{c}{v} \)</li>
+            <ul style='padding: 0em 1em; list-style: none'>
+                <li>\( c = \text{viteza de propagare a luminii în vid} \)</li>
+                <li>\( c = 3 \cdotp 10^8 \ \rm{ m \cdotp s^{-1} } \)</li>
+                <li>\( v = \text{viteza de propagare a luminii în mediu} \)</li>
+            </ul>
+            <li><b>Pentru aer și vid:</b>\( \ v = c \implies n = 1 \)</li>
+            <li><b>Pentru alte medii:</b>\( \ v \leqslant c \implies n \geqslant 1 \)</li>
+
+            <li style='margin-top: 2em'><b>Drumul optic:</b> \(\ \delta = nd \)</li>
+            <ul style='padding: 0em 1em; list-style: none'>
+                <li>\( d = \text{drumul geometric} \)</li>
+                <li>\( [\delta]_{SI} = \rm{ m } \)</li>
+            </ul>
+        </ul>
+    </section>
+
+    <section>
+        <h2 id="introduction">Enunț</h2>
+        <p>Între două puncte lumina se propagă astfel încât <b>timpul de propagare</b> (drumul optic) să fie <b>minim.</b></p>
+    </section>
+
+    <section>
+        <h2 id="introduction">Consecințe</h2>
+        <ol>
+            <li><b>Într-un mediu omogen și izotrop, lumina se propagă în linie dreaptă:</b></li>
+            <li><b>Principiul reversibilității razelor de lumină:</b></li>
+            <img src="/res/reversibilitatea_drumului.svg" alt="Principiul reversibilității razelor de lumină" style="width: 10rem; margin: auto; display: block"/>
+            <li><b>Principiul independenței fasciculelor luminoase:</b></li>
+            <img src="/res/fascicule.svg" alt="Principiul independenței fasciculelor luminoase" style="width: 20rem; margin: auto; display: block"/>
+        </ol>
+    </section>
+{% endblock %}

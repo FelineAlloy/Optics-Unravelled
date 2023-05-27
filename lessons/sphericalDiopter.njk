@@ -1,0 +1,71 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <h2 id="introduction">Notiuni introductive</h2>
+    <ul>
+        <li><b>Imagine reală:</b> formată la intersecția razelor de lumină</li>
+        <li><b>Imagine virtuală:</b> formată la intersecția prelungirilor razelor de lumină</li>
+        <li><b>Puncte conjugate:</b> sursa și imaginea sa</li>
+        <li><b>Aproximația paraxială (gausiană):</b> \( \rm{ \ i &lt; 6^\circ \implies \sin i \simeq \tangent i \simeq i(rad)\ } \) </li>
+    </ul>
+</section>
+
+<section>
+    <h2 id="phericalDiopter">Dioptrul sferic</h2>
+    <ul>
+        <li><b>Dioptrul:</b> suprafața de separare dintre două medii transparente</li>
+        <li><b>Dioptrul Sferic:</b> suprafața de separare provine dintr-o sferă</li>
+    </ul>
+</section>
+
+<section>
+    <h2 id="conjgatePoints">Relația punctelor conjugate pentru dioptrul sferic: \( \frac{n_2}{x_2} - \frac{n_1}{x_1} = \frac{n_2 - n_1}{R} \)</h2>
+    <iframe
+        id="canvasIframe"
+        src="ray-optics/simulator/#conjugate-points-relation"
+        name="targetframe"
+        allowTransparency="true"
+        scrolling="no"
+        frameborder="0"
+    >
+    </iframe>
+</section>
+
+<section>
+    <div class="dropdown"><p>Demonstrație</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+    <div class="dropdown-content">
+        <p>Teorema sinusurilor in \( \triangle POM \): \( \frac{PO}{\sin i} = \frac{PM}{\sin \alpha} \)</p>
+        <p>Teorema sinusurilor in \( \triangle OMP' \): \( \frac{P'O}{\sin(\pi-r)} = \frac{MP'}{\sin(\pi-\alpha)} \)</p>
+        $$
+        \displaylines{
+
+            \sin \alpha = \sin(\pi-\alpha) \\
+            PM \simeq -x_1,\ MP' \simeq x_2 \\
+
+            \begin{equation}
+                \left.
+                    \begin{aligned}
+
+                    \frac{-x_1}{\sin \alpha} = \frac{R-x_1}{\sin i} \ \\
+                    \frac{x_2}{\sin \alpha} = \frac{-R+x_2}{\sin r} \
+                    
+                    \end{aligned}
+                \right\vert
+                \implies
+                \begin{aligned}
+                    
+                    \frac{-x_1}{x_2} = \frac{R-x_1}{-R+x_2} \cdot \frac{n_1}{n_2} \implies
+
+                \end{aligned}
+            \end{equation}
+
+            \\
+
+            \implies x_1 R n_2 -x_1 x_2 n_2 = x_2 R n_1 - x_1 x_2 n_1 \implies \\
+            \implies x_1 x_2 (n_2 - n_1) = R (x_1 n_2 - x_2 n_1) \implies \\
+            \implies \bf{\frac{n_2}{x_2} - \frac{n_1}{x_1} = \frac{n_2 - n_1}{R} }
+        }
+        $$
+    </div>
+</section>
+{% endblock %}

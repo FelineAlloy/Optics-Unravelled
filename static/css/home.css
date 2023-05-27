@@ -39,6 +39,9 @@ menu.main-menu a {
     color: black;
     text-align: center;
 
+    display: block;
+    margin: auto;
+
     font-size: 1em;
 }
 

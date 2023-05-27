@@ -1,0 +1,23 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    $$
+    \displaylines {
+    \text{pentru} \ f_2 = x_2, \ x_1 \to \infty \ \text{avem:} \\
+    - \frac{n_2}{f_2} = \frac{n_2 - n_1}{R} \implies f_2 = \frac{n_2 R}{n_2 - n_1}
+    }
+    $$
+</section>
+
+<section>
+    <iframe
+        id="canvasIframe"
+        src="ray-optics/simulator/#image-focus"
+        name="targetframe"
+        allowTransparency="true"
+        scrolling="no"
+        frameborder="0"
+    >
+    </iframe>
+</section>
+{% endblock %}

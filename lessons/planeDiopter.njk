@@ -1,0 +1,34 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <li>Imaginea este <b>de aceași parte</b> cu obiectul!</li>
+</section>
+<section>
+    <div style="float: left">
+        $$
+        \displaylines {
+        \begin{aligned}
+        & R \to \infty \\
+        & \frac{n_2}{x_2} - \frac{n_1}{x_1} = \frac{n_2 - n_1}{R} \implies \\
+        & \implies \frac{n_2}{x_2} = \frac{n_1}{x_1} \implies n_1 x_2 = n_2 x_1 \implies \beta = 1\\
+        \\
+        & f_1 = - \infty \\
+        & f_2 = \infty
+        \end{aligned}
+        }
+        $$
+    </div>
+</section>
+
+<section>
+    <iframe
+        id="canvasIframe"
+        src="ray-optics/simulator/#apparent-depth"
+        name="targetframe"
+        allowTransparency="true"
+        scrolling="no"
+        frameborder="0"
+    >
+    </iframe>
+</section>
+{% endblock %}

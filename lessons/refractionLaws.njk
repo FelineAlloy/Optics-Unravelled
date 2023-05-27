@@ -1,0 +1,91 @@
+{% extends "./lesson.html" %}
+{% block content %}
+    <section>
+        <h2>Legea I</h2>
+        <li><b>Enunț:</b> Raza incidentă, normală în punctul de contact și raza refractată se află în același plan.</li>
+    </section>
+
+    <section>
+        <div class="dropdown"><p>Demonstrație</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+        <div class="dropdown-content">
+            <div style="display: flex; justify-content: center">
+                <img src="/res/dem_refractie.svg" alt="Demonstrație legea a II-a" style="width: 20rem;"/>
+
+                <div>
+                    $$
+                    \begin{aligned}
+                    & P \in xoy \\
+                    & P' \in xoy \\
+                    & M \in zox \\
+                    & M \left( x, 0, z \right) \\
+                    & P \left(0, y_1, 0 \right) \\
+                    & P' \left(x_2, y_2, 0 \right)
+                    \end{aligned}
+                    $$
+                </div>
+            </div>
+
+            $$
+            \begin{aligned}
+            PM & = \sqrt{y^2 + y_1^2 + z^2} \\
+            MP' & = \sqrt{( x_2 - x )^2 + y_1^2 + z^2} \\
+            \delta & = n_1 PM + n_2 MP' \\
+            \delta & = n_1 \sqrt{y^2 + y_1^2 + z^2} + n_2 \sqrt{( x_2 - x )^2 + y_1^2 + z^2} \\
+            \end{aligned}
+            \\
+            $$
+
+            $$
+            \begin{aligned}
+            & z=? \ x=? \ \text{a.î.} \ \delta_{min} \\
+            & \delta_{min} \implies z = 0 \implies \text{raza incidentă, normală în punctul de contact și raza reflectată sunt în același plan.}
+            \end{aligned}
+            \\
+            $$
+
+            $$
+            \begin{aligned}
+                \left.
+                    \begin{aligned}
+                    \delta = n_1 \sqrt{y^2 + y_1^2 + z^2} + n_2 \sqrt{( x_2 - x )^2 + y_1^2 + z^2} \ \\
+                    \delta'_{(x)} = 0 \
+                    \end{aligned}
+
+                \right \vert \implies \\
+
+                \implies \delta'_{(x)} = n_1 (x^2 + y_1^2) ^ { - \frac{1}{2} } \cdot 2x + n_2 \left[ (x_2 - x)^2 + y_2^2 \right] ^ { - \frac{1}{2} } \cdot 2(x_2 - x) \cdot (-1) = 0
+
+            \end{aligned}
+            $$
+
+            $$
+            \begin{aligned}
+            \\
+            n_1 \frac{x}{ \sqrt{x^2  +y_1^2} } & = n_2 \frac{x_2 - x}{ \sqrt{( x_2 - x )^2 + y_1^2} } \\
+            n_1 \sin{i} & = n_2 \sin{r}
+            \end{aligned}
+            $$
+        </div>
+    </section>
+
+    <section>
+        <h2>Legea a II-a</h2>
+        <li><b>Enunț:</b> \( \ n_1 \sin{i} = n_2 \sin{r} \)</li>
+        <img src="/res/refractie.svg" alt="refractia" style="width: 20rem; margin: auto; display: block"/>
+        <li><b>Refracția:</b> Fenomenul de trecere a razei de lumină dintr-un mediu transparent în alt mediu transparent cu schimbarea direcției de propagare.</li>
+    </section>
+
+    <section>
+        <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+            <div class="dropdown-content">
+                <iframe
+                    id="canvasIframe"
+                    src="ray-optics/simulator/#refraction-reflection"
+                    name="targetframe"
+                    allowTransparency="true"
+                    scrolling="no"
+                    frameborder="0"
+                >
+                </iframe>
+    </section>
+{% endblock %}

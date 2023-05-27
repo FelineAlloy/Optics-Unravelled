@@ -13,7 +13,16 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/lesson.css">
 
-    <title>Document</title>
+    <script>
+        window.MathJax = {
+            loader: {load: ["input/tex", "output/svg", '[tex]/physics']},
+            tex: {packages: {'[+]': ['physics']}},
+        };
+    </script>
+
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <title>{{title}}</title>
 </head>
 <body>
     <header>
@@ -36,7 +45,7 @@
 
              
                 <div>
-                    <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this)" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+                    <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
                     <div class="dropdown-content show">
                         <iframe
                             id="canvasIframe"
@@ -52,9 +61,6 @@
             
     </article>
 
-    <textarea id="textarea1"
-    style="position: absolute; bottom: 0; left: 0; width: 99%; height: 100px; display:none;"></textarea>
-
     <!-- Import scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
 
@@ -68,5 +74,15 @@
 
     <!-- Utilities -->
     <script src="js/dropdown.js"></script>
+    <script>
+        function calcWidth(){
+            var area = 585225;
+            var iframe = document.getElementById("canvasIframe");
+            iframe.style.height = Math.min(3/2*iframe.offsetWidth, Math.round(area / iframe.offsetWidth)) + "px";
+        }
+        
+        window.onresize = calcWidth();
+
+    </script>
 </body>
 </html>

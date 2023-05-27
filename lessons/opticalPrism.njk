@@ -1,0 +1,64 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <iframe
+        id="canvasIframe"
+        src="ray-optics/simulator/#optical-prism"
+        name="targetframe"
+        allowTransparency="true"
+        scrolling="no"
+        frameborder="0"
+    >
+    </iframe>
+</section>
+
+<section>
+    $$
+    \displaylines{
+
+        \delta = \text{deviația} \\
+
+        \begin{equation}
+            \left.
+                \begin{aligned}
+
+                A = r + r' \ \\
+                \delta = i - r + (i' - r') \
+                
+                \end{aligned}
+            \right \vert \implies
+            \begin{aligned}
+                
+                \delta = i + i' - A \\
+
+            \end{aligned}
+        \end{equation}
+
+    }
+    $$
+
+    $$
+    \displaylines{
+
+        \delta_{min} \implies
+
+        \begin{equation}
+            \left.
+                \begin{aligned}
+
+                i = i' \ \\
+                r = r' \
+                
+                \end{aligned}
+            \right \vert \implies
+            \begin{aligned}
+                
+                A = 2r \\
+                \delta = 2i - A
+
+            \end{aligned}
+        \end{equation}
+    }
+    $$
+</section>
+{% endblock %}

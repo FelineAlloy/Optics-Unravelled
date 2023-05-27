@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "objs": [
+    {
+      "type": "refractor",
+      "path": [
+        {
+          "x": 920,
+          "y": 340,
+          "arc": false
+        },
+        {
+          "x": 740,
+          "y": 660,
+          "arc": false
+        },
+        {
+          "x": 1100,
+          "y": 660,
+          "arc": false
+        }
+      ],
+      "notDone": false,
+      "p": 1.5
+    },
+    {
+      "type": "laser",
+      "p1": {
+        "type": 1,
+        "x": 700,
+        "y": 600,
+        "exist": true
+      },
+      "p2": {
+        "type": 1,
+        "x": 740,
+        "y": 580,
+        "exist": true
+      },
+      "p": 1
+    }
+  ],
+  "mode": "light",
+  "rayDensity_light": 0.1,
+  "rayDensity_images": 1,
+  "observer": null,
+  "origin": {
+    "x": -619,
+    "y": -135
+  },
+  "scale": 1,
+  "colorMode": false
+}

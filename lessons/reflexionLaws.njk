@@ -1,0 +1,74 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <li><b>Reflexia:</b> Fenomenul de întoarcere a razei de lumină în mediul din care provine, cu schimbarea direcției de propagare.</li>
+
+    $$
+    \begin{equation}
+        \left.
+            \begin{aligned}
+
+            n_1 \sin{i} = n_2 \sin{r} \ \\
+            n_1 = - n_2 \
+            
+            \end{aligned}
+        \right\vert\implies i = r
+    \end{equation}
+    $$
+
+    <img src="/res/reflexie.svg" alt="reflexia" style="width: 20rem; margin: auto; display: block"/>
+</section>
+
+<section>
+    <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+        <div class="dropdown-content">
+            <iframe
+                id="canvasIframe"
+                src="ray-optics/simulator/#refraction-reflection"
+                name="targetframe"
+                allowTransparency="true"
+                scrolling="no"
+                frameborder="0"
+            >
+            </iframe>
+        </div>
+</section>
+
+<section>
+    <h2>Legea I</h2>
+    <li><b>Enunț:</b> raza incidentă, normala în punctul de contact și raza reflectată sunt în același plan.</li>
+</section>
+
+<section>
+    <h2>Legea a II-a: \( \ i = r \)</h2>
+</section>
+
+<section>
+    <h2>Unghi Limită</h2>
+    
+    <div style="float: left">
+        $$
+        \begin{align}
+        & n_2 &lt n_1 \\
+        & n_1 \sin{i} = n_2 \sin{r} \implies \frac{ \sin{i} }{ \sin{r} } = \frac{n_2}{n_1} \implies i &lt r \implies \text{depărtare de normală} \\
+        \\
+        & \text{Dacă} r = \frac{\pi}{2} \implies i = l \implies \frac{ \sin{l} }{ \sin{ \frac{\pi}{2} } } = \frac{n_2}{n_1} \implies \sin{l} = \frac{n_2}{n_1}, \ n_2 &lt n_1
+        \end{align}
+        $$
+    </div>
+
+    <div style="clear: both"></div>
+
+    <li style="float: left; dispaly: inline-block; margin-top: 20px; margin-right: 10px"><b>OBS:</b></li>
+
+    <div style="float: left; dispaly: inline-block">
+        $$
+        \begin{align}
+        & i &lt l \implies \text{reflexie + refracție} \\
+        & i = l \implies r = \frac{\pi}{2} \\
+        & i > l \implies \text{reflexie totală}
+        \end{align}
+        $$
+    </div>
+</section>
+{% endblock %}

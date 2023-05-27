@@ -21,7 +21,7 @@ app.get('/lesson', (req, res) => {
 
     var title = page;
     try {
-        title = en.locales['en'][page].message;
+        title = ro.locales['ro'][page].message;
     } catch {}
 
     return res.render('./lessons/'+page+'.njk', {title: title});
