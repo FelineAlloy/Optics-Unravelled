@@ -34,7 +34,7 @@ class tab {
 function navViewModel () {
     this.tabs = [
         new tab("Lessons", true, [
-            new entry("fermatPrinciple", ["refractionLaws", "reflexionLaws", "opticalPrism"]),
+            new entry("fermatPrinciple", ["natureOfLight", "refractionLaws", "reflexionLaws", "opticalPrism"]),
             new entry("sphericalDiopter", ["objectFocus", "imageFocus", "transverseGrowth", "planeDiopter"]),
             //new entry("lenses", []),
             //new entry("instruments", ["magnifyingGlass", "microscope", "telescope"])

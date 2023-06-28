@@ -62,9 +62,9 @@ iframe {
     padding-left: 1rem;
     padding-right: 1rem;
 
-    /* display: grid;
+    display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 1.2rem; */
+    gap: 1.2rem;
 }
 
 .s1-container {

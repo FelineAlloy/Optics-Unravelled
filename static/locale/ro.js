@@ -10,67 +10,86 @@ locales["ro"] = {
   // Lessons
   //Introduction
   "introduction": {
-    "message": "Noțiuni introductive"
+    "message": "Noțiuni introductive",
+    "tag": "lesson"
   },
   "natureOfLight": {
-    "message": "Natura luminii"
+    "message": "Natura luminii",
+    "tag": "lesson"
   },
   "fermatPrinciple": {
-    "message": "Principiul lui Fermat"
+    "message": "Principiul lui Fermat",
+    "tag": "lesson"
   },
   "refractionLaws": {
-    "message": "Legile refracției"
+    "message": "Legile refracției",
+    "tag": "lesson"
   },
   "reflexionLaws": {
-    "message": "Legile reflexiei"
+    "message": "Legile reflexiei",
+    "tag": "lesson"
   },
   "planeDiopter": {
-    "message": "Aplicație: Imaginea unui obiect prin dioptrul plan"
+    "message": "Aplicație: Imaginea unui obiect prin dioptrul plan",
+    "tag": "lesson"
   },
   "opticalPrism": {
-    "message": "Aplicație: Prisma optică"
+    "message": "Aplicație: Prisma optică",
+    "tag": "lesson"
   },
 
   //The Spherical Diopter
   "sphericalDiopter": {
-    "message": "Dioptrul sferic"
+    "message": "Dioptrul sferic",
+    "tag": "lesson"
   },
   "conjgatePoints": {
-    "message": "Relația punctelor conjugate - dioprul sferic"
+    "message": "Relația punctelor conjugate - dioprul sferic",
+    "tag": "lesson"
   },
   "objectFocus": {
-    "message": "Focare: Focar obiect"
+    "message": "Focare: Focar obiect",
+    "tag": "lesson"
   },
   "imageFocus": {
-    "message": "Focare: Focar imagine"
+    "message": "Focare: Focar imagine",
+    "tag": "lesson"
   },
   "transverseGrowth": {
-    "message": "Marirea liniară transversală"
+    "message": "Marirea liniară transversală",
+    "tag": "lesson"
   },
   "planeDiopter": {
-    "message": "Dioptrul plan"
+    "message": "Dioptrul plan",
+    "tag": "lesson"
   },
   "sphericalMirror": {
-    "message": "Oglinzi sferice"
+    "message": "Oglinzi sferice",
+    "tag": "lesson"
   },
 
   // Lenses
   "lenses": {
-    "message": "Lentile groase și subțiri"
+    "message": "Lentile groase și subțiri",
+    "tag": "lesson"
   },
 
   // Optical Instruments
   "instruments": {
-    "message": "Instrumente optice"
+    "message": "Instrumente optice",
+    "tag": "lesson"
   },
   "magnifyingGlass": {
-    "message": "Lupa"
+    "message": "Lupa",
+    "tag": "lesson"
   },
   "microscope": {
-    "message": "Microscopul"
+    "message": "Microscopul",
+    "tag": "lesson"
   },
   "telescope": {
-    "message": "Telescopul"
+    "message": "Telescopul",
+    "tag": "lesson"
   },
 
   // Errors

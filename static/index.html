@@ -17,32 +17,32 @@
 <body>
     <section class="title-wraper">
         <div class="s1-container">
-            <h1 style="color: white">Optică Geometrică</h1>
+            <h1 style="color: white">Optics Unravelled</h1>
             <div class="s1-container title-links-wrapper">
-                <!-- <a href="#lessons">Lecții</a>
+                <a href="#lessons">Lecții</a>
                 <p>|</p>
                 <a href="#exercices">Exerciții</a>
                 <p>|</p>
-                <a href="#simulations">Simulări</a> -->
+                <a href="#simulations">Simulări</a>
+                <p>|</p>
                 <a href="despre.html">Despre</a>
             </div>
         </div>
     </section>
     <section class="s1-container article-mp">
-        <div class="nav-wrapper" data-bind="foreach: tabs">
-            <!-- ko if: selected -->
-                <menu class="main-menu" data-bind="foreach: content">
-                    <li><a data-bind="text: getLocaleName(), style: {'font-weight': 'bold'}, attr: { href: getURL('')}"></a></li>
-                    <!-- ko foreach: elem-->
-                        <li><a data-bind="text: getMsg($data), attr: { href: $parent.getURL($data)}"></a></li>
-                    <!-- /ko -->
-                </menu>
-            <!-- /ko -->
+        <div class="nav-wrapper">
+            <menu class="main-menu">
+                {% for elem in lessons %}
+                    <li><a href="/lesson?page={{ elem.id }}">{{ elem.text }}</a></li>
+                {% else %}
+                    <li>WTF</li>
+                {% endfor %}
+            </menu>      
         </div>
-        <!-- <article class="nav-article">
+        <article class="nav-article">
             <h1>Noțiuni introductive</h1>
             <p>Scurtă prezentare a lecției</p>
-        </article> -->
+        </article>
     </section>
 
     <!-- Import scripts -->
@@ -54,6 +54,7 @@
     <script src="locale/ro.js"></script>
 
     <!-- View Models scripts -->
+    <script src="nunjucks.js"></script>
     <script src="js/navViewModel.js"></script>
 </body>
 </html>
