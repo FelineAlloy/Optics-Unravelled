@@ -29,7 +29,7 @@ locales["ro"] = {
     "message": "Legile reflexiei",
     "tag": "lesson"
   },
-  "planeDiopter": {
+  "imgThroughPlaneDiopter": {
     "message": "Aplicație: Imaginea unui obiect prin dioptrul plan",
     "tag": "lesson"
   },
@@ -41,10 +41,6 @@ locales["ro"] = {
   //The Spherical Diopter
   "sphericalDiopter": {
     "message": "Dioptrul sferic",
-    "tag": "lesson"
-  },
-  "conjgatePoints": {
-    "message": "Relația punctelor conjugate - dioprul sferic",
     "tag": "lesson"
   },
   "objectFocus": {

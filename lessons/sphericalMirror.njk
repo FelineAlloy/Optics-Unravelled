@@ -1,0 +1,54 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <h2>Clasificare</h2>
+    <ul>
+        <li><b>Oglinzi concave:</b> \( R \lt 0 \)</li>
+        <li><b>Oglinzi convexe:</b> \( R \gt 0 \)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Mărirea liniară transversală</h2>
+    <ul>
+        <li>\( \beta = - \frac{x_2}{x_1} \)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Relația punctelor conjugate</h2>
+    <ul>
+        <li>\( \frac{1}{x_2} + \frac{1}{x_1} = \frac{2}{R} \implies f_1 = f_2 = \frac{R}{2} \)</li>
+    </ul>
+</section>
+
+<section>
+    <div class="dropdown"><p>Demonstrație</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+    <div class="dropdown-content">
+        $$
+        \displaylines{
+            \begin{equation}
+                \left.
+                    \begin{aligned}
+
+                    \frac{n_1}{x_2} - \frac{n_1}{x_1} = \frac{n_2 - n_1}{R} \\
+                    n_2 = -n_1
+                    
+                    \end{aligned}
+                \right\vert
+                \implies
+                \begin{aligned}
+                    
+                   -n_1 ( \frac{1}{x_2} + \frac{1}{x_1} ) = \frac{-2 n_2}{R} \implies
+
+                \end{aligned}
+            \end{equation}
+
+            \\
+
+            \implies \bf{\frac{1}{x_2} + \frac{1}{x_1} = \frac{2}{R} }
+        }
+        $$
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <h2>Definiție</h2>
+    <p>O asociere de <b>2 dioptrii</b> și mediul transparent dintre dioptrii.</p>
+</section>
+
+<section>
+    <h2>Relația punctelor conjugate</h2>
+    $$ \frac{1}{x_2} - \frac{1}{x_1} = (\frac{n_l}{n_m} - 1)(\frac{1}{R_1} - \frac{1}{R_2}) $$
+</section>
+
+<section>
+    <div class="dropdown"><p>Demonstrație</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
+    <div class="dropdown-content">
+        $$
+        \displaylines{
+
+            \frac{n_2}{x'_1} - \frac{n_1}{x_1} = \frac{n_2 - n_1}{R_1} \\
+            \frac{n_3}{x_2} - \frac{n_2}{-(d - x'_1)} = \frac{n_3 - n_2}{R_2} \\
+            \text{Dacă} \ n_3 = n_1 \implies \frac{n_1}{x_2} - \frac{n_2}{-(d - x'_1)} = \frac{n_1 - n_2}{R_2} \\
+
+            \\
+            \text{Pentru lentile subțiri:} \ d \ll -x_1, \ R, \ x'_1, \ etc \\
+            \\
+
+            \left.
+                \begin{aligned}
+
+                \frac{n_2}{x'_1} - \frac{n_1}{x_1} = \frac{n_2 - n_1}{R_1} \\
+                \frac{n_1}{x_2} - \frac{n_2}{-(d - x'_1)} = \frac{n_1 - n_2}{R_2} \\
+                
+                \end{aligned}
+            \right) (+) \\
+
+            \left. \frac{n_1}{x_2} - \frac{n_1}{x_1} = (n_2 - n_1)(\frac{1}{R_1} - \frac{1}{R_2}) \right\vert :n_1 \implies \\
+            \\
+            \implies \bf{\frac{1}{x_2} - \frac{1}{x_1} = (\frac{n_l}{n_m} - 1)(\frac{1}{R_1} - \frac{1}{R_2})}
+        }
+        $$
+    </div>
+</section>
+
+<section>
+    <h2>Distanțele focale</h2>
+    $$
+    \displaylines{
+        f_1=x_1, \ x_2 \rightarrow \infty \implies \frac{1}{f_1} = -(\frac{n_l}{n_m} - 1)(\frac{1}{R_1} - \frac{1}{R_2}) \\
+        f_2=x_2, \ x_1 \rightarrow \infty \implies \frac{1}{f_2} = (\frac{n_l}{n_m} - 1)(\frac{1}{R_1} - \frac{1}{R_2}) \\
+    }   
+    $$
+    <li><b>OBS:</b>\( \ \frac{1}{x_2} - \frac{1}{x_1} = \frac{1}{f} \)</li>
+    <li><b>Lentilă în aer liber:</b>\( \  \frac{1}{f} = (n_l - 1)(\frac{1}{R_1} - \frac{1}{R_2}) \)</li>
+    <li><b>Convergența:</b>\( \ C = \frac{1}{f} \quad [C]_{SI} = 1 \rm{d} = \text{dioptrie} = 1 \rm{m^{-1} } \)</li>
+</section>
+
+<section>
+    <h2>Lentile convergente \( \scriptstyle \ \ f \gt 0 \)</h2>
+</section>
+
+<section>
+    <h2>Lentile divergente \( \scriptstyle \ \ f \lt 0 \)</h2>
+</section>
+{% endblock %}
