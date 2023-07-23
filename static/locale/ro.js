@@ -66,7 +66,7 @@ locales["ro"] = {
 
   // Lenses
   "lenses": {
-    "message": "Lentile groase și subțiri",
+    "message": "Lentile subțiri",
     "tag": "lesson"
   },
 
