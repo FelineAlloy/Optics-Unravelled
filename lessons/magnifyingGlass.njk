@@ -1,0 +1,68 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <iframe
+        id="canvasIframe"
+        src="ray-optics/simulator/#conjugate-points-relation"
+        name="targetframe"
+        allowTransparency="true"
+        scrolling="no"
+        frameborder="0"
+    >
+    </iframe>
+</section>
+
+<section>
+   <h2>Puterea</h2>
+    $$
+    \displaylines{
+
+        \begin{equation}
+            \left.
+                \begin{aligned}
+
+                P = \frac{ \tan{\alpha_2} }{y_2} \ \\
+                -x_2 \simeq f_1 \implies \tan{\alpha_2} = \frac{y_1}{f_1} \
+                
+                \end{aligned}
+            \right\vert
+            \implies
+            \begin{aligned}
+                
+                P = \frac{1}{f}
+
+            \end{aligned}
+        \end{equation}
+    }
+    $$
+</section>
+<section>
+   <h2>Grosismentul</h2>
+    $$
+    \displaylines{
+
+        \begin{equation}
+            \left.
+                \begin{aligned}
+
+                G = \frac{ \tan{\alpha_2} }{ \tan{\alpha_1} } \ \\
+                \tan{\alpha_1} = \frac{y_1}{\delta} \ \\
+                \tan{\alpha_2} = \frac{y_1}{f} \ \\
+                
+                \end{aligned}
+            \right\vert
+            \implies
+            \begin{aligned}
+                
+                G = \frac{\delta}{f}
+
+            \end{aligned}
+        \end{equation}
+
+        \\
+
+        \delta = 0,25 \rm{m} = \frac{1}{4} \rm{m} \implies G = \frac{1}{4f} \implies G = \frac{P}{4}
+    }
+    $$
+</section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "./lesson.html" %}
+{% block content %}
+<section>
+    <iframe
+        id="canvasIframe"
+        src="ray-optics/simulator/#conjugate-points-relation"
+        name="targetframe"
+        allowTransparency="true"
+        scrolling="no"
+        frameborder="0"
+    >
+    </iframe>
+</section>
+
+<section>
+   <h2>Puterea</h2>
+    $$
+    \displaylines{
+
+        \begin{equation}
+            \left.
+                \begin{aligned}
+
+                P = \frac{ \tan{\alpha_2} }{y_2} \ \\
+                x_1' \simeq -f_2 \implies \tan{\alpha_2} = \frac{y'}{-f_2} \
+                
+                \end{aligned}
+            \right\vert
+            \implies
+            \begin{aligned}
+                
+                P = \frac{1}{-f_2} \frac{y'}{y_1}
+
+            \end{aligned}
+        \end{equation}
+
+        \\
+
+        e \gg f_1 \implies \frac{y'}{y_1} = \frac{x_2}{x_1} \simeq \frac{f_1 + e}{-f_1} \simeq \frac{e}{-f_1} \\
+        P = \frac{e}{f_1 f_2}
+    }
+    $$
+</section>
+<section>
+   <h2>Grosismentul</h2>
+    $$
+    \displaylines{
+
+        \begin{equation}
+            \left.
+                \begin{aligned}
+
+                G = \frac{ \tan{\alpha_2} }{ \tan{\alpha_1} } \ \\
+                \tan{\alpha_1} = \frac{y_1}{\delta} \ \\
+                \tan{\alpha_2} = \frac{y'}{-f_2} \ \\
+                
+                \end{aligned}
+            \right\vert
+            \implies
+            \begin{aligned}
+                
+                G = \delta \frac{1}{-f_2} \frac{y'}{y_1} = \delta P
+
+            \end{aligned}
+        \end{equation}
+
+        \\
+
+        \delta = 0,25 \rm{m} = \frac{1}{4} \rm{m} \implies G = \frac{P}{4}
+    }
+    $$
+</section>
+{% endblock %}
