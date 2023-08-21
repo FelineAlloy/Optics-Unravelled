@@ -8,6 +8,7 @@ const en = require('./static/locale/en');
 const ro = require('./static/locale/ro');
 
 app.use(express.static(__dirname + '/static', {index: false}));
+app.use("/canvas", express.static(__dirname + '/canvas', {index: false}));
 
 nunjucks.configure('.', {
     autoescape: true,
