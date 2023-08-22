@@ -48,7 +48,7 @@ var graphs = {
         var ya = l1.p2.y - l1.p1.y;
         var yb = l2.p2.y - l2.p1.y;
 
-        return graph.point((A * xb - b * xa) / (xa * yb - xb * ya), (A * yb - B * ya) / (xa * yb - xb * ya));
+        return graphs.point((A * xb - B * xa) / (xa * yb - xb * ya), (A * yb - B * ya) / (xa * yb - xb * ya));
     },
 
     intersection_line_circle: function(l1, c1) {

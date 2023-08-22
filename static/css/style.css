@@ -40,11 +40,15 @@ a {
     color: white;
 }
 
+.canvas-wrapper {
+    height: 400px;
+    width: 100%;
+}
+
 canvas {
     border-color: black;
     border-style: solid;
-    /* height: 400px; */
-    /* width: 100%; */
+    
 }
 
 iframe {
