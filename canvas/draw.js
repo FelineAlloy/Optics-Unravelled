@@ -9,8 +9,6 @@ var artist = {
 
     rays: [], // the light sources
 
-    drawBufffer: [], // all the rays forwhich I still need to check collisions before drawing
-
     // Drawing functions
 
     clear: function() {
@@ -34,6 +32,8 @@ var artist = {
 
     draw: function() {
 
+        var drawBufffer = []; // all the rays forwhich I still need to check collisions before drawing
+
         for(const obj of artist.objects) {
             obj.draw(); //draw the object
         }
@@ -45,10 +45,10 @@ var artist = {
         c.beginPath();
 
         for(const ray of artist.rays) {
-            artist.drawBufffer.push(ray);
+            drawBufffer.push(ray);
         }
 
-        for(const ray of artist.drawBufffer) {
+        for(const ray of drawBufffer) {
             var colPoint = {type: 1, x: -1, y: -1, exist: false};
             var newRay;
             var minDist = 1e9;
@@ -58,11 +58,10 @@ var artist = {
                 // 1. the point where the collision happend
                 // 2. a new ray to be added to rays[] which represents the new light direction
 
+                console.log(drawBufffer.length);
                 var {point: colPoint_tmp, ray: newRay_tmp} = obj.getCollision(ray);
 
-                console.log(colPoint_tmp)
-
-                if(colPoint_tmp.exist) {
+                if(colPoint_tmp.exist && graphs.length(colPoint_tmp, ray.p1) > 1) {
                     var dist = graphs.length(ray.p1, colPoint_tmp);
 
                     // only take into consideration the closest collision
@@ -75,11 +74,9 @@ var artist = {
             }
 
             if(colPoint.exist) {
-                console.log("yes");
                 artist.draw_segment(graphs.segment(ray.p1, colPoint));
-                //if(newRay.exist) {artist.drawBufffer.push(newRay);}
+                if(newRay.exist) {drawBufffer.push(newRay);}
             } else {
-                console.log("no");
                 artist.draw_ray(ray);
             }
         }

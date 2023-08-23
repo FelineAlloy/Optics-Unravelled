@@ -16,9 +16,9 @@ var ray = graphs.ray(
     graphs.point(0, 0));
 
 var diopter = new planeDiopter(
-    graphs.point(100, canvas.height),
-    graphs.point(100, 0), 
-    1, 1.5);
+    graphs.point(200, canvas.height),
+    graphs.point(200, 0), 
+    1, 1);
 
 artist.objects.push(diopter);
 artist.rays.push(ray);

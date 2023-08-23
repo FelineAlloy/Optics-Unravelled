@@ -25,6 +25,18 @@ var graphs = {
         return p1.x * p2.y - p1.y * p2.x;
     },
 
+    // rotate p1 arround p2 by alpha 
+    rotate_point: function(alpha, p1, p2) {
+        
+        var x = p1.x - p2.x;
+        var y = p1.y - p2.y;
+
+        x = x * Math.cos(alpha) - y * Math.sin(alpha) + p2.x;
+        y = x * Math.sin(alpha) + y * Math.cos(alpha) + p2.y;
+
+        return graphs.point(x, y);
+    },
+
     intersection: function(obj1, obj2) {
         // line & line
         if(obj1.type == 2 && obj2.type == 2) {
@@ -135,6 +147,6 @@ var graphs = {
     parallel: function(l1, p1) {
         var dx = l1.p2.x - l1.p1.x;
         var dy = l1.p2.y - l1.p1.y;
-        return graphs.line(p1, graphs.point(p1.x + dx, p1.y + dy));
+        return graphs.line(graphs.point(p1.x - dx, p1.y - dy), graphs.point(p1.x + dx, p1.y + dy));
     }
 }
