@@ -25,21 +25,50 @@ var graphs = {
         return p1.x * p2.y - p1.y * p2.x;
     },
 
+    // angle between two vectors
+    get_angle: function(obj1, obj2) {
+        if(obj1.type == 1 && obj2.type == 1) {
+
+            let l1 = this.length(this.point(0, 0), obj1);
+            let l2 = this.length(this.point(0, 0), obj2);
+
+            return Math.asin(this.cross(obj1, obj2) / (l1 * l2));
+        } else if(obj1.type <= 4 && obj2.type <= 4) {
+            
+            let p0 = this.intersection(obj1, obj2);
+            let p1 = this.point(obj1.p2.x - p0.x, obj1.p2.y - p0.y);
+            let p2 = this.point(obj2.p2.x - p0.x, obj2.p2.y - p0.y);
+
+            let l1 = this.length(this.point(0, 0), p1);
+            let l2 = this.length(this.point(0, 0), p2);
+            
+            return Math.asin(this.cross(p1, p2) / (l1 * l2))
+        }
+    },
+
     // rotate p1 arround p2 by alpha 
-    rotate_point: function(alpha, p1, p2) {
-        
-        var x = p1.x - p2.x;
-        var y = p1.y - p2.y;
-
-        x = x * Math.cos(alpha) - y * Math.sin(alpha) + p2.x;
-        y = x * Math.sin(alpha) + y * Math.cos(alpha) + p2.y;
-
-        return graphs.point(x, y);
+    rotate_point: function(point, center, angle) {
+        const s = Math.sin(angle);
+        const c = Math.cos(angle);
+    
+        // Translate the point back to the origin
+        const translatedX = point.x - center.x;
+        const translatedY = point.y - center.y;
+    
+        // Rotate the point
+        const rotatedX = translatedX * c - translatedY * s;
+        const rotatedY = translatedX * s + translatedY * c;
+    
+        // Translate the point back to its original position
+        const finalX = rotatedX + center.x;
+        const finalY = rotatedY + center.y;
+    
+        return this.point(finalX, finalY);
     },
 
     intersection: function(obj1, obj2) {
         // line & line
-        if(obj1.type == 2 && obj2.type == 2) {
+        if(1 < obj1.type && obj1.type < 5 && 1 < obj2.type && obj2.type < 5) {
             return this.intersection_2line(obj1, obj2);
         }
         // line & circle 

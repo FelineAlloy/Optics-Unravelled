@@ -7,10 +7,8 @@ function planeDiopter(point1, point2, n1, n2) {
 
     // required member functions
     this.draw = function() {};
-    this.getCollision = function(ray) {
+    this.getCollision = function(ray1) {
         
-        let ray1 = ray;
-        ray1.type = 2;
         let colPoint = graphs.intersection(ray1, this.l1);
 
         if(graphs.intersection_is_on_ray(colPoint, ray))
@@ -24,13 +22,14 @@ function planeDiopter(point1, point2, n1, n2) {
             c.lineTo(normal.p2.x, normal.p2.y);
             c.stroke();
             c.beginPath();
+            c.arc(colPoint.x, colPoint.y, 2, 0, 2 * Math.PI);
+            c.fill();
             c.strokeStyle = "red";
-
 
             let p1 = graphs.point(normal.p1.x - colPoint.x, normal.p1.y - colPoint.y);
             let p2 = graphs.point(ray1.p1.x - colPoint.x, ray1.p1.y - colPoint.y);
 
-            let i = Math.asin(graphs.cross(p1, p2) / (graphs.length(colPoint, p1) * graphs.length(colPoint, p2)));
+            let i = graphs.get_angle(normal, ray1);
             let r = Math.asin(Math.sin(i) * n1 / n2);
 
             let p3 = normal.p2;
@@ -39,11 +38,11 @@ function planeDiopter(point1, point2, n1, n2) {
             }
 
             console.log(p1, p2, p3);
-            console.log(i, Math.asin(Math.sin(i)), r); // i isnt calculated well
+            console.log(i * 180 / Math.PI, r * 180 / Math.PI);
 
-            p3 = graphs.rotate_point(r, p3, colPoint);
+            p3 = graphs.rotate_point(p3, colPoint, r);
 
-            let newRay = graphs.ray(colPoint,p3); //find a way of calculating this using r
+            let newRay = graphs.ray(colPoint,p3);
 
             return {point: colPoint, ray: newRay}
         } else {
