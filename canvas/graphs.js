@@ -1,4 +1,4 @@
-var graphs = {
+const graphs = {
     point: function(x, y) {return {type: 1, x: x, y: y, exist: true}},
 
     line: function(p1, p2) {return {type: 2, p1: p1, p2: p2, exist: true}},
@@ -25,25 +25,16 @@ var graphs = {
         return p1.x * p2.y - p1.y * p2.x;
     },
 
-    // angle between two vectors
-    get_angle: function(obj1, obj2) {
-        if(obj1.type == 1 && obj2.type == 1) {
+    // angle between two vectors, in the trigonometric direction (ORDER MATTERS!)
+    get_angle: function(p1, p2, p3) {
 
-            let l1 = this.length(this.point(0, 0), obj1);
-            let l2 = this.length(this.point(0, 0), obj2);
+        let vector1 = this.point(p1.x - p2.x, p1.y - p2.y);
+        let vector2 = this.point(p3.x - p2.x, p3.y - p2.y);
 
-            return Math.asin(this.cross(obj1, obj2) / (l1 * l2));
-        } else if(obj1.type <= 4 && obj2.type <= 4) {
-            
-            let p0 = this.intersection(obj1, obj2);
-            let p1 = this.point(obj1.p2.x - p0.x, obj1.p2.y - p0.y);
-            let p2 = this.point(obj2.p2.x - p0.x, obj2.p2.y - p0.y);
+        let dot = this.dot(vector1, vector2);
+        let cross = this.cross(vector1, vector2);
 
-            let l1 = this.length(this.point(0, 0), p1);
-            let l2 = this.length(this.point(0, 0), p2);
-            
-            return Math.asin(this.cross(p1, p2) / (l1 * l2))
-        }
+        return Math.atan2(cross, dot);
     },
 
     // rotate p1 arround p2 by alpha 
@@ -56,8 +47,8 @@ var graphs = {
         const translatedY = point.y - center.y;
     
         // Rotate the point
-        const rotatedX = translatedX * c - translatedY * s;
-        const rotatedY = translatedX * s + translatedY * c;
+        const rotatedX = translatedX * c + translatedY * s;
+        const rotatedY = - translatedX * s + translatedY * c;
     
         // Translate the point back to its original position
         const finalX = rotatedX + center.x;
@@ -82,35 +73,35 @@ var graphs = {
     },
 
     intersection_2line: function(l1, l2) {
-        var A = l1.p2.x * l1.p1.y - l1.p1.x * l1.p2.y;
-        var B = l2.p2.x * l2.p1.y - l2.p1.x * l2.p2.y;
-        var xa = l1.p2.x - l1.p1.x;
-        var xb = l2.p2.x - l2.p1.x;
-        var ya = l1.p2.y - l1.p1.y;
-        var yb = l2.p2.y - l2.p1.y;
+        const A = l1.p2.x * l1.p1.y - l1.p1.x * l1.p2.y;
+        const B = l2.p2.x * l2.p1.y - l2.p1.x * l2.p2.y;
+        const xa = l1.p2.x - l1.p1.x;
+        const xb = l2.p2.x - l2.p1.x;
+        const ya = l1.p2.y - l1.p1.y;
+        const yb = l2.p2.y - l2.p1.y;
 
         return graphs.point((A * xb - B * xa) / (xa * yb - xb * ya), (A * yb - B * ya) / (xa * yb - xb * ya));
     },
 
     intersection_line_circle: function(l1, c1) {
-        var xa = l1.p2.x - l1.p1.x;
-        var ya = l1.p2.y - l1.p1.y;
-        var cx = c1.c.x;
-        var cy = c1.c.y;
-        var r_sq = (typeof c1.r == 'object') ? ((c1.r.p1.x - c1.r.p2.x) * (c1.r.p1.x - c1.r.p2.x) + (c1.r.p1.y - c1.r.p2.y) * (c1.r.p1.y - c1.r.p2.y)) : (c1.r * c1.r);
+        const xa = l1.p2.x - l1.p1.x;
+        const ya = l1.p2.y - l1.p1.y;
+        const cx = c1.c.x;
+        const cy = c1.c.y;
+        const r_sq = (typeof c1.r == 'object') ? ((c1.r.p1.x - c1.r.p2.x) * (c1.r.p1.x - c1.r.p2.x) + (c1.r.p1.y - c1.r.p2.y) * (c1.r.p1.y - c1.r.p2.y)) : (c1.r * c1.r);
 
-        var l = Math.sqrt(xa*xa + ya*ya);
-        var ux = xa / l;
-        var uy = ya / l;
+        const l = Math.sqrt(xa*xa + ya*ya);
+        const ux = xa / l;
+        const uy = ya / l;
 
-        var cu = ((cx - l1.p1.x) * ux + (cy - l1.p1.y) * uy);
-        var px = l1.p1.x + cu * ux;
-        var py = l1.p1.y + cu * uy;
+        const cu = ((cx - l1.p1.x) * ux + (cy - l1.p1.y) * uy);
+        const px = l1.p1.x + cu * ux;
+        const py = l1.p1.y + cu * uy;
 
 
-        var d = Math.sqrt(r_sq - (px - cx) * (px - cx) - (py - cy) * (py - cy));
+        const d = Math.sqrt(r_sq - (px - cx) * (px - cx) - (py - cy) * (py - cy));
 
-        var ret = [];
+        let ret = [];
         ret[1] = graphs.point(px + ux * d, py + uy * d);
         ret[2] = graphs.point(px - ux * d, py - uy * d);
 
@@ -140,22 +131,22 @@ var graphs = {
     },
 
     length_squared: function(p1, p2) {
-        var dx = p1.x - p2.x;
-        var dy = p1.y - p2.y;
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
         return dx * dx + dy * dy;
     },
 
     // Geometric constructions
 
     midpoint: function(l1) {
-        var nx = (l1.p1.x + l1.p2.x) * 0.5;
-        var ny = (l1.p1.y + l1.p2.y) * 0.5;
+        const nx = (l1.p1.x + l1.p2.x) * 0.5;
+        const ny = (l1.p1.y + l1.p2.y) * 0.5;
         return graphs.point(nx, ny);
     },
 
     midpoint_points: function(p1, p2) {
-        var nx = (p1.x + p2.x) * 0.5;
-        var ny = (p1.y + p2.y) * 0.5;
+        const nx = (p1.x + p2.x) * 0.5;
+        const ny = (p1.y + p2.y) * 0.5;
         return graphs.point(nx, ny);
     },
 
@@ -172,10 +163,23 @@ var graphs = {
           );
     },
 
+    addPointAlongSegment: function(startPoint, endPoint, distanceFromEdge) {
+        const segmentVector = this.point(endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+        const segmentLength = this.length(startPoint, endPoint);
+        
+        const normalizedVector = this.point(segmentVector.x / segmentLength, segmentVector.y / segmentLength);
+        
+        const offset = this.point(normalizedVector.x * distanceFromEdge, normalizedVector.y * distanceFromEdge);
+        
+        const pointAlongSegment = this.point(startPoint.x + offset.x, startPoint.y + offset.y);
+        
+        return pointAlongSegment;
+    },
+
     // Get the line though p1 and parallel to l1.
     parallel: function(l1, p1) {
-        var dx = l1.p2.x - l1.p1.x;
-        var dy = l1.p2.y - l1.p1.y;
+        const dx = l1.p2.x - l1.p1.x;
+        const dy = l1.p2.y - l1.p1.y;
         return graphs.line(graphs.point(p1.x - dx, p1.y - dy), graphs.point(p1.x + dx, p1.y + dy));
     }
 }

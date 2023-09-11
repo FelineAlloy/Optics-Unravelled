@@ -1,7 +1,10 @@
 const canvas = document.getElementById("example");
 const c = canvas.getContext("2d");
 
-var artist = {
+canvas.width = canvas.parentElement.clientWidth;
+canvas.height = canvas.parentElement.clientHeight;
+
+const artist = {
 
     // Arrayes for objects to be drawn
 
@@ -23,16 +26,16 @@ var artist = {
     draw_ray: function(ray1) {
         c.moveTo(ray1.p1.x, ray1.p1.y);
 
-        var d = canvas.height*canvas.height + canvas.width*canvas.width;
-        var x = (ray1.p2.x - ray1.p1.x) / graphs.length(ray1.p1, ray1.p2) * d;
-        var y = (ray1.p2.y - ray1.p1.y) / graphs.length(ray1.p1, ray1.p2) * d;
+        const d = canvas.height*canvas.height + canvas.width*canvas.width;
+        const x = (ray1.p2.x - ray1.p1.x) / graphs.length(ray1.p1, ray1.p2) * d;
+        const y = (ray1.p2.y - ray1.p1.y) / graphs.length(ray1.p1, ray1.p2) * d;
 
         c.lineTo(x, y);
     },
 
-    draw: function() {
+    draw: function(maxBounces) {
 
-        var drawBufffer = []; // all the rays forwhich I still need to check collisions before drawing
+        const drawBufffer = []; // all the rays for which I still need to check collisions before drawing
 
         for(const obj of artist.objects) {
             obj.draw(); //draw the object
@@ -49,33 +52,37 @@ var artist = {
         }
 
         for(const ray of drawBufffer) {
-            var colPoint = {type: 1, x: -1, y: -1, exist: false};
-            var newRay;
-            var minDist = 1e9;
+            let colPoint = {type: 1, x: -1, y: -1, exist: false};
+            let colObj;
+            let minDist = 1e9;
+
+            //console.log(drawBufffer.length);
             for(const obj of artist.objects) {
-                //get the nearest collision point between the ray and a part of the object
+                // get the nearest collision point between the ray and a part of the object
                 // this should return two things:
                 // 1. the point where the collision happend
                 // 2. a new ray to be added to rays[] which represents the new light direction
 
-                console.log(drawBufffer.length);
-                var {point: colPoint_tmp, ray: newRay_tmp} = obj.getCollision(ray);
-
-                if(colPoint_tmp.exist && graphs.length(colPoint_tmp, ray.p1) > 1) {
-                    var dist = graphs.length(ray.p1, colPoint_tmp);
-
+                const {point: colPoint_tmp, dist: dist} = obj.getCollision(ray);
+                //console.log(colPoint_tmp, dist);
+                
+                if(colPoint_tmp.exist && dist < minDist) {
                     // only take into consideration the closest collision
-                    if(dist < minDist) {
-                        minDist = dist;
-                        colPoint = colPoint_tmp;
-                        newRay = newRay_tmp;
-                    }
+                    minDist = dist;
+                    colPoint = colPoint_tmp;
+                    colObj = obj;
                 }
             }
 
             if(colPoint.exist) {
                 artist.draw_segment(graphs.segment(ray.p1, colPoint));
-                if(newRay.exist) {drawBufffer.push(newRay);}
+
+                if(drawBufffer.length <= maxBounces * artist.rays.length) {
+                    const newRay = colObj.getNewRay(ray, colPoint);
+                    if(newRay.exist) {
+                        drawBufffer.push(newRay);
+                    }
+                }
             } else {
                 artist.draw_ray(ray);
             }
