@@ -36,6 +36,12 @@ const lens1 = new lens(
     100
 );
 
+const mirror = new planeMirror(
+    graphs.point(800, 0),
+    graphs.point(800, canvas.height), 
+    10
+);
+
 artist.objects.push(diopter);
 artist.objects.push(diopter2);
 artist.objects.push(screen1);

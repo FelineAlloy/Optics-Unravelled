@@ -35,7 +35,7 @@ const artist = {
 
     draw: function(maxBounces) {
 
-        const drawBufffer = []; // all the rays for which I still need to check collisions before drawing
+        const drawBuffer = []; // all the rays for which I still need to check collisions before drawing
 
         for(const obj of artist.objects) {
             obj.draw(); //draw the object
@@ -48,20 +48,20 @@ const artist = {
         c.beginPath();
 
         for(const ray of artist.rays) {
-            drawBufffer.push(ray);
+            drawBuffer.push(ray);
         }
 
-        for(const ray of drawBufffer) {
+        for(const ray of drawBuffer) {
             let colPoint = {type: 1, x: -1, y: -1, exist: false};
             let colObj;
             let minDist = 1e9;
 
-            //console.log(drawBufffer.length);
+            //console.log(drawBuffer.length);
             for(const obj of artist.objects) {
-                // get the nearest collision point between the ray and a part of the object
+                // get the nearest VALID collision point between the ray and a part of the object
                 // this should return two things:
                 // 1. the point where the collision happend
-                // 2. a new ray to be added to rays[] which represents the new light direction
+                // 2. the distance between the source of the ray and the collision
 
                 const {point: colPoint_tmp, dist: dist} = obj.getCollision(ray);
                 //console.log(colPoint_tmp, dist);
@@ -77,10 +77,10 @@ const artist = {
             if(colPoint.exist) {
                 artist.draw_segment(graphs.segment(ray.p1, colPoint));
 
-                if(drawBufffer.length <= maxBounces * artist.rays.length) {
+                if(drawBuffer.length <= maxBounces * artist.rays.length) {
                     const newRay = colObj.getNewRay(ray, colPoint);
                     if(newRay.exist) {
-                        drawBufffer.push(newRay);
+                        drawBuffer.push(newRay);
                     }
                 }
             } else {
