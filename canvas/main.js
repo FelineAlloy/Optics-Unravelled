@@ -31,14 +31,14 @@ const screen1 = new screen(
 );
 
 const lens1 = new lens(
-    graphs.point(500, canvas.height - 100),
-    graphs.point(900, 100),
+    graphs.point(800, canvas.height-100),
+    graphs.point(800, 100),
     100
 );
 
 const mirror = new planeMirror(
-    graphs.point(800, 0),
-    graphs.point(800, canvas.height), 
+    graphs.point(1000, 0),
+    graphs.point(1000, canvas.height), 
     10
 );
 
@@ -46,6 +46,7 @@ artist.objects.push(diopter);
 artist.objects.push(diopter2);
 artist.objects.push(screen1);
 artist.objects.push(lens1);
+artist.objects.push(mirror);
 artist.rays.push(ray);
 
 function updateSimulation() {

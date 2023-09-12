@@ -71,38 +71,34 @@ function lens(point1, point2, f) {
 
     this.getNewRay = function(ray1, colPoint) {
 
-        const normal = graphs.parallel(graphs.perpendicular_bisector(this.l1), colPoint);
         const midpoint = graphs.midpoint(this.l1);
+        const parallelRay = graphs.parallel(ray1, midpoint);
 
-        let i = graphs.get_angle(ray1.p1, colPoint, normal.p1);
-        let p3 = graphs.point(this.fp2.x, this.fp2.y);
+        let focalPoint = this.fp1;
+        const i1 = graphs.get_angle(this.l1.p1, this.l1.p2, ray1.p1);
+        const i2 = graphs.get_angle(this.l1.p1, this.l1.p2, focalPoint);
+        if((i1 * i2 > 0 && this.f > 0) || (i1 * i2 < 0 && this.f < 0)) {
+            focalPoint = this.fp2;
+        }
+        const focusPlane = graphs.parallel(this.l1, focalPoint);
 
-        if(Math.abs(i) > Math.PI/2) {
-            p3 = graphs.point(this.fp1.x, this.fp1.y);
-            i = graphs.get_angle(ray1.p1, colPoint, normal.p2);
+        // c.stroke();
+        // c.beginPath();
+
+        // c.moveTo(parallelRay.p1.x, parallelRay.p1.y);
+        // c.lineTo(parallelRay.p2.x, parallelRay.p2.y);
+
+        // c.moveTo(focusPlane.p1.x, focusPlane.p1.y);
+        // c.lineTo(focusPlane.p2.x, focusPlane.p2.y);
+
+        // c.stroke();
+        // c.beginPath();
+
+        const newRay = graphs.ray(colPoint, graphs.intersection(parallelRay, focusPlane)); 
+        if(this.f < 0) {
+            newRay.p2 = graphs.rotate_point(newRay.p2, newRay.p1, Math.PI);
         }
 
-        const alpha = Math.atan2(p3.y - midpoint.y, p3.x - midpoint.x);
-        console.log(alpha * 180 / Math.PI);
-
-        p3.x += Math.tan(i) * this.f * Math.sin(alpha);
-        p3.y += Math.tan(i) * this.f * Math.cos(alpha);
-
-        c.stroke();
-        c.beginPath();
-        
-        c.arc(p3.x, p3.y, 3, 0, Math.PI*2);
-
-        const parallel = graphs.parallel(ray1, midpoint);
-        c.moveTo(parallel.p1.x, parallel.p1.y);
-        c.lineTo(parallel.p2.x, parallel.p2.y);
-        
-        c.stroke();
-        c.beginPath();
-
-        const newRay = graphs.ray(colPoint, p3);
-
         return newRay;
-
     };
 }
