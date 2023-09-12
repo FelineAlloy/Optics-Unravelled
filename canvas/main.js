@@ -42,11 +42,18 @@ const mirror = new planeMirror(
     10
 );
 
+const diopter3 = new sphericalDiopter(
+    graphs.point(1000, canvas.height/2),
+    graphs.point(600, canvas.height/2), 
+    30 * Math.PI/180, 1, 1.5
+);
+
 artist.objects.push(diopter);
 artist.objects.push(diopter2);
 artist.objects.push(screen1);
 artist.objects.push(lens1);
 artist.objects.push(mirror);
+artist.objects.push(diopter3);
 artist.rays.push(ray);
 
 function updateSimulation() {

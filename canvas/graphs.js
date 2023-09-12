@@ -25,7 +25,7 @@ const graphs = {
         return p1.x * p2.y - p1.y * p2.x;
     },
 
-    // angle between two vectors, in the trigonometric direction (ORDER MATTERS!)
+    // angle between two vectors (from p3 to p1), in the trigonometric direction (ORDER MATTERS!)
     get_angle: function(p1, p2, p3) {
 
         let vector1 = this.point(p1.x - p2.x, p1.y - p2.y);
@@ -47,6 +47,7 @@ const graphs = {
         const translatedY = point.y - center.y;
     
         // Rotate the point
+        // (we use a counterclokwise rotation matrix since the y axis is reversed in the canvas)
         const rotatedX = translatedX * c + translatedY * s;
         const rotatedY = - translatedX * s + translatedY * c;
     
@@ -63,11 +64,11 @@ const graphs = {
             return this.intersection_2line(obj1, obj2);
         }
         // line & circle 
-        else if(obj1.type == 2 && obj2.type == 5) {
+        else if(1 < obj1.type && obj1.type < 5 && obj2.type == 5) {
             return this.intersection_line_circle(obj1, obj2);
         }
         // circle & line
-        else if(obj1.type == 5 && obj2.type == 2) {
+        else if(obj1.type == 5 && 1 < obj1.type && obj1.type < 5) {
             return this.intersection_line_circle(obj2, obj1);
         }
     },

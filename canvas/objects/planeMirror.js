@@ -65,7 +65,7 @@ function planeMirror(point1, point2, dashLength) {
         let i = graphs.get_angle(ray1.p1, colPoint, normal.p2);
         let p3 = normal.p2;
 
-        //console.log(i * 180 / Math.PI);
+        // console.log(i * 180 / Math.PI);
 
         // c.stroke();
         // c.beginPath();
