@@ -11,7 +11,7 @@ function sphericalDiopter(point1, point2, angle, n1, n2) {
 	this.draw = function () {
 		c.beginPath();
 
-		c.strokeStyle = "black";
+		c.strokeStyle = colors.objects;
 		c.lineWidth = 2;
 
 		const centerX = this.c1.c.x;
@@ -31,6 +31,7 @@ function sphericalDiopter(point1, point2, angle, n1, n2) {
 		const p1 = graphs.addPointAlongSegment(r.p2, r.p1, -20);
 		const p2 = graphs.addPointAlongSegment(r.p2, r.p1, 20);
 
+		c.fillStyle = colors.text;
 		c.textAlign = "center";
 		c.textBaseline = "middle";
 		c.font = "20px Arial";
@@ -39,9 +40,9 @@ function sphericalDiopter(point1, point2, angle, n1, n2) {
 
 		//draw selectables
 		c.beginPath();
-		c.fillStyle = "black";
+		c.fillStyle = colors.selectables;
 		for (const item of this.selectables) {
-			c.arc(item.x, item.y, 2, 0, 2 * Math.PI);
+			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
 		}
 		c.fill();
 	};
@@ -51,25 +52,14 @@ function sphericalDiopter(point1, point2, angle, n1, n2) {
 		const dist1 = graphs.length(ray1.p1, colPoints[1]);
 		const dist2 = graphs.length(ray1.p1, colPoints[2]);
 
-		const alpha1 = graphs.get_angle(
-			colPoints[1],
-			this.c1.r.p1,
-			this.c1.r.p2
-		);
-		const alpha2 = graphs.get_angle(
-			colPoints[2],
-			this.c1.r.p1,
-			this.c1.r.p2
-		);
+		const alpha1 = graphs.get_angle(colPoints[1], this.c1.r.p1, this.c1.r.p2);
+		const alpha2 = graphs.get_angle(colPoints[2], this.c1.r.p1, this.c1.r.p2);
 
 		let colPoint = graphs.point(0, 0);
 		colPoint.exist = false;
 		let dist = 0;
 
-		if (
-			Math.abs(alpha1) <= this.angle / 2 &&
-			Math.abs(alpha2) <= this.angle / 2
-		) {
+		if (Math.abs(alpha1) <= this.angle / 2 && Math.abs(alpha2) <= this.angle / 2) {
 			if (dist1 < dist2) {
 				colPoint = colPoints[1];
 				dist = dist1;
@@ -85,11 +75,7 @@ function sphericalDiopter(point1, point2, angle, n1, n2) {
 			dist = dist2;
 		}
 
-		if (
-			colPoint.exist &&
-			graphs.intersection_is_on_ray(colPoint, ray1) &&
-			dist > 1
-		) {
+		if (colPoint.exist && graphs.intersection_is_on_ray(colPoint, ray1) && dist > 1) {
 			return { point: colPoint, dist: dist };
 		}
 

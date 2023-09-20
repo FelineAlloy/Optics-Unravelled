@@ -22,7 +22,7 @@ function planeMirror(point1, point2, dashLength) {
 		const dxDash = this.dashLength * Math.cos(dashAngle);
 		const dyDash = this.dashLength * Math.sin(dashAngle);
 
-		c.strokeStyle = "black";
+		c.strokeStyle = colors.objects;
 		c.lineWidth = 3;
 
 		c.beginPath();
@@ -38,19 +38,16 @@ function planeMirror(point1, point2, dashLength) {
 
 		for (let i = 1; i <= numDashes; i++) {
 			c.moveTo(this.l1.p1.x + i * dxStep, this.l1.p1.y + i * dyStep);
-			c.lineTo(
-				this.l1.p1.x + i * dxStep + dxDash,
-				this.l1.p1.y + i * dyStep + dyDash
-			);
+			c.lineTo(this.l1.p1.x + i * dxStep + dxDash, this.l1.p1.y + i * dyStep + dyDash);
 		}
 
 		c.stroke();
 
 		//draw selectables
 		c.beginPath();
-		c.fillStyle = "black";
+		c.fillStyle = colors.selectables;
 		for (const item of this.selectables) {
-			c.arc(item.x, item.y, 2, 0, 2 * Math.PI);
+			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
 		}
 		c.fill();
 	};
@@ -71,10 +68,7 @@ function planeMirror(point1, point2, dashLength) {
 	};
 
 	this.getNewRay = function (ray1, colPoint) {
-		const normal = graphs.parallel(
-			graphs.perpendicular_bisector(this.l1),
-			colPoint
-		);
+		const normal = graphs.parallel(graphs.perpendicular_bisector(this.l1), colPoint);
 
 		let i = graphs.get_angle(ray1.p1, colPoint, normal.p2);
 		let p3 = normal.p2;

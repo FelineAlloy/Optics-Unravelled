@@ -10,7 +10,7 @@ function planeDiopter(point1, point2, n1, n2) {
 	this.draw = function () {
 		c.beginPath();
 
-		c.strokeStyle = "black";
+		c.strokeStyle = colors.objects;
 		c.lineWidth = 2;
 
 		c.moveTo(this.l1.p1.x, this.l1.p1.y);
@@ -23,6 +23,7 @@ function planeDiopter(point1, point2, n1, n2) {
 		const p1 = graphs.addPointAlongSegment(midpoint, normal.p1, 20);
 		const p2 = graphs.addPointAlongSegment(midpoint, normal.p2, 20);
 
+		c.fillStyle = colors.text;
 		c.textAlign = "center";
 		c.textBaseline = "middle";
 		c.font = "20px Arial";
@@ -31,9 +32,9 @@ function planeDiopter(point1, point2, n1, n2) {
 
 		//draw selectables
 		c.beginPath();
-		c.fillStyle = "black";
+		c.fillStyle = colors.selectables;
 		for (const item of this.selectables) {
-			c.arc(item.x, item.y, 2, 0, 2 * Math.PI);
+			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
 		}
 		c.fill();
 	};
@@ -43,8 +44,10 @@ function planeDiopter(point1, point2, n1, n2) {
 		const dist = graphs.length(ray1.p1, colPoint);
 		//console.log(dist);
 
-		if (graphs.intersection_is_on_ray(colPoint, ray1) && dist > 1) {
-			return { point: colPoint, dist: dist };
+		if (graphs.intersection_is_on_segment(colPoint, this.l1)) {
+			if (graphs.intersection_is_on_ray(colPoint, ray1) && dist > 1) {
+				return { point: colPoint, dist: dist };
+			}
 		}
 
 		colPoint.exist = false;
@@ -52,10 +55,7 @@ function planeDiopter(point1, point2, n1, n2) {
 	};
 
 	this.getNewRay = function (ray1, colPoint) {
-		const normal = graphs.parallel(
-			graphs.perpendicular_bisector(this.l1),
-			colPoint
-		);
+		const normal = graphs.parallel(graphs.perpendicular_bisector(this.l1), colPoint);
 
 		let i = graphs.get_angle(ray1.p1, colPoint, normal.p1);
 		let r = Math.asin((Math.sin(i) * n1) / n2);

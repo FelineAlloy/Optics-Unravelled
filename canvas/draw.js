@@ -15,6 +15,8 @@ const artist = {
 
 	clear: function () {
 		c.clearRect(0, 0, canvas.width, canvas.height);
+		c.fillStyle = colors.background;
+		c.fillRect(0, 0, canvas.width, canvas.height);
 	},
 
 	draw_segment: function (seg1) {
@@ -26,10 +28,8 @@ const artist = {
 		c.moveTo(ray1.p1.x, ray1.p1.y);
 
 		const d = canvas.height * canvas.height + canvas.width * canvas.width;
-		const x =
-			((ray1.p2.x - ray1.p1.x) / graphs.length(ray1.p1, ray1.p2)) * d;
-		const y =
-			((ray1.p2.y - ray1.p1.y) / graphs.length(ray1.p1, ray1.p2)) * d;
+		const x = ((ray1.p2.x - ray1.p1.x) / graphs.length(ray1.p1, ray1.p2)) * d;
+		const y = ((ray1.p2.y - ray1.p1.y) / graphs.length(ray1.p1, ray1.p2)) * d;
 
 		c.lineTo(x, y);
 	},
@@ -42,16 +42,16 @@ const artist = {
 		}
 
 		if (selected != null) {
-			c.strokeStyle = "black";
+			c.strokeStyle = colors.selectables;
 			c.lineWidth = 2;
 
 			c.beginPath();
-			c.arc(selected.x, selected.y, 4, 0, 2 * Math.PI);
+			c.arc(selected.x, selected.y, selectableRadius + 2, 0, 2 * Math.PI);
 			c.stroke();
 		}
 
 		// since ik rays will only use stroke, i group them toghether.
-		c.strokeStyle = "red";
+		c.strokeStyle = colors.rays;
 		c.lineWidth = 3;
 
 		c.beginPath();
@@ -72,8 +72,7 @@ const artist = {
 				// 1. the point where the collision happend
 				// 2. the distance between the source of the ray and the collision
 
-				const { point: colPoint_tmp, dist: dist } =
-					obj.getCollision(ray);
+				const { point: colPoint_tmp, dist: dist } = obj.getCollision(ray);
 				//console.log(colPoint_tmp, dist);
 
 				if (colPoint_tmp.exist && dist < minDist) {

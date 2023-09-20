@@ -14,17 +14,14 @@ function lens(point1, point2, f) {
 	this.draw = function () {
 		c.beginPath();
 
-		c.strokeStyle = "black";
+		c.strokeStyle = colors.objects;
 		c.lineWidth = 3;
 
 		c.moveTo(this.l1.p1.x, this.l1.p1.y);
 		c.lineTo(this.l1.p2.x, this.l1.p2.y);
 
 		const sgnf = Math.sign(this.f);
-		const angle = Math.atan2(
-			this.l1.p1.y - this.l1.p2.y,
-			this.l1.p1.x - this.l1.p2.x
-		);
+		const angle = Math.atan2(this.l1.p1.y - this.l1.p2.y, this.l1.p1.x - this.l1.p2.x);
 
 		c.moveTo(
 			this.l1.p1.x - sgnf * 15 * Math.cos(angle - Math.PI / 6),
@@ -52,6 +49,7 @@ function lens(point1, point2, f) {
 
 		c.stroke();
 
+		c.fillStyle = colors.text;
 		c.textAlign = "center";
 		c.textBaseline = "middle";
 		c.font = "20px Arial";
@@ -60,10 +58,10 @@ function lens(point1, point2, f) {
 
 		//draw selectables
 
-		c.fillStyle = "black";
+		c.fillStyle = colors.selectables;
 		for (const item of this.selectables) {
 			c.beginPath();
-			c.arc(item.x, item.y, 2, 0, 2 * Math.PI);
+			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
 			c.fill();
 		}
 	};
@@ -109,10 +107,7 @@ function lens(point1, point2, f) {
 		// c.stroke();
 		// c.beginPath();
 
-		const newRay = graphs.ray(
-			colPoint,
-			graphs.intersection(parallelRay, focusPlane)
-		);
+		const newRay = graphs.ray(colPoint, graphs.intersection(parallelRay, focusPlane));
 		if (this.f < 0) {
 			newRay.p2 = graphs.rotate_point(newRay.p2, newRay.p1, Math.PI);
 		}

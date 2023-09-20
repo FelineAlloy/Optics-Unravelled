@@ -8,7 +8,7 @@ function screen(point1, point2) {
 	this.draw = function () {
 		c.beginPath();
 
-		c.strokeStyle = "black";
+		c.strokeStyle = colors.objects;
 		c.lineWidth = 4;
 
 		c.moveTo(this.l1.p1.x, this.l1.p1.y);
@@ -18,9 +18,9 @@ function screen(point1, point2) {
 
 		//draw selectables
 		c.beginPath();
-		c.fillStyle = "black";
+		c.fillStyle = colors.selectables;
 		for (const item of this.selectables) {
-			c.arc(item.x, item.y, 2, 0, 2 * Math.PI);
+			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
 		}
 		c.fill();
 	};
