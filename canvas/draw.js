@@ -50,15 +50,16 @@ const artist = {
 			c.stroke();
 		}
 
+		for (const rayObj of artist.rays) {
+			rayObj.draw();
+			drawBuffer.push(rayObj.ray);
+		}
+
 		// since ik rays will only use stroke, i group them toghether.
 		c.strokeStyle = colors.rays;
 		c.lineWidth = 3;
 
 		c.beginPath();
-
-		for (const ray of artist.rays) {
-			drawBuffer.push(ray);
-		}
 
 		for (const ray of drawBuffer) {
 			let colPoint = { type: 1, x: -1, y: -1, exist: false };

@@ -9,9 +9,9 @@ let isDragging = false;
 function getMosuePositionOnCanvas(event) {
 	const clientX = event.clientX || event.touches[0].clientX;
 	const clientY = event.clientY || event.touches[0].clientY;
-	const { offsetLeft, offsetTop } = event.target;
-	const canvasX = clientX - offsetLeft;
-	const canvasY = clientY - offsetTop;
+	rect = canvas.getBoundingClientRect();
+	const canvasX = clientX - rect.left;
+	const canvasY = clientY - rect.top;
 
 	return { x: canvasX, y: canvasY };
 }
@@ -25,6 +25,14 @@ const mouse_down = function (event) {
 
 	prevX = mouseX;
 	prevY = mouseY;
+
+	for (const obj of artist.rays)
+		for (const selectable of obj.selectables)
+			if (graphs.length(graphs.point(mouseX, mouseY), selectable) < selectableRadius * 2) {
+				selected = selectable;
+				isDragging = true;
+				return;
+			}
 
 	for (const obj of artist.objects)
 		for (const selectable of obj.selectables)
@@ -66,9 +74,6 @@ const mouse_move = function (event) {
 	mouseX = mouse.x;
 	mouseY = mouse.y;
 
-	ray.p2.x = mouseX;
-	ray.p2.y = mouseY;
-
 	updateSimulation();
 
 	if (!isDragging) {
@@ -85,10 +90,10 @@ const mouse_move = function (event) {
 	prevY = mouseY;
 };
 
-canvas.onmousedown = mouse_down;
-canvas.onmouseup = mouse_up;
-canvas.onmouseout = mouse_out;
-canvas.onmousemove = mouse_move;
+canvas.addEventListener("mousedown", mouse_down);
+canvas.addEventListener("mousemove", mouse_move);
+canvas.addEventListener("mouseup", mouse_up);
+canvas.addEventListener("mouseout", mouse_out);
 
 canvas.addEventListener("touchstart", mouse_down, { passive: false });
 canvas.addEventListener("touchmove", mouse_move, { passive: false });
@@ -99,7 +104,7 @@ canvas.addEventListener("touchcancel", mouse_out, { passive: false });
 
 // ------- Simulation Init -------
 
-const ray = graphs.ray(graphs.point(canvas.width / 2, canvas.height / 2), graphs.point(0, 0));
+const rayObj = new rayObject(graphs.point(canvas.width / 2, canvas.height / 2), graphs.point(0, 0));
 
 const diopter = new planeDiopter(graphs.point(200, canvas.height), graphs.point(200, 0), 1, 1.5);
 
@@ -125,7 +130,7 @@ artist.objects.push(screen1);
 artist.objects.push(lens1);
 artist.objects.push(mirror);
 artist.objects.push(diopter3);
-artist.rays.push(ray);
+artist.rays.push(rayObj);
 
 function updateSimulation() {
 	artist.clear();

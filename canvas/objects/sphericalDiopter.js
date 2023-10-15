@@ -94,11 +94,11 @@ function sphericalDiopter(point1, point2, angle, n1, n2) {
 		if (Math.abs(i) >= Math.PI / 2) {
 			i = -Math.sign(i) * (Math.PI - Math.abs(i));
 			r = Math.asin((Math.sin(i) * this.n1) / this.n2);
-			console.log(
-				(i * 180) / Math.PI,
-				(r * 180) / Math.PI,
-				(Math.sin(i) * this.n1) / this.n2
-			);
+			// console.log(
+			// 	(i * 180) / Math.PI,
+			// 	(r * 180) / Math.PI,
+			// 	(Math.sin(i) * this.n1) / this.n2
+			// );
 			p3 = normal.p1;
 		}
 
