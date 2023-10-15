@@ -1,15 +1,27 @@
-const rect = canvas.getBoundingClientRect();
+// ------- Mouse Event Hadling -------
 
+let rect = canvas.getBoundingClientRect();
 let mouseX, mouseY, prevX, prevY;
 
 let selected = null;
 let isDragging = false;
 
+function getMosuePositionOnCanvas(event) {
+	const clientX = event.clientX || event.touches[0].clientX;
+	const clientY = event.clientY || event.touches[0].clientY;
+	const { offsetLeft, offsetTop } = event.target;
+	const canvasX = clientX - offsetLeft;
+	const canvasY = clientY - offsetTop;
+
+	return { x: canvasX, y: canvasY };
+}
+
 const mouse_down = function (event) {
 	event.preventDefault();
 
-	mouseX = event.clientX - rect.left;
-	mouseY = event.clientY - rect.top;
+	const mouse = getMosuePositionOnCanvas(event);
+	mouseX = mouse.x;
+	mouseY = mouse.y;
 
 	prevX = mouseX;
 	prevY = mouseY;
@@ -48,8 +60,11 @@ const mouse_out = function (event) {
 };
 
 const mouse_move = function (event) {
-	mouseX = event.clientX - rect.left;
-	mouseY = event.clientY - rect.top;
+	event.preventDefault();
+
+	const mouse = getMosuePositionOnCanvas(event);
+	mouseX = mouse.x;
+	mouseY = mouse.y;
 
 	ray.p2.x = mouseX;
 	ray.p2.y = mouseY;
@@ -59,8 +74,6 @@ const mouse_move = function (event) {
 	if (!isDragging) {
 		return;
 	}
-
-	event.preventDefault();
 
 	let dx = mouseX - prevX;
 	let dy = mouseY - prevY;
@@ -76,6 +89,15 @@ canvas.onmousedown = mouse_down;
 canvas.onmouseup = mouse_up;
 canvas.onmouseout = mouse_out;
 canvas.onmousemove = mouse_move;
+
+canvas.addEventListener("touchstart", mouse_down, { passive: false });
+canvas.addEventListener("touchmove", mouse_move, { passive: false });
+canvas.addEventListener("touchend", mouse_up, { passive: false });
+canvas.addEventListener("touchcancel", mouse_out, { passive: false });
+
+// ------- /Mouse Event Hadling -------
+
+// ------- Simulation Init -------
 
 const ray = graphs.ray(graphs.point(canvas.width / 2, canvas.height / 2), graphs.point(0, 0));
 
@@ -111,3 +133,5 @@ function updateSimulation() {
 }
 
 updateSimulation();
+
+// ------- /Simulation Init -------
