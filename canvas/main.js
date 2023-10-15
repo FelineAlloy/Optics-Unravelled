@@ -48,22 +48,25 @@ const mouse_out = function (event) {
 };
 
 const mouse_move = function (event) {
+	mouseX = event.clientX - rect.left;
+	mouseY = event.clientY - rect.top;
+
+	ray.p2.x = mouseX;
+	ray.p2.y = mouseY;
+
+	updateSimulation();
+
 	if (!isDragging) {
 		return;
 	}
 
 	event.preventDefault();
 
-	mouseX = event.clientX - rect.left;
-	mouseY = event.clientY - rect.top;
-
 	let dx = mouseX - prevX;
 	let dy = mouseY - prevY;
 
 	selected.x += dx;
 	selected.y += dy;
-
-	updateSimulation();
 
 	prevX = mouseX;
 	prevY = mouseY;
