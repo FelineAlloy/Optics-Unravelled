@@ -1,32 +1,25 @@
-function screen(point1, point2) {
-	this.l1 = graphs.line(point1, point2);
+objTypes["screen"] = {
+	create: function (point1, point2) {
+		return { type: "screen", l1: graphs.line(point1, point2) };
+	},
 
-	// selectable objects
-	this.selectables = [this.l1.p1, this.l1.p2];
+	// TODO: implement this
+	selected: function (obj, mouse, dragginPart) {},
 
-	// required member functions
-	this.draw = function () {
+	draw: function (obj) {
 		c.beginPath();
 
 		c.strokeStyle = colors.objects;
 		c.lineWidth = 4;
 
-		c.moveTo(this.l1.p1.x, this.l1.p1.y);
-		c.lineTo(this.l1.p2.x, this.l1.p2.y);
+		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
+		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
 
 		c.stroke();
+	},
 
-		//draw selectables
-		c.beginPath();
-		c.fillStyle = colors.selectables;
-		for (const item of this.selectables) {
-			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
-		}
-		c.fill();
-	};
-
-	this.getCollision = function (ray1) {
-		const colPoint = graphs.intersection(ray1, this.l1);
+	getCollision: function (obj, ray1) {
+		const colPoint = graphs.intersection(ray1, obj.l1);
 		const dist = graphs.length(ray1.p1, colPoint);
 		//console.log(dist);
 
@@ -36,11 +29,11 @@ function screen(point1, point2) {
 
 		colPoint.exist = false;
 		return { point: colPoint, dist: dist };
-	};
+	},
 
-	this.getNewRay = function (ray1, colPoint) {
+	getNewRay: function (obj, ray1, colPoint) {
 		const newRay = graphs.ray(colPoint, colPoint);
 		newRay.exist = false;
 		return newRay;
-	};
-}
+	},
+};

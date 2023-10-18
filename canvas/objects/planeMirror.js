@@ -1,17 +1,18 @@
-function planeMirror(point1, point2, dashLength) {
-	this.l1 = graphs.line(point1, point2);
-	this.dashLength = dashLength;
+objTypes["planeMirror"] = {
+	create: function (point1, point2, dashLength) {
+		return { type: "planeMirror", l1: graphs.line(point1, point2), dashLength: dashLength };
+	},
 
-	// selectable objects
-	this.selectables = [this.l1.p1, this.l1.p2];
+	// TODO: implement this
+	selected: function (obj, mouse, dragginPart) {},
 
 	// required member functions
-	this.draw = function () {
-		const distance = graphs.length_segment(this.l1);
-		const numDashes = Math.floor(distance / this.dashLength);
+	draw: function (obj) {
+		const distance = graphs.length_segment(obj.l1);
+		const numDashes = Math.floor(distance / obj.dashLength);
 
-		const dx = this.l1.p2.x - this.l1.p1.x;
-		const dy = this.l1.p2.y - this.l1.p1.y;
+		const dx = obj.l1.p2.x - obj.l1.p1.x;
+		const dy = obj.l1.p2.y - obj.l1.p1.y;
 
 		const lineAngle = Math.atan2(-dy, -dx);
 		const dashAngle = lineAngle + Math.PI / 4;
@@ -19,45 +20,37 @@ function planeMirror(point1, point2, dashLength) {
 		const dxStep = dx / numDashes;
 		const dyStep = dy / numDashes;
 
-		const dxDash = this.dashLength * Math.cos(dashAngle);
-		const dyDash = this.dashLength * Math.sin(dashAngle);
+		const dxDash = obj.dashLength * Math.cos(dashAngle);
+		const dyDash = obj.dashLength * Math.sin(dashAngle);
 
 		c.strokeStyle = colors.objects;
 		c.lineWidth = 3;
 
 		c.beginPath();
 
-		c.moveTo(this.l1.p1.x, this.l1.p1.y);
-		c.lineTo(this.l1.p2.x, this.l1.p2.y);
+		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
+		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
 
 		c.stroke();
 		c.lineWidth = 2;
 		c.beginPath();
 
-		c.moveTo(this.l1.p1.x, this.l1.p1.y);
+		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
 
 		for (let i = 1; i <= numDashes; i++) {
-			c.moveTo(this.l1.p1.x + i * dxStep, this.l1.p1.y + i * dyStep);
-			c.lineTo(this.l1.p1.x + i * dxStep + dxDash, this.l1.p1.y + i * dyStep + dyDash);
+			c.moveTo(obj.l1.p1.x + i * dxStep, obj.l1.p1.y + i * dyStep);
+			c.lineTo(obj.l1.p1.x + i * dxStep + dxDash, obj.l1.p1.y + i * dyStep + dyDash);
 		}
 
 		c.stroke();
+	},
 
-		//draw selectables
-		c.beginPath();
-		c.fillStyle = colors.selectables;
-		for (const item of this.selectables) {
-			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
-		}
-		c.fill();
-	};
-
-	this.getCollision = function (ray1) {
-		const colPoint = graphs.intersection(ray1, this.l1);
+	getCollision: function (obj, ray1) {
+		const colPoint = graphs.intersection(ray1, obj.l1);
 		const dist = graphs.length(ray1.p1, colPoint);
 		//console.log(dist);
 
-		if (graphs.intersection_is_on_segment(colPoint, this.l1)) {
+		if (graphs.intersection_is_on_segment(colPoint, obj.l1)) {
 			if (graphs.intersection_is_on_ray(colPoint, ray1) && dist > 1) {
 				return { point: colPoint, dist: dist };
 			}
@@ -65,10 +58,10 @@ function planeMirror(point1, point2, dashLength) {
 
 		colPoint.exist = false;
 		return { point: colPoint, dist: dist };
-	};
+	},
 
-	this.getNewRay = function (ray1, colPoint) {
-		const normal = graphs.parallel(graphs.perpendicular_bisector(this.l1), colPoint);
+	getNewRay: function (obj, ray1, colPoint) {
+		const normal = graphs.parallel(graphs.perpendicular_bisector(obj.l1), colPoint);
 
 		let i = graphs.get_angle(ray1.p1, colPoint, normal.p2);
 		let p3 = normal.p2;
@@ -90,5 +83,5 @@ function planeMirror(point1, point2, dashLength) {
 		const newRay = graphs.ray(colPoint, p4);
 
 		return newRay;
-	};
-}
+	},
+};

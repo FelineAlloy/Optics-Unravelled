@@ -1,3 +1,9 @@
+const canvas = document.getElementById("example");
+const c = canvas.getContext("2d");
+
+canvas.width = canvas.parentElement.clientWidth;
+canvas.height = canvas.parentElement.clientHeight;
+
 const colors = {
 	rays: "red",
 	objects: "black",
@@ -6,3 +12,7 @@ const colors = {
 	background: "white",
 };
 const selectableRadius = 3;
+
+const objTypes = {};
+let objects = []; // objects to be drawn
+let rays = []; // the light sources

@@ -26,7 +26,7 @@ const mouse_down = function (event) {
 	prevX = mouseX;
 	prevY = mouseY;
 
-	for (const obj of artist.rays)
+	for (const obj of rays)
 		for (const selectable of obj.selectables)
 			if (graphs.length(graphs.point(mouseX, mouseY), selectable) < selectableRadius * 2) {
 				selected = selectable;
@@ -34,7 +34,7 @@ const mouse_down = function (event) {
 				return;
 			}
 
-	for (const obj of artist.objects)
+	for (const obj of objects)
 		for (const selectable of obj.selectables)
 			if (graphs.length(graphs.point(mouseX, mouseY), selectable) < selectableRadius * 2) {
 				selected = selectable;
@@ -104,19 +104,40 @@ canvas.addEventListener("touchcancel", mouse_out, { passive: false });
 
 // ------- Simulation Init -------
 
-const rayObj = new rayObject(graphs.point(canvas.width / 2, canvas.height / 2), graphs.point(0, 0));
+const rayObj = objTypes["rayObject"].create(
+	graphs.point(canvas.width / 2, canvas.height / 2),
+	graphs.point(0, 0)
+);
 
-const diopter = new planeDiopter(graphs.point(200, canvas.height), graphs.point(200, 0), 1, 1.5);
+const diopter = objTypes["planeDiopter"].create(
+	graphs.point(200, canvas.height),
+	graphs.point(200, 0),
+	1,
+	1.5
+);
 
-const diopter2 = new planeDiopter(graphs.point(400, canvas.height), graphs.point(400, 0), 1.5, 1);
+const diopter2 = objTypes["planeDiopter"].create(
+	graphs.point(400, canvas.height),
+	graphs.point(400, 0),
+	1.5,
+	1
+);
 
-const screen1 = new screen(graphs.point(100, canvas.height), graphs.point(100, 0));
+const screen1 = objTypes["screen"].create(graphs.point(100, canvas.height), graphs.point(100, 0));
 
-const lens1 = new lens(graphs.point(800, canvas.height - 100), graphs.point(800, 100), 100);
+const lens1 = objTypes["lens"].create(
+	graphs.point(800, canvas.height - 100),
+	graphs.point(800, 100),
+	100
+);
 
-const mirror = new planeMirror(graphs.point(1000, 0), graphs.point(1000, canvas.height), 10);
+const mirror = objTypes["planeMirror"].create(
+	graphs.point(1000, 0),
+	graphs.point(1000, canvas.height),
+	10
+);
 
-const diopter3 = new sphericalDiopter(
+const diopter3 = objTypes["sphericalDiopter"].create(
 	graphs.point(1000, canvas.height / 2),
 	graphs.point(600, canvas.height / 2),
 	(30 * Math.PI) / 180,
@@ -124,19 +145,24 @@ const diopter3 = new sphericalDiopter(
 	1.5
 );
 
-artist.objects.push(diopter);
-artist.objects.push(diopter2);
-artist.objects.push(screen1);
-artist.objects.push(lens1);
-artist.objects.push(mirror);
-artist.objects.push(diopter3);
-artist.rays.push(rayObj);
+// objects.push(diopter);
+// objects.push(diopter2);
+// objects.push(screen1);
+// objects.push(lens1);
+// objects.push(mirror);
+// objects.push(diopter3);
+// rays.push(rayObj);
+
+importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {
+	console.log(data);
+	rays = data["rays"];
+	objects = data["objects"];
+	updateSimulation();
+});
 
 function updateSimulation() {
 	artist.clear();
 	artist.draw(100, selected);
 }
-
-updateSimulation();
 
 // ------- /Simulation Init -------

@@ -1,50 +1,55 @@
-function lens(point1, point2, f) {
-	this.l1 = graphs.line(point1, point2);
-	this.f = f;
+objTypes["lens"] = {
+	create: function (point1, point2, f) {
+		const l1 = graphs.line(point1, point2);
+		const normal = graphs.perpendicular_bisector(l1);
+		const midpoint = graphs.midpoint(l1);
 
-	const normal = graphs.perpendicular_bisector(this.l1);
-	const midpoint = graphs.midpoint(this.l1);
-	this.fp1 = graphs.addPointAlongSegment(midpoint, normal.p1, this.f);
-	this.fp2 = graphs.addPointAlongSegment(midpoint, normal.p2, this.f);
+		return {
+			type: "lens",
+			l1: l1,
+			f: f,
+			fp1: graphs.addPointAlongSegment(midpoint, normal.p1, f),
+			fp2: graphs.addPointAlongSegment(midpoint, normal.p2, f),
+		};
+	},
 
-	// selectable objects
-	this.selectables = [this.fp1, this.fp2, this.l1.p1, this.l1.p2];
+	// TODO: implement this
+	selected: function (obj, mouse, dragginPart) {},
 
-	// required member functions
-	this.draw = function () {
+	draw: function (obj) {
 		c.beginPath();
 
 		c.strokeStyle = colors.objects;
 		c.lineWidth = 3;
 
-		c.moveTo(this.l1.p1.x, this.l1.p1.y);
-		c.lineTo(this.l1.p2.x, this.l1.p2.y);
+		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
+		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
 
-		const sgnf = Math.sign(this.f);
-		const angle = Math.atan2(this.l1.p1.y - this.l1.p2.y, this.l1.p1.x - this.l1.p2.x);
-
-		c.moveTo(
-			this.l1.p1.x - sgnf * 15 * Math.cos(angle - Math.PI / 6),
-			this.l1.p1.y - sgnf * 15 * Math.sin(angle - Math.PI / 6)
-		);
-
-		c.lineTo(this.l1.p1.x, this.l1.p1.y);
-
-		c.lineTo(
-			this.l1.p1.x - sgnf * 15 * Math.cos(angle + Math.PI / 6),
-			this.l1.p1.y - sgnf * 15 * Math.sin(angle + Math.PI / 6)
-		);
+		const sgnf = Math.sign(obj.f);
+		const angle = Math.atan2(obj.l1.p1.y - obj.l1.p2.y, obj.l1.p1.x - obj.l1.p2.x);
 
 		c.moveTo(
-			this.l1.p2.x + sgnf * 15 * Math.cos(angle - Math.PI / 6),
-			this.l1.p2.y + sgnf * 15 * Math.sin(angle - Math.PI / 6)
+			obj.l1.p1.x - sgnf * 15 * Math.cos(angle - Math.PI / 6),
+			obj.l1.p1.y - sgnf * 15 * Math.sin(angle - Math.PI / 6)
 		);
 
-		c.lineTo(this.l1.p2.x, this.l1.p2.y);
+		c.lineTo(obj.l1.p1.x, obj.l1.p1.y);
 
 		c.lineTo(
-			this.l1.p2.x + sgnf * 15 * Math.cos(angle + Math.PI / 6),
-			this.l1.p2.y + sgnf * 15 * Math.sin(angle + Math.PI / 6)
+			obj.l1.p1.x - sgnf * 15 * Math.cos(angle + Math.PI / 6),
+			obj.l1.p1.y - sgnf * 15 * Math.sin(angle + Math.PI / 6)
+		);
+
+		c.moveTo(
+			obj.l1.p2.x + sgnf * 15 * Math.cos(angle - Math.PI / 6),
+			obj.l1.p2.y + sgnf * 15 * Math.sin(angle - Math.PI / 6)
+		);
+
+		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
+
+		c.lineTo(
+			obj.l1.p2.x + sgnf * 15 * Math.cos(angle + Math.PI / 6),
+			obj.l1.p2.y + sgnf * 15 * Math.sin(angle + Math.PI / 6)
 		);
 
 		c.stroke();
@@ -53,26 +58,17 @@ function lens(point1, point2, f) {
 		c.textAlign = "center";
 		c.textBaseline = "middle";
 		c.font = "20px Arial";
-		c.fillText("f1", this.fp1.x, this.fp1.y);
-		c.fillText("f2", this.fp2.x, this.fp2.y);
+		c.fillText("f1", obj.fp1.x, obj.fp1.y);
+		c.fillText("f2", obj.fp2.x, obj.fp2.y);
+	},
 
-		//draw selectables
-
-		c.fillStyle = colors.selectables;
-		for (const item of this.selectables) {
-			c.beginPath();
-			c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
-			c.fill();
-		}
-	};
-
-	this.getCollision = function (ray1) {
-		const colPoint = graphs.intersection(ray1, this.l1);
+	getCollision: function (obj, ray1) {
+		const colPoint = graphs.intersection(ray1, obj.l1);
 		const dist = graphs.length(ray1.p1, colPoint);
 		//console.log(dist);
 
 		if (
-			graphs.intersection_is_on_segment(colPoint, this.l1) &&
+			graphs.intersection_is_on_segment(colPoint, obj.l1) &&
 			graphs.intersection_is_on_ray(colPoint, ray1) &&
 			dist > 1
 		) {
@@ -81,19 +77,19 @@ function lens(point1, point2, f) {
 
 		colPoint.exist = false;
 		return { point: colPoint, dist: dist };
-	};
+	},
 
-	this.getNewRay = function (ray1, colPoint) {
-		const midpoint = graphs.midpoint(this.l1);
+	getNewRay: function (obj, ray1, colPoint) {
+		const midpoint = graphs.midpoint(obj.l1);
 		const parallelRay = graphs.parallel(ray1, midpoint);
 
-		let focalPoint = this.fp1;
-		const i1 = graphs.get_angle(this.l1.p1, this.l1.p2, ray1.p1);
-		const i2 = graphs.get_angle(this.l1.p1, this.l1.p2, focalPoint);
-		if ((i1 * i2 > 0 && this.f > 0) || (i1 * i2 < 0 && this.f < 0)) {
-			focalPoint = this.fp2;
+		let focalPoint = obj.fp1;
+		const i1 = graphs.get_angle(obj.l1.p1, obj.l1.p2, ray1.p1);
+		const i2 = graphs.get_angle(obj.l1.p1, obj.l1.p2, focalPoint);
+		if ((i1 * i2 > 0 && obj.f > 0) || (i1 * i2 < 0 && obj.f < 0)) {
+			focalPoint = obj.fp2;
 		}
-		const focusPlane = graphs.parallel(this.l1, focalPoint);
+		const focusPlane = graphs.parallel(obj.l1, focalPoint);
 
 		// c.stroke();
 		// c.beginPath();
@@ -108,10 +104,10 @@ function lens(point1, point2, f) {
 		// c.beginPath();
 
 		const newRay = graphs.ray(colPoint, graphs.intersection(parallelRay, focusPlane));
-		if (this.f < 0) {
+		if (obj.f < 0) {
 			newRay.p2 = graphs.rotate_point(newRay.p2, newRay.p1, Math.PI);
 		}
 
 		return newRay;
-	};
-}
+	},
+};

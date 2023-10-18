@@ -1,16 +1,4 @@
-const canvas = document.getElementById("example");
-const c = canvas.getContext("2d");
-
-canvas.width = canvas.parentElement.clientWidth;
-canvas.height = canvas.parentElement.clientHeight;
-
 const artist = {
-	// Arrayes for objects to be drawn
-
-	objects: [],
-
-	rays: [], // the light sources
-
 	// Drawing functions
 
 	clear: function () {
@@ -37,8 +25,8 @@ const artist = {
 	draw: function (maxBounces, selected) {
 		const drawBuffer = []; // all the rays for which I still need to check collisions before drawing
 
-		for (const obj of artist.objects) {
-			obj.draw(); //draw the object
+		for (const obj of objects) {
+			objTypes[obj.type].draw(obj); //draw the object
 		}
 
 		if (selected != null) {
@@ -50,8 +38,8 @@ const artist = {
 			c.stroke();
 		}
 
-		for (const rayObj of artist.rays) {
-			rayObj.draw();
+		for (const rayObj of rays) {
+			objTypes[rayObj.type].draw(rayObj);
 			drawBuffer.push(rayObj.ray);
 		}
 
@@ -67,13 +55,16 @@ const artist = {
 			let minDist = 1e9;
 
 			//console.log(drawBuffer.length);
-			for (const obj of artist.objects) {
+			for (const obj of objects) {
 				// get the nearest VALID collision point between the ray and a part of the object
 				// this should return two things:
 				// 1. the point where the collision happend
 				// 2. the distance between the source of the ray and the collision
 
-				const { point: colPoint_tmp, dist: dist } = obj.getCollision(ray);
+				const { point: colPoint_tmp, dist: dist } = objTypes[obj.type].getCollision(
+					obj,
+					ray
+				);
 				//console.log(colPoint_tmp, dist);
 
 				if (colPoint_tmp.exist && dist < minDist) {
@@ -87,8 +78,8 @@ const artist = {
 			if (colPoint.exist) {
 				artist.draw_segment(graphs.segment(ray.p1, colPoint));
 
-				if (drawBuffer.length <= maxBounces * artist.rays.length) {
-					const newRay = colObj.getNewRay(ray, colPoint);
+				if (drawBuffer.length <= maxBounces * rays.length) {
+					const newRay = objTypes[colObj.type].getNewRay(colObj, ray, colPoint);
 					if (newRay.exist) {
 						drawBuffer.push(newRay);
 					}
