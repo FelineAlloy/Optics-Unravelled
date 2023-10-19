@@ -49,11 +49,11 @@ objTypes["rayObject"] = {
 		c.stroke();
 
 		c.beginPath();
-		c.arc(obj.ray.p1.x, obj.ray.p1.y, clickExtent_point, 0, 2 * Math.PI);
+		c.arc(obj.ray.p1.x, obj.ray.p1.y, 5, 0, 2 * Math.PI);
 		c.stroke();
 		c.beginPath();
 		c.fillStyle = colors.objects;
-		c.arc(obj.ray.p1.x, obj.ray.p1.y, clickExtent_point - 3, 0, 2 * Math.PI);
+		c.arc(obj.ray.p1.x, obj.ray.p1.y, 2, 0, 2 * Math.PI);
 		c.fill();
 	},
 };

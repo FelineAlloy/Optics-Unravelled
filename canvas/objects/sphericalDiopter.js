@@ -90,9 +90,9 @@ objTypes["sphericalDiopter"] = {
 		c.fillText("n2", p2.x, p2.y);
 
 		c.beginPath();
-		c.arc(obj.c1.c.x, obj.c1.c.y, clickExtent_point - 3, 0, 2 * Math.PI);
+		c.arc(obj.c1.c.x, obj.c1.c.y, 2, 0, 2 * Math.PI);
 		c.fill();
-		c.arc(obj.c1.c.x, obj.c1.c.y, clickExtent_point, 0, 2 * Math.PI);
+		c.arc(obj.c1.c.x, obj.c1.c.y, 5, 0, 2 * Math.PI);
 		c.stroke();
 	},
 

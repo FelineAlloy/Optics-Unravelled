@@ -11,7 +11,7 @@ const colors = {
 	selectables: "black",
 	background: "white",
 };
-const clickExtent_point = 5;
+const clickExtent_point = 10;
 const clickExtent_line = 5;
 
 const objTypes = {};
