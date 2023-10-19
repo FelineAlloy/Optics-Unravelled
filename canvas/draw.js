@@ -22,20 +22,11 @@ const artist = {
 		c.lineTo(x, y);
 	},
 
-	draw: function (maxBounces, selected) {
+	draw: function (maxBounces) {
 		const drawBuffer = []; // all the rays for which I still need to check collisions before drawing
 
 		for (const obj of objects) {
 			objTypes[obj.type].draw(obj); //draw the object
-		}
-
-		if (selected != null) {
-			c.strokeStyle = colors.selectables;
-			c.lineWidth = 2;
-
-			c.beginPath();
-			c.arc(selected.x, selected.y, selectableRadius + 2, 0, 2 * Math.PI);
-			c.stroke();
 		}
 
 		for (const rayObj of rays) {

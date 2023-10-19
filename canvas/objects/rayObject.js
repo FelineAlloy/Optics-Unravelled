@@ -3,22 +3,57 @@ objTypes["rayObject"] = {
 		return { type: "rayObject", ray: graphs.ray(p1, p2) };
 	},
 
-	// TODO: implement this
-	selected: function (obj, mouse, dragginPart) {},
-
-	draw: function (obj) {
-		// //draw selectables
-		// c.beginPath();
-		// c.fillStyle = colors.selectables;
-		// for (const item of this.selectables) {
-		// 	c.arc(item.x, item.y, selectableRadius, 0, 2 * Math.PI);
-		// }
-		// c.fill();
+	selected: function (obj, mouse, selected) {
+		if (
+			mouseOnPoint(mouse, obj.ray.p1) &&
+			graphs.length_squared(mouse, obj.ray.p1) <= graphs.length_squared(mouse, obj.ray.p2)
+		) {
+			selected.part = 1;
+			return true;
+		}
+		if (mouseOnPoint(mouse, obj.ray.p2)) {
+			selected.part = 2;
+			return true;
+		}
 	},
 
-	// getCollision: function (ray1) {
-	// };
+	c_mousemove: function (obj, dx, dy) {
+		if (selected.part == 1) {
+			obj.ray.p1.x += dx;
+			obj.ray.p1.y += dy;
+		} else if (selected.part == 2) {
+			obj.ray.p2.x += dx;
+			obj.ray.p2.y += dy;
+		}
+	},
 
-	// getNewRay: function (ray1, colPoint) {
-	// };
+	draw: function (obj) {
+		const angle = Math.atan2(obj.ray.p2.y - obj.ray.p1.y, obj.ray.p2.x - obj.ray.p1.x);
+
+		c.beginPath();
+		c.strokeStyle = colors.objects;
+		c.lineWidth = 3;
+
+		c.moveTo(
+			obj.ray.p2.x - 10 * Math.cos(angle - Math.PI / 6),
+			obj.ray.p2.y - 10 * Math.sin(angle - Math.PI / 6)
+		);
+
+		c.lineTo(obj.ray.p2.x, obj.ray.p2.y);
+
+		c.lineTo(
+			obj.ray.p2.x - 10 * Math.cos(angle + Math.PI / 6),
+			obj.ray.p2.y - 10 * Math.sin(angle + Math.PI / 6)
+		);
+
+		c.stroke();
+
+		c.beginPath();
+		c.arc(obj.ray.p1.x, obj.ray.p1.y, clickExtent_point, 0, 2 * Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.fillStyle = colors.objects;
+		c.arc(obj.ray.p1.x, obj.ray.p1.y, clickExtent_point - 3, 0, 2 * Math.PI);
+		c.fill();
+	},
 };

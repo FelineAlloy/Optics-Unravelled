@@ -9,10 +9,56 @@ objTypes["sphericalDiopter"] = {
 		};
 	},
 
-	// TODO: implement this
-	selected: function (obj, mouse, dragginPart) {},
+	selected: function (obj, mouse, selected) {
+		if (
+			mouseOnPoint(mouse, obj.c1.c) &&
+			graphs.length_squared(mouse, obj.c1.c) <= graphs.length_squared(mouse, obj.c1.r.p2)
+		) {
+			selected.part = 1;
+			return true;
+		}
+		if (mouseOnPoint(mouse, obj.c1.r.p2)) {
+			selected.part = 2;
+			return true;
+		}
+		const e1 = graphs.rotate_point(obj.c1.r.p2, obj.c1.c, obj.angle / 2);
+		const e2 = graphs.rotate_point(obj.c1.r.p2, obj.c1.c, -obj.angle / 2);
+		if (mouseOnPoint(mouse, e1)) {
+			selected.part = 3;
+			return true;
+		}
+		if (mouseOnPoint(mouse, e2)) {
+			selected.part = 4;
+			return true;
+		}
+		if (
+			graphs.get_angle(obj.c1.r.p2, obj.c1.c, mouse) <= obj.angle &&
+			Math.abs(graphs.length(mouse, obj.c1.c) - graphs.length(obj.c1.r.p1, obj.c1.r.p2)) <=
+				clickExtent_line
+		) {
+			selected.part = 0;
+			return true;
+		}
+	},
 
-	// required member functions
+	c_mousemove: function (obj, dx, dy) {
+		if (selected.part == 0) {
+			obj.c1.c.x += dx;
+			obj.c1.c.y += dy;
+
+			obj.c1.r.p2.x += dx;
+			obj.c1.r.p2.y += dy;
+		} else if (selected.part == 1) {
+			obj.c1.c.x += dx;
+			obj.c1.c.y += dy;
+		} else if (selected.part == 2) {
+			obj.c1.r.p2.x += dx;
+			obj.c1.r.p2.y += dy;
+		} else if (selected.part == 3 || selected.part == 4) {
+			obj.angle = 2 * Math.abs(graphs.get_angle(mouse, obj.c1.c, obj.c1.r.p2));
+		}
+	},
+
 	draw: function (obj) {
 		c.beginPath();
 
@@ -42,6 +88,12 @@ objTypes["sphericalDiopter"] = {
 		c.font = "20px Arial";
 		c.fillText("n1", p1.x, p1.y);
 		c.fillText("n2", p2.x, p2.y);
+
+		c.beginPath();
+		c.arc(obj.c1.c.x, obj.c1.c.y, clickExtent_point - 3, 0, 2 * Math.PI);
+		c.fill();
+		c.arc(obj.c1.c.x, obj.c1.c.y, clickExtent_point, 0, 2 * Math.PI);
+		c.stroke();
 	},
 
 	getCollision: function (obj, ray1) {

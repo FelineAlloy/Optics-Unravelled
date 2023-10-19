@@ -11,7 +11,8 @@ const colors = {
 	selectables: "black",
 	background: "white",
 };
-const selectableRadius = 3;
+const clickExtent_point = 5;
+const clickExtent_line = 5;
 
 const objTypes = {};
 let objects = []; // objects to be drawn

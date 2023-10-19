@@ -13,8 +13,114 @@ objTypes["lens"] = {
 		};
 	},
 
-	// TODO: implement this
-	selected: function (obj, mouse, dragginPart) {},
+	selected: function (obj, mouse, selected) {
+		if (
+			mouseOnPoint(mouse, obj.l1.p1) &&
+			graphs.length_squared(obj.l1.p1, mouse) <= graphs.length_squared(obj.l1.p2, mouse) &&
+			graphs.length_squared(obj.l1.p1, mouse) <= graphs.length_squared(obj.fp1, mouse) &&
+			graphs.length_squared(obj.l1.p1, mouse) <= graphs.length_squared(obj.fp2, mouse)
+		) {
+			selected.part = 1;
+			return true;
+		}
+		if (
+			mouseOnPoint(mouse, obj.l1.p2) &&
+			graphs.length_squared(obj.l1.p2, mouse) <= graphs.length_squared(obj.fp2, mouse) &&
+			graphs.length_squared(obj.l1.p2, mouse) <= graphs.length_squared(obj.fp2, mouse)
+		) {
+			selected.part = 2;
+			return true;
+		}
+		if (
+			mouseOnPoint(mouse, obj.fp1) &&
+			graphs.length_squared(obj.fp1, mouse) <= graphs.length_squared(obj.fp2, mouse)
+		) {
+			selected.part = 3;
+			return true;
+		}
+		if (mouseOnPoint(mouse, obj.fp2)) {
+			selected.part = 4;
+			return true;
+		}
+		if (mouseOnSegment(mouse, obj.l1)) {
+			selected.part = 0;
+			return true;
+		}
+	},
+
+	c_mousemove: function (obj, dx, dy) {
+		if (selected.part == 0) {
+			obj.l1.p1.x += dx;
+			obj.l1.p1.y += dy;
+
+			obj.l1.p2.x += dx;
+			obj.l1.p2.y += dy;
+
+			obj.fp1.x += dx;
+			obj.fp1.y += dy;
+
+			obj.fp2.x += dx;
+			obj.fp2.y += dy;
+		} else if (selected.part == 1) {
+			const p0 = graphs.point(obj.l1.p1.x, obj.l1.p1.y);
+
+			obj.l1.p1.x += dx;
+			obj.l1.p1.y += dy;
+
+			const midpoint = graphs.midpoint(obj.l1);
+			const alpha = graphs.get_angle(obj.l1.p1, midpoint, p0);
+
+			const len = graphs.length(midpoint, obj.l1.p1);
+			obj.l1.p2 = graphs.addPointAlongSegment(midpoint, obj.l1.p1, -len);
+			const normal = graphs.perpendicular_bisector(obj.l1);
+
+			obj.fp1 = graphs.addPointAlongSegment(midpoint, normal.p1, obj.f);
+			obj.fp2 = graphs.addPointAlongSegment(midpoint, normal.p2, obj.f);
+		} else if (selected.part == 2) {
+			const p0 = graphs.point(obj.l1.p2.x, obj.l1.p2.y);
+
+			obj.l1.p2.x += dx;
+			obj.l1.p2.y += dy;
+
+			const midpoint = graphs.midpoint(obj.l1);
+			const alpha = graphs.get_angle(obj.l1.p2, midpoint, p0);
+			const normal = graphs.perpendicular_bisector(obj.l1);
+
+			const len = graphs.length(midpoint, obj.l1.p2);
+			obj.l1.p1 = graphs.addPointAlongSegment(midpoint, obj.l1.p2, -len);
+
+			obj.fp1 = graphs.addPointAlongSegment(midpoint, normal.p1, obj.f);
+			obj.fp2 = graphs.addPointAlongSegment(midpoint, normal.p2, obj.f);
+		} else if (selected.part == 3) {
+			const p0 = graphs.point(obj.fp1.x, obj.fp1.y);
+
+			obj.fp1.x += dx;
+			obj.fp1.y += dy;
+
+			const midpoint = graphs.midpoint(obj.l1);
+			const alpha = graphs.get_angle(obj.fp1, midpoint, p0);
+
+			obj.f = graphs.length(midpoint, obj.fp1);
+			obj.fp2 = graphs.addPointAlongSegment(midpoint, obj.fp1, -obj.f);
+
+			obj.l1.p1 = graphs.rotate_point(obj.l1.p1, midpoint, alpha);
+			obj.l1.p2 = graphs.rotate_point(obj.l1.p2, midpoint, alpha);
+		} else if (selected.part == 4) {
+			const p0 = graphs.point(obj.fp2.x, obj.fp2.y);
+
+			obj.fp2.x += dx;
+			obj.fp2.y += dy;
+
+			const midpoint = graphs.midpoint(obj.l1);
+			const alpha = graphs.get_angle(obj.fp2, midpoint, p0);
+
+			obj.f = graphs.length(midpoint, obj.fp2);
+			obj.fp1 = graphs.addPointAlongSegment(midpoint, obj.fp2, -obj.f);
+
+			obj.l1.p1 = graphs.rotate_point(obj.l1.p1, midpoint, alpha);
+			obj.l1.p2 = graphs.rotate_point(obj.l1.p2, midpoint, alpha);
+		}
+	},
 
 	draw: function (obj) {
 		c.beginPath();

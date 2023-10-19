@@ -1,10 +1,34 @@
 // ------- Mouse Event Hadling -------
 
 let rect = canvas.getBoundingClientRect();
-let mouseX, mouseY, prevX, prevY;
+let mouse = graphs.point(0, 0);
+let mouse_prev = graphs.point(0, 0);
 
-let selected = null;
+const selected = { obj: undefined, part: undefined };
 let isDragging = false;
+
+function mouseOnPoint(mouse, point) {
+	return graphs.length_squared(mouse, point) < clickExtent_point * clickExtent_point;
+}
+
+function mouseOnSegment(mouse, segment) {
+	var d_per =
+		Math.pow(
+			(mouse.x - segment.p1.x) * (segment.p1.y - segment.p2.y) +
+				(mouse.y - segment.p1.y) * (segment.p2.x - segment.p1.x),
+			2
+		) /
+		((segment.p1.y - segment.p2.y) * (segment.p1.y - segment.p2.y) +
+			(segment.p2.x - segment.p1.x) * (segment.p2.x - segment.p1.x)); //Similar to the distance between the mouse and the line
+	var d_par =
+		(segment.p2.x - segment.p1.x) * (mouse.x - segment.p1.x) +
+		(segment.p2.y - segment.p1.y) * (mouse.y - segment.p1.y); //Similar to the projected point of the mouse on the line
+	return (
+		d_per < clickExtent_line * clickExtent_line &&
+		d_par >= 0 &&
+		d_par <= graphs.length_segment_squared(segment)
+	);
+}
 
 function getMosuePositionOnCanvas(event) {
 	const clientX = event.clientX || event.touches[0].clientX;
@@ -16,31 +40,32 @@ function getMosuePositionOnCanvas(event) {
 	return { x: canvasX, y: canvasY };
 }
 
+function getSelectedObject(mouse) {
+	for (const obj of rays) {
+		if (objTypes[obj.type].selected(obj, mouse, selected)) {
+			return obj;
+		}
+	}
+	for (const obj of objects) {
+		if (objTypes[obj.type].selected(obj, mouse, selected)) {
+			return obj;
+		}
+	}
+
+	return null;
+}
+
 const mouse_down = function (event) {
 	event.preventDefault();
 
-	const mouse = getMosuePositionOnCanvas(event);
-	mouseX = mouse.x;
-	mouseY = mouse.y;
+	mouse = getMosuePositionOnCanvas(event);
 
-	prevX = mouseX;
-	prevY = mouseY;
+	mouse_prev = graphs.point(mouse.x, mouse.y);
 
-	for (const obj of rays)
-		for (const selectable of obj.selectables)
-			if (graphs.length(graphs.point(mouseX, mouseY), selectable) < selectableRadius * 2) {
-				selected = selectable;
-				isDragging = true;
-				return;
-			}
-
-	for (const obj of objects)
-		for (const selectable of obj.selectables)
-			if (graphs.length(graphs.point(mouseX, mouseY), selectable) < selectableRadius * 2) {
-				selected = selectable;
-				isDragging = true;
-				return;
-			}
+	selected.obj = getSelectedObject(mouse);
+	if (selected.obj != null) {
+		isDragging = true;
+	}
 
 	updateSimulation();
 };
@@ -52,7 +77,7 @@ const mouse_up = function (event) {
 
 	event.preventDefault();
 	isDragging = false;
-	selected = null;
+	selected.obj = null;
 	updateSimulation();
 };
 
@@ -63,16 +88,14 @@ const mouse_out = function (event) {
 
 	event.preventDefault();
 	isDragging = false;
-	selected = null;
+	selected.obj = null;
 	updateSimulation();
 };
 
 const mouse_move = function (event) {
 	event.preventDefault();
 
-	const mouse = getMosuePositionOnCanvas(event);
-	mouseX = mouse.x;
-	mouseY = mouse.y;
+	mouse = getMosuePositionOnCanvas(event);
 
 	updateSimulation();
 
@@ -80,14 +103,12 @@ const mouse_move = function (event) {
 		return;
 	}
 
-	let dx = mouseX - prevX;
-	let dy = mouseY - prevY;
+	let dx = mouse.x - mouse_prev.x;
+	let dy = mouse.y - mouse_prev.y;
 
-	selected.x += dx;
-	selected.y += dy;
+	objTypes[selected.obj.type].c_mousemove(selected.obj, dx, dy);
 
-	prevX = mouseX;
-	prevY = mouseY;
+	mouse_prev = graphs.point(mouse.x, mouse.y);
 };
 
 canvas.addEventListener("mousedown", mouse_down);
@@ -145,24 +166,24 @@ const diopter3 = objTypes["sphericalDiopter"].create(
 	1.5
 );
 
-// objects.push(diopter);
-// objects.push(diopter2);
-// objects.push(screen1);
-// objects.push(lens1);
-// objects.push(mirror);
-// objects.push(diopter3);
-// rays.push(rayObj);
+objects.push(diopter);
+objects.push(diopter2);
+objects.push(screen1);
+objects.push(lens1);
+objects.push(mirror);
+objects.push(diopter3);
+rays.push(rayObj);
 
-importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {
-	console.log(data);
-	rays = data["rays"];
-	objects = data["objects"];
-	updateSimulation();
-});
+// importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {
+// 	console.log(data);
+// 	rays = data["rays"];
+// 	objects = data["objects"];
+// 	updateSimulation();
+// });
 
 function updateSimulation() {
 	artist.clear();
-	artist.draw(100, selected);
+	artist.draw(100);
 }
 
 // ------- /Simulation Init -------

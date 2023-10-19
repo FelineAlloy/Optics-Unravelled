@@ -3,10 +3,40 @@ objTypes["planeMirror"] = {
 		return { type: "planeMirror", l1: graphs.line(point1, point2), dashLength: dashLength };
 	},
 
-	// TODO: implement this
-	selected: function (obj, mouse, dragginPart) {},
+	selected: function (obj, mouse, selected) {
+		if (
+			mouseOnPoint(mouse, obj.l1.p1) &&
+			graphs.length_squared(obj.l1.p1, mouse) <= graphs.length_squared(obj.l1.p2, mouse)
+		) {
+			selected.part = 1;
+			return true;
+		}
+		if (mouseOnPoint(mouse, obj.l1.p2)) {
+			selected.part = 2;
+			return true;
+		}
+		if (mouseOnSegment(mouse, obj.l1)) {
+			selected.part = 0;
+			return true;
+		}
+	},
 
-	// required member functions
+	c_mousemove: function (obj, dx, dy) {
+		if (selected.part == 0) {
+			obj.l1.p1.x += dx;
+			obj.l1.p1.y += dy;
+
+			obj.l1.p2.x += dx;
+			obj.l1.p2.y += dy;
+		} else if (selected.part == 1) {
+			obj.l1.p1.x += dx;
+			obj.l1.p1.y += dy;
+		} else if (selected.part == 2) {
+			obj.l1.p2.x += dx;
+			obj.l1.p2.y += dy;
+		}
+	},
+
 	draw: function (obj) {
 		const distance = graphs.length_segment(obj.l1);
 		const numDashes = Math.floor(distance / obj.dashLength);
