@@ -26,6 +26,12 @@
 
 /* Main article */
 
+.nav-wrapper {
+	position: absolute;
+	left: 50%;
+	transform: translate(-30%, 0);
+}
+
 menu.main-menu {
     margin: 0px 1.2em 1.2em 1.2em;
     list-style: none;

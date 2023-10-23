@@ -27,7 +27,7 @@
 <body>
     <header>
         <div class="s1-container">
-            <a href="index.html">Meniu</a>
+            <a href="/">Meniu</a>
         </div>
     </header>
     <article class="s1-container article-mp">
@@ -42,12 +42,12 @@
 
         <section>
             <h2>Autori</h2>
-            <li><b>Luxin Gabriel Mătăsaru</b> - elev în clasa a XI-a la Colegiul Național de Informatică „Tudor Vianu”</li>
+            <li><b>Luxin Gabriel Mătăsaru</b> - elev în clasa a XII-a la Colegiul Național de Informatică „Tudor Vianu”</li>
         </section>
 
         <section>
             <h2>Mulțumiri</h2>
-            <li><b>Autorilor proiectului <a href="https://phydemo.app/ray-optics/" style="color: #4d7b96; font-size: 1em">Ray Optics Simulation</a>: </b> Tu Yi-Ting, Sun Wei-Fang</li>
+            <li> Doamnelor profesoare <b>Ioana Stoica </b> și <b>Mincă Carmen</b> pentru ajutorul și îndrumarile utile în realizarea proiectului.</li>
         </section>
     </article>
 
@@ -58,21 +58,5 @@
     <script src="js/locale.js"></script>
     <script src="locale/en.js"></script>
     <script src="locale/ro.js"></script>
-
-    <!-- View Models scripts -->
-    <script src="nunjucks.js"></script>
-
-    <!-- Utilities -->
-    <script src="js/dropdown.js"></script>
-    <script>
-        function calcWidth(){
-            var area = 585225;
-            var iframe = document.getElementById("canvasIframe");
-            iframe.style.height = Math.min(3/2*iframe.offsetWidth, Math.round(area / iframe.offsetWidth)) + "px";
-        }
-        
-        window.onresize = calcWidth();
-
-    </script>
 </body>
 </html>
