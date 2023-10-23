@@ -46,11 +46,17 @@ objTypes["sphericalDiopter"] = {
 			obj.c1.c.x += dx;
 			obj.c1.c.y += dy;
 
+			obj.c1.r.p1.x = obj.c1.c.x;
+			obj.c1.r.p1.y = obj.c1.c.y;
+
 			obj.c1.r.p2.x += dx;
 			obj.c1.r.p2.y += dy;
 		} else if (selected.part == 1) {
 			obj.c1.c.x += dx;
 			obj.c1.c.y += dy;
+
+			obj.c1.r.p1.x = obj.c1.c.x;
+			obj.c1.r.p1.y = obj.c1.c.y;
 		} else if (selected.part == 2) {
 			obj.c1.r.p2.x += dx;
 			obj.c1.r.p2.y += dy;
@@ -86,8 +92,8 @@ objTypes["sphericalDiopter"] = {
 		c.textAlign = "center";
 		c.textBaseline = "middle";
 		c.font = "20px Arial";
-		c.fillText("n1", p1.x, p1.y);
-		c.fillText("n2", p2.x, p2.y);
+		c.fillText(obj.n1.toString(), p1.x, p1.y);
+		c.fillText(obj.n2.toString(), p2.x, p2.y);
 
 		c.beginPath();
 		c.arc(obj.c1.c.x, obj.c1.c.y, 2, 0, 2 * Math.PI);

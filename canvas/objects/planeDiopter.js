@@ -57,8 +57,8 @@ objTypes["planeDiopter"] = {
 		c.textAlign = "center";
 		c.textBaseline = "middle";
 		c.font = "20px Arial";
-		c.fillText("n1", p1.x, p1.y);
-		c.fillText("n2", p2.x, p2.y);
+		c.fillText(obj.n1.toString(), p1.x, p1.y);
+		c.fillText(obj.n2.toString(), p2.x, p2.y);
 	},
 
 	getCollision: function (obj, ray1) {

@@ -35,29 +35,6 @@
         <h1 style="text-align: center;">{{title}}</h1>
         {% block content %}
         {% endblock %}
-            
-                <!-- <div>
-                    <h1><a data-bind="text: getTitle()"></a></h1>
-                    <p data-bind="text: getContent()"></p>
-                </div>
-            
-
-             
-                <div>
-                    <div class="dropdown"><p>Exemplu</p><a onclick="dropdown(this), calcWidth()" class="dropbtn"><i class="fa-solid fa-angle-down"></i></a></div>
-                    <div class="dropdown-content show">
-                        <iframe
-                            id="canvasIframe"
-                            src="ray-optics/simulator/#apparent-depth"
-                            name="targetframe"
-                            allowTransparency="true"
-                            scrolling="no"
-                            frameborder="0"
-                        >
-                        </iframe>
-                    </div>
-                </div> -->
-            
     </article>
 
     <!-- Import scripts -->
@@ -68,20 +45,32 @@
     <script src="locale/en.js"></script>
     <script src="locale/ro.js"></script>
 
-    <!-- View Models scripts -->
-    <script src="nunjucks.js"></script>
-
     <!-- Utilities -->
     <script src="js/dropdown.js"></script>
-    <script>
-        function calcWidth(){
-            var area = 585225;
-            var iframe = document.getElementById("canvasIframe");
-            iframe.style.height = Math.min(3/2*iframe.offsetWidth, Math.round(area / iframe.offsetWidth)) + "px";
-        }
-        
-        window.onresize = calcWidth();
 
-    </script>
+	<!-- Global variables -->
+	<script src="/canvas/global.js"></script>
+	
+	<!-- Geometric constructions -->
+	<script src="/canvas/graphs.js"></script>
+	
+	<!-- Objects -->
+	<script src="/canvas/objects/rayObject.js"></script>
+	
+	<script src="/canvas/objects/screen.js"></script>
+	<script src="/canvas/objects/arrow.js"></script>
+	<script src="/canvas/objects/aop.js"></script>
+
+	<script src="/canvas/objects/planeDiopter.js"></script>
+	<script src="/canvas/objects/sphericalDiopter.js"></script>
+	<script src="/canvas/objects/lens.js"></script>
+	<script src="/canvas/objects/planeMirror.js"></script>
+	
+	<!-- Main workflow -->
+	<!-- <script src="/canvas/export.js"></script> -->
+	<script src="/canvas/import.js"></script>
+	<script src="/canvas/draw.js"></script>
+	<!-- <script src="/canvas/examples/{{id}}.js"></script> -->
+	<script src="/canvas/main.js"></script>
 </body>
 </html>

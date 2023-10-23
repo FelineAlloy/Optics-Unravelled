@@ -25,10 +25,10 @@ locales["ro"] = {
 		message: "Legile reflexiei",
 		tag: "lesson",
 	},
-	imgThroughPlaneDiopter: {
-		message: "Aplicație: Imaginea unui obiect prin dioptrul plan",
-		tag: "lesson",
-	},
+	// imgThroughPlaneDiopter: {
+	// 	message: "Aplicație: Imaginea unui obiect prin dioptrul plan",
+	// 	tag: "lesson",
+	// },
 	opticalPrism: {
 		message: "Aplicație: Prisma optică",
 		tag: "lesson",
@@ -79,10 +79,10 @@ locales["ro"] = {
 		message: "Microscopul",
 		tag: "lesson",
 	},
-	telescope: {
-		message: "Telescopul",
-		tag: "lesson",
-	},
+	// telescope: {
+	// 	message: "Telescopul",
+	// 	tag: "lesson",
+	// },
 
 	// Errors
 	errorExist: {

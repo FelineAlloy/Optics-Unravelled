@@ -1,4 +1,4 @@
-const canvas = document.getElementById("example");
+const canvas = document.getElementsByTagName("canvas")[0]; // due to how other parts are imlemented we only suport one canmvas per page
 const c = canvas.getContext("2d");
 
 canvas.width = canvas.parentElement.clientWidth;

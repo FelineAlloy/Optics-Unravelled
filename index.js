@@ -1,46 +1,41 @@
-const path = require('path');
-const nunjucks = require('nunjucks');
+const path = require("path");
+const nunjucks = require("nunjucks");
 
-const express = require('express');
+const express = require("express");
 const app = express();
 
-const en = require('./static/locale/en');
-const ro = require('./static/locale/ro');
+const en = require("./static/locale/en");
+const ro = require("./static/locale/ro");
 
-app.use(express.static(__dirname + '/static', {index: false}));
-app.use("/canvas", express.static(__dirname + '/canvas', {index: false}));
+app.use(express.static(__dirname + "/static", { index: false }));
+app.use("/canvas", express.static(__dirname + "/canvas", { index: false }));
 
-nunjucks.configure('.', {
-    autoescape: true,
-    express: app
+nunjucks.configure(".", {
+	autoescape: true,
+	express: app,
 });
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
+	var lessons = [];
+	var objKeys = Object.keys(locales["ro"]);
 
-    var lessons = []
-    var objKeys = Object.keys(locales['ro']);
+	objKeys.forEach((key) => {
+		var elem = ro.locales["ro"][key];
+		if (elem.tag == "lesson") lessons.push({ id: key, text: elem.message });
+	});
 
-    objKeys.forEach(key => {
-
-        var elem = ro.locales['ro'][key];
-        if(elem.tag == "lesson")
-            lessons.push({'id': key, 'text': elem.message});
-    });
-
-    return res.render('./static/index.html', {lessons: lessons});
-
+	return res.render("./static/index.html", { lessons: lessons });
 });
 
-app.get('/lesson', (req, res) => {
+app.get("/lesson", (req, res) => {
+	var page = req.query.page;
 
-    var page = req.query.page;
+	var title = page;
+	try {
+		title = ro.locales["ro"][page].message;
+	} catch {}
 
-    var title = page;
-    try {
-        title = ro.locales['ro'][page].message;
-    } catch {}
-
-    return res.render('./lessons/'+page+'.njk', {title: title});
+	return res.render("./lessons/" + page + ".njk", { title: title, id: req.query.page });
 });
 
-app.listen(process.env.PORT || 3000, () => console.log('App available on http://localhost:3000'));
+app.listen(process.env.PORT || 3000, () => console.log("App available on http://localhost:3000"));
