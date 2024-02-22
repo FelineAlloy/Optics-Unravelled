@@ -1,6 +1,6 @@
 objTypes["screen"] = {
-	create: function (point1, point2) {
-		return { type: "screen", l1: graphs.line(point1, point2) };
+	create: function (point1, point2, uid) {
+		return { type: "screen", l1: graphs.line(point1, point2), uid: uid };
 	},
 
 	selected: function (obj, mouse, selected) {

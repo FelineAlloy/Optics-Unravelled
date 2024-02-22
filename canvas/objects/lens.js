@@ -1,5 +1,5 @@
 objTypes["lens"] = {
-	create: function (point1, point2, f) {
+	create: function (point1, point2, f, uid) {
 		const l1 = graphs.line(point1, point2);
 		const normal = graphs.perpendicular_bisector(l1);
 		const midpoint = graphs.midpoint(l1);
@@ -10,6 +10,7 @@ objTypes["lens"] = {
 			f: f,
 			fp1: graphs.addPointAlongSegment(midpoint, normal.p1, f),
 			fp2: graphs.addPointAlongSegment(midpoint, normal.p2, f),
+			uid: uid,
 		};
 	},
 

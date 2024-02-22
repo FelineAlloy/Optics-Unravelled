@@ -1,4 +1,4 @@
-// ------- Mouse Event Hadling -------
+// ------- Dropdown Hadling -------
 
 respondToVisibility = function (element, callback) {
 	var options = {
@@ -156,98 +156,22 @@ canvas.addEventListener("touchcancel", mouse_out, { passive: false });
 // ------- Simulation Init -------
 
 if (canvas.id == "example") {
-	// const p1 = graphs.point(canvas.width / 2, canvas.height / 6);
-	// const p2 = graphs.point(canvas.width / 2 + 200, (canvas.height * 5) / 6);
-	// const p3 = graphs.point(canvas.width / 2 - 200, (canvas.height * 5) / 6);
 
-	const r = 300;
-	const f1 = 100;
-	const f2 = 150;
-	const x1 = -180;
-	const x2 = (f1 * x1) / (f1 + x1);
-	const x2_ = x2 - canvas.width / 3;
-	const x3 = (f2 * x2_) / (f2 + x2_);
-	const h0 = 40;
-	const h2 = (h0 * x2) / x1;
-	const h3 = (h2 * x3) / x2_;
+    const p1 = graphs.point(canvas.width/2 - Math.tan(Math.PI/6) * (canvas.height-100), canvas.height-50);
+    const p2 = graphs.point(canvas.width/2 + Math.tan(Math.PI/6) * (canvas.height-100), canvas.height-50);
+    const p3 = graphs.point(canvas.width/2, 50);
 
-	console.log(x2, (x2 / x1) * h0);
+    const ray = objTypes["rayObject"].create(graphs.point(100, 100), graphs.point(200, 200), 0, true);
+	const d1 = objTypes["planeDiopter"].create(p1, p3, 1, 1.5, 1);
+    const d2 = objTypes["planeDiopter"].create(p2, p3, 1.5, 1, 2);
+    const d3 = objTypes["planeDiopter"].create(p1, p2, 1.5, 1, 2);
+    const alpha = objTypes["angle"].create([1, 1, 2], ["l1.p1", "l1.p2", "l1.p1"], 69);
 
-	const rayObj1 = objTypes["rayObject"].create(
-		graphs.point(canvas.width / 3 + x1, canvas.height / 2 - h0),
-		graphs.point(canvas.width / 3 + x1 / 2, canvas.height / 2 - h0)
-	);
-	const rayObj2 = objTypes["rayObject"].create(
-		graphs.point(canvas.width / 3 + x1, canvas.height / 2 - h0),
-		graphs.point(canvas.width / 3, canvas.height / 2)
-	);
-
-	const rayObj3 = objTypes["rayObject"].create(
-		graphs.point(canvas.width / 3 + x2, canvas.height / 2 - h2),
-		graphs.point((canvas.width * 2) / 3 + x2_ / 2, canvas.height / 2 - h2)
-	);
-	const rayObj4 = objTypes["rayObject"].create(
-		graphs.point(canvas.width / 3 + x2, canvas.height / 2 - h2),
-		graphs.point((canvas.width * 2) / 3, canvas.height / 2)
-	);
-
-	// const diopter = objTypes["planeDiopter"].create(p1, p2, 1, 1.5);
-
-	// const diopter2 = objTypes["planeDiopter"].create(p2, p3, 1, 1.5);
-
-	// const diopter3 = objTypes["planeDiopter"].create(p3, p1, 1, 1.5);
-
-	const screen1 = objTypes["screen"].create(
-		graphs.point(canvas.width / 3 + x1, canvas.height / 2 - h0 * 1.001),
-		graphs.point(canvas.width / 3 + x1, canvas.height / 2)
-	);
-	const screen2 = objTypes["screen"].create(
-		graphs.point(canvas.width / 3 + x2, canvas.height / 2 - h2 * 1.001),
-		graphs.point(canvas.width / 3 + x2, canvas.height / 2)
-	);
-	const screen3 = objTypes["screen"].create(
-		graphs.point((canvas.width * 2) / 3 + x3, canvas.height / 2 - h3 * 1.001),
-		graphs.point((canvas.width * 2) / 3 + x3, canvas.height / 2)
-	);
-
-	const lens1 = objTypes["lens"].create(
-		graphs.point(canvas.width / 3, canvas.height / 2 - 125),
-		graphs.point(canvas.width / 3, canvas.height / 2 + 125),
-		f1
-	);
-	const lens2 = objTypes["lens"].create(
-		graphs.point((canvas.width * 2) / 3, canvas.height / 2 - 125),
-		graphs.point((canvas.width * 2) / 3, canvas.height / 2 + 125),
-		f2
-	);
-
-	// const mirror = objTypes["planeMirror"].create(
-	// 	graphs.point(1020, (2 * canvas.height) / 3),
-	// 	graphs.point(0, (2 * canvas.height) / 3),
-	// 	10
-	// );
-
-	// const diopter3 = objTypes["planeDiopter"].create(
-	// 	graphs.point(canvas.width / 2, canvas.height / 2 + 100),
-	// 	graphs.point(canvas.width / 2, canvas.height / 2 - 100),
-	// 	1,
-	// 	1.5
-	// );
-
-	// objects.push(diopter);
-	// objects.push(diopter2);
-	//objects.push(diopter3);
-	objects.push(screen1);
-	objects.push(screen2);
-	objects.push(screen3);
-	objects.push(lens1);
-	objects.push(lens2);
-	// objects.push(mirror);
-	// objects.push(diopter3);
-	rays.push(rayObj1);
-	rays.push(rayObj2);
-	rays.push(rayObj3);
-	rays.push(rayObj4);
+    rays.push(ray);
+    objects.push(d1);
+    objects.push(d2);
+    objects.push(d3);
+    objects.push(alpha);
 } else {
 	importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {
 		rays = data["rays"];

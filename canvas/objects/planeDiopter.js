@@ -1,6 +1,6 @@
 objTypes["planeDiopter"] = {
-	create: function (p1, p2, n1, n2) {
-		return { type: "planeDiopter", l1: graphs.line(p1, p2), n1: n1, n2: n2 };
+	create: function (p1, p2, n1, n2, uid) {
+		return { type: "planeDiopter", l1: graphs.line(p1, p2), n1: n1, n2: n2, uid: uid };
 	},
 
 	selected: function (obj, mouse, selected) {

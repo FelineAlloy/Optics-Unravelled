@@ -1,6 +1,6 @@
 objTypes["planeMirror"] = {
-	create: function (point1, point2, dashLength) {
-		return { type: "planeMirror", l1: graphs.line(point1, point2), dashLength: dashLength };
+	create: function (point1, point2, dashLength, uid) {
+		return { type: "planeMirror", l1: graphs.line(point1, point2), dashLength: dashLength, uid: uid };
 	},
 
 	selected: function (obj, mouse, selected) {

@@ -1,6 +1,6 @@
 objTypes["aop"] = {
-	create: function (point1, point2) {
-		return { type: "aop", l1: graphs.line(point1, point2) };
+	create: function (point1, point2, uid) {
+		return { type: "aop", l1: graphs.line(point1, point2), uid: uid };
 	},
 
 	selected: function (obj, mouse, selected) {

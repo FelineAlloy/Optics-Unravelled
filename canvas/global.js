@@ -11,9 +11,15 @@ const colors = {
 	selectables: "black",
 	background: "white",
 };
-const clickExtent_point = 10;
+const clickExtent_point = 15;
 const clickExtent_line = 5;
 
 const objTypes = {};
 let objects = []; // objects to be drawn
 let rays = []; // the light sources
+let overlayBuffer = [] // objects which don't interact with anything and are generated each frame
+                       // also used for other objects which are not drawn but need to be stored and found (ex: point objects)
+
+function uidGen() {
+    return 'uid-' + Math.random().toString(36).substring(7);  
+}

@@ -1,6 +1,6 @@
 objTypes["rayObject"] = {
-	create: function (p1, p2) {
-		return { type: "rayObject", ray: graphs.ray(p1, p2) };
+	create: function (p1, p2, uid, track_deflection = false) {
+		return { type: "rayObject", ray: graphs.ray(p1, p2), track_deflection: track_deflection, uid: uid };
 	},
 
 	selected: function (obj, mouse, selected) {
@@ -30,30 +30,27 @@ objTypes["rayObject"] = {
 	draw: function (obj) {
 		const angle = Math.atan2(obj.ray.p2.y - obj.ray.p1.y, obj.ray.p2.x - obj.ray.p1.x);
 
-		c.beginPath();
-		c.strokeStyle = colors.objects;
-		c.lineWidth = 3;
+		artist.draw_control_point("arrow", obj.ray.p2.x, obj.ray.p2.y, angle);
 
-		c.moveTo(
-			obj.ray.p2.x - 10 * Math.cos(angle - Math.PI / 6),
-			obj.ray.p2.y - 10 * Math.sin(angle - Math.PI / 6)
-		);
+		artist.draw_control_point("point", obj.ray.p1.x, obj.ray.p1.y);
+	},
+};
 
-		c.lineTo(obj.ray.p2.x, obj.ray.p2.y);
+objTypes["rayObject_dt"] = {
+	create: function (p1, p2, uid) {
+		return { type: "rayObject_dt", ray: graphs.ray(p1, p2), uid: uid };
+	},
 
-		c.lineTo(
-			obj.ray.p2.x - 10 * Math.cos(angle + Math.PI / 6),
-			obj.ray.p2.y - 10 * Math.sin(angle + Math.PI / 6)
-		);
+	selected: function (obj, mouse, selected) {
+		return false
+	},
 
-		c.stroke();
+	c_mousemove: function (obj, dx, dy) {
+	},
 
-		c.beginPath();
-		c.arc(obj.ray.p1.x, obj.ray.p1.y, 5, 0, 2 * Math.PI);
-		c.stroke();
-		c.beginPath();
-		c.fillStyle = colors.objects;
-		c.arc(obj.ray.p1.x, obj.ray.p1.y, 2, 0, 2 * Math.PI);
-		c.fill();
+	draw: function (obj) {
+        c.beginPath();
+		artist.draw_ray_dotted(obj.ray);
+        c.stroke();
 	},
 };

@@ -1,8 +1,9 @@
 objTypes["arrow"] = {
-	create: function (point1, point2) {
+	create: function (point1, point2, uid) {
 		return {
 			type: "arrow",
 			l1: graphs.line(point1, point2),
+			iod: uid,
 		};
 	},
 

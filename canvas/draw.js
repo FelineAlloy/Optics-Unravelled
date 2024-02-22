@@ -22,8 +22,55 @@ const artist = {
 		c.lineTo(x, y);
 	},
 
+    draw_ray_dotted: function (ray1) {
+        c.moveTo(ray1.p1.x, ray1.p1.y);
+      
+        const distance = graphs.length(ray1.p1, ray1.p2);
+        const interval = 3; // set the interval for the dotted line
+
+        dx = ((ray1.p2.x - ray1.p1.x) / distance) * interval;
+        dy = ((ray1.p2.y - ray1.p1.y) / distance) * interval;
+      
+        for (let i = 1; i <= 100; i += 2) {
+          c.moveTo(ray1.p1.x + dx*i, ray1.p1.y + dy*i);
+          c.lineTo(ray1.p1.x + dx*(i+1), ray1.p1.y + dy*(i+1));
+        }
+    },
+
+	draw_control_point: function(type, x, y, angle=0) {
+		if(type == "point") {
+			c.beginPath();
+			c.arc(x, y, 4.5, 0, 2 * Math.PI);
+			c.fill();
+		}
+
+		if (type == "hand") {
+		}
+
+		if (type == "arrow") {
+			c.beginPath();
+			c.moveTo(
+				x - 10 * Math.cos(angle - Math.PI / 6),
+				y - 10 * Math.sin(angle - Math.PI / 6)
+			);
+	
+			c.lineTo(x, y);
+	
+			c.lineTo(
+				x - 10 * Math.cos(angle + Math.PI / 6),
+				y - 10 * Math.sin(angle + Math.PI / 6)
+			);
+			c.stroke();
+		}
+
+		return;
+	},
+
 	draw: function (maxBounces) {
 		const drawBuffer = []; // all the rays for which I still need to check collisions before drawing
+        const drawBufferRoots = []; // a reference to the initial rayObject that generated the current ray
+        overlayBuffer = []; // objects which don't interact with anything and are generated each frame
+                            // also used for other objects which are not drawn but need to be stored and found (ex: point objects)
 
 		for (const obj of objects) {
 			objTypes[obj.type].draw(obj); //draw the object
@@ -32,6 +79,7 @@ const artist = {
 		for (const rayObj of rays) {
 			objTypes[rayObj.type].draw(rayObj);
 			drawBuffer.push(rayObj.ray);
+            drawBufferRoots.push({...rayObj, depth: 0});
 		}
 
 		// since ik rays will only use stroke, i group them toghether.
@@ -40,7 +88,7 @@ const artist = {
 
 		c.beginPath();
 
-		for (const ray of drawBuffer) {
+		for (const [i, ray] of drawBuffer.entries()) {
 			let colPoint = { type: 1, x: -1, y: -1, exist: false };
 			let colObj;
 			let minDist = 1e9;
@@ -73,13 +121,42 @@ const artist = {
 					const newRay = objTypes[colObj.type].getNewRay(colObj, ray, colPoint);
 					if (newRay.exist) {
 						drawBuffer.push(newRay);
+
+                        if(drawBufferRoots[i].ray == ray) {
+                            drawBufferRoots[i]['colPoint'] = {...colPoint};
+                        }
+                        drawBufferRoots.push({...drawBufferRoots[i], depth: drawBufferRoots[i].depth+1});
 					}
 				}
 			} else {
 				artist.draw_ray(ray);
+
+                if(drawBufferRoots[i].track_deflection && drawBufferRoots[i].ray != ray) {
+                    const uid2 = uidGen();
+                    overlayBuffer.push(objTypes["rayObject_dt"].create(ray.p1, graphs.rotate_point(ray.p2, ray.p1, Math.PI), uid2));
+
+                    if(drawBufferRoots[i].depth >= 2) {
+                        const uid3 = uidGen();
+                        const intersect = graphs.intersection(ray, drawBufferRoots[i].ray);
+                        overlayBuffer.push({p: intersect, uid: uid3});
+
+                        const uid1 = uidGen();
+                        overlayBuffer.push(objTypes["rayObject_dt"].create(drawBufferRoots[i].colPoint, graphs.rotate_point(drawBufferRoots[i].colPoint, intersect, Math.PI), uid1));
+
+                        overlayBuffer.push(objTypes["angle"].create([uid1, uid3, uid2], ["ray.p2", "p", "ray.p1"]), uidGen());
+                    } else {
+                        overlayBuffer.push(objTypes["angle"].create([drawBufferRoots[i].uid, uid2, uid2], ["ray.p1", "ray.p1", "ray.p2"], uidGen()));
+                    }
+                }
 			}
 		}
 
 		c.stroke();
+
+        for (const obj of overlayBuffer) {
+            if(obj.hasOwnProperty("type")) {
+			    objTypes[obj.type].draw(obj); //draw the object
+            }
+		}
 	},
 };

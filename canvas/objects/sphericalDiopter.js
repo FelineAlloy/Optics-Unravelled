@@ -1,11 +1,12 @@
 objTypes["sphericalDiopter"] = {
-	create: function (point1, point2, angle, n1, n2) {
+	create: function (point1, point2, angle, n1, n2, uid) {
 		return {
 			type: "sphericalDiopter",
 			c1: graphs.circle(point1, point2),
 			angle: angle,
 			n1: n1,
 			n2: n2,
+			uid: uid,
 		};
 	},
 
@@ -95,11 +96,7 @@ objTypes["sphericalDiopter"] = {
 		c.fillText(obj.n1.toString(), p1.x, p1.y);
 		c.fillText(obj.n2.toString(), p2.x, p2.y);
 
-		c.beginPath();
-		c.arc(obj.c1.c.x, obj.c1.c.y, 2, 0, 2 * Math.PI);
-		c.fill();
-		c.arc(obj.c1.c.x, obj.c1.c.y, 5, 0, 2 * Math.PI);
-		c.stroke();
+		artist.draw_control_point("point", obj.c1.c.x, obj.c1.c.y);
 	},
 
 	getCollision: function (obj, ray1) {
