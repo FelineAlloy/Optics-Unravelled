@@ -92,6 +92,11 @@ objTypes["planeDiopter"] = {
 			//console.log(i * 180 / Math.PI, r * 180 / Math.PI);
 		}
 
+        p4 = graphs.rotate_point(p3, colPoint, r);
+        if (isNaN(r)) {
+            p4 = graphs.rotate_point(p3, colPoint, i - Math.PI/2);
+        }
+
 		// c.stroke();
 		// c.beginPath();
 		// c.moveTo(colPoint.x, colPoint.y);
@@ -99,7 +104,6 @@ objTypes["planeDiopter"] = {
 		// c.stroke();
 		// c.beginPath();
 
-		p4 = graphs.rotate_point(p3, colPoint, r);
 		const newRay = graphs.ray(colPoint, p4);
 
 		return newRay;

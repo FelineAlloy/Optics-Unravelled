@@ -1,7 +1,7 @@
-objTypes["sphericalDiopter"] = {
+objTypes["sphericalDiopter_real"] = {
 	create: function (point1, point2, angle, n1, n2, uid) {
 		return {
-			type: "sphericalDiopter",
+			type: "sphericalDiopter_real",
 			c1: graphs.circle(point1, point2),
 			angle: angle,
 			n1: n1,
@@ -156,6 +156,43 @@ objTypes["sphericalDiopter"] = {
 
 		p4 = graphs.rotate_point(p3, colPoint, r);
 		const newRay = graphs.ray(colPoint, p4);
+
+		return newRay;
+	},
+};
+
+objTypes["sphericalDiopter"] = {...objTypes["sphericalDiopter_real"],
+	create: function (point1, point2, angle, n1, n2, uid) {
+		return {
+			type: "sphericalDiopter",
+			c1: graphs.circle(point1, point2),
+			angle: angle,
+			n1: n1,
+			n2: n2,
+			uid: uid,
+		};
+	},
+
+	getNewRay: function (obj, ray1, colPoint) {
+
+        const p1 = graphs.intersection(obj.c1.r, graphs.line(ray1.p1, ray1.p2));
+        const vert = graphs.parallel(graphs.perpendicular_bisector(obj.c1.r), obj.c1.r.p2);
+        
+        let x1 = Math.sign(graphs.get_angle(vert.p1, obj.c1.r.p2, p1))*graphs.length(p1, obj.c1.r.p2);
+        if(isNaN(p1.y)){
+            x1 = Math.sign(graphs.get_angle(vert.p1, obj.c1.r.p2, ray1.p1)) * 1e9;
+        }
+
+        const r = graphs.length_segment(obj.c1.r);
+
+        const x2 = obj.n2 * x1 * r / (x1*(obj.n2-obj.n1) + r*obj.n1);
+        
+        let p2 = graphs.addPointAlongSegment(obj.c1.r.p2, obj.c1.r.p1, -x2)
+        if(Math.abs(graphs.get_angle(p2, colPoint, ray1.p1)) < Math.PI/2) {
+            p2 = graphs.rotate_point(p2, colPoint, Math.PI);
+        }
+
+		const newRay = graphs.ray(colPoint, p2);
 
 		return newRay;
 	},
