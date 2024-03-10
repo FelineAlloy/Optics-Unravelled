@@ -3,16 +3,44 @@
 header {
     font-size: 1rem;
     overflow: hidden;
+	height: auto;
     background-color: #245571;
     padding: .5em .5em;
 }
 
 header a {
+	display: block;
     font-size: 1.2em;
     float: left;
     text-align: center;
     padding: .25em 1.2em .25em 0;
 }
+
+.help {
+	float: right;
+}
+
+.trigger {
+	position: relative;
+}
+
+.popup {
+	position: absolute;
+	left: 2.5em;
+	top: 0%;
+
+	background-color: #ffffff;
+	border: 5px solid #1f1f1f;
+	padding: 10px;
+	border-radius: 10px;
+	/* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+	z-index: 1000; /* Ensure popup is above other elements */
+	display: none; /* Initially hide the popup */
+}
+
+/* .trigger:hover .popup {
+	display: block;
+} */
 
 /* Content section */
 

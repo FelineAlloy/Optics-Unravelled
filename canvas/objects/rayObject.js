@@ -1,6 +1,11 @@
 objTypes["rayObject"] = {
 	create: function (p1, p2, uid, track_deflection = false) {
-		return { type: "rayObject", ray: graphs.ray(p1, p2), track_deflection: track_deflection, uid: uid };
+		return {
+			type: "rayObject",
+			ray: graphs.ray(p1, p2),
+			track_deflection: track_deflection,
+			uid: uid,
+		};
 	},
 
 	selected: function (obj, mouse, selected) {
@@ -30,7 +35,7 @@ objTypes["rayObject"] = {
 	draw: function (obj) {
 		const angle = Math.atan2(obj.ray.p2.y - obj.ray.p1.y, obj.ray.p2.x - obj.ray.p1.x);
 
-		artist.draw_control_point("arrow", obj.ray.p2.x, obj.ray.p2.y, angle);
+		artist.draw_control_point("hand", obj.ray.p2.x, obj.ray.p2.y, angle);
 
 		artist.draw_control_point("point", obj.ray.p1.x, obj.ray.p1.y);
 	},
@@ -42,15 +47,14 @@ objTypes["rayObject_dt"] = {
 	},
 
 	selected: function (obj, mouse, selected) {
-		return false
+		return false;
 	},
 
-	c_mousemove: function (obj, dx, dy) {
-	},
+	c_mousemove: function (obj, dx, dy) {},
 
 	draw: function (obj) {
-        c.beginPath();
+		c.beginPath();
 		artist.draw_ray_dotted(obj.ray);
-        c.stroke();
+		c.stroke();
 	},
 };
