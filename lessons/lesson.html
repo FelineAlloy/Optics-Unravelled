@@ -26,13 +26,12 @@
 </head>
 <body>
     <header>
-        <div class="s1-container">
+        <div class="s1-container" style="display:flow-root">
             <a href="/">Meniu</a>
             <a href="despre.html">Despre</a>
-			<a class="fa-regular fa-circle-question help trigger">
-				<span class="popup">
-					some text dnckowsaqmndsms
-					jdiwikdsklds
+			<a class="fa-regular fa-circle-question trigger" style="float:right" id="popupTrigger">
+				<span class="popup" id="popupContent">
+					Poți mișca razele folosind <i class="fa-regular fa-hand"></i> sau <i class="fa-solid fa-circle fa-2xs"></i>, iar celeleate elemente, trăgând de capetele lor.
 				</span>
 			</a>
         </div>
@@ -43,6 +42,44 @@
         {% block content %}
         {% endblock %}
     </article>
+
+	<!-- Toggle help popup from header -->
+	<script>
+		// Get the trigger element and the popup content
+		var triggerElement = document.getElementById("popupTrigger");
+		var popupContent = document.getElementById("popupContent");
+
+		// Variable to keep track of popup visibility
+		var isPopupVisible = false;
+
+		// Function to toggle popup visibility
+		function togglePopup() {
+			if (isPopupVisible) {
+				// If popup is visible, hide it
+				popupContent.style.display = "none";
+				isPopupVisible = false;
+			} else {
+				// If popup is hidden, show it
+				popupContent.style.display = "block";
+				isPopupVisible = true;
+			}
+		}
+
+		// Add event listener for click event on trigger element
+		triggerElement.addEventListener("click", function () {
+			// Toggle popup visibility on click
+			togglePopup();
+		});
+
+		// Close popup when tapping outside the popup
+		document.addEventListener("click", function (event) {
+			if (!popupContent.contains(event.target) && event.target !== triggerElement) {
+				// If clicked outside the popup and not on the trigger element, hide the popup
+				popupContent.style.display = "none";
+				isPopupVisible = false;
+			}
+		});
+	</script>
 
     <!-- Import scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>

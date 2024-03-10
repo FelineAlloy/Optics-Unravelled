@@ -46,7 +46,7 @@ const artist = {
 
 		if (type == "hand") {
 			if (handImg.complete) {
-				c.drawImage(handImg, x - 8, y - 9, 16, 18);
+				c.drawImage(handImg, x - 9, y - 9, 18, 18);
 			}
 		}
 

@@ -2,8 +2,6 @@
 
 header {
     font-size: 1rem;
-    overflow: hidden;
-	height: auto;
     background-color: #245571;
     padding: .5em .5em;
 }
@@ -16,26 +14,27 @@ header a {
     padding: .25em 1.2em .25em 0;
 }
 
-.help {
-	float: right;
-}
-
 .trigger {
 	position: relative;
 }
 
 .popup {
 	position: absolute;
-	left: 2.5em;
-	top: 0%;
+	width: 14rem;
+	left: -7rem;
+	top: 105%;
 
-	background-color: #ffffff;
-	border: 5px solid #1f1f1f;
+	background-color: #f9f9f9;
+	border: 1px solid #ccc;
 	padding: 10px;
 	border-radius: 10px;
-	/* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	z-index: 1000; /* Ensure popup is above other elements */
 	display: none; /* Initially hide the popup */
+
+	font-size: 1rem;
+	text-align: center;
+	color: black;
 }
 
 /* .trigger:hover .popup {
