@@ -15,7 +15,7 @@
     <title>Optics Unravelled</title>
 </head>
 <body>
-    <section class="title-wraper">
+    <header>
         <div class="s1-container">
             <h1 style="color: white">Optics Unravelled</h1>
             <div class="s1-container title-links-wrapper">
@@ -29,22 +29,13 @@
 				<a href="despre.html">Despre</a>
             </div>
         </div>
-    </section>
-    <section class="s1-container article-mp">
-        <div class="nav-wrapper">
-            <menu class="main-menu">
-                {% for elem in lessons %}
-                    <li><a href="/lesson?page={{ elem.id }}">{{ elem.text }}</a></li>
-                {% else %}
-                    <li>WTF</li>
-                {% endfor %}
-            </menu>      
-        </div>
-        <!-- <article class="nav-article">
-            <h1>Noțiuni introductive</h1>
-            <p>Scurtă prezentare a lecției</p>
-        </article> -->
-    </section>
+    </header>
+
+	<menu class="nav-wrapper main-menu" style="margin-top: 2rem">
+		{% for elem in lessons %}
+			<li><a href="/lesson?page={{ elem.id }}">{{ elem.text }}</a></li>
+		{% endfor %}
+	</menu>
 
     <!-- Import scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>

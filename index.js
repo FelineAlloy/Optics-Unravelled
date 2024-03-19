@@ -35,7 +35,19 @@ app.get("/lesson", (req, res) => {
 		title = ro.locales["ro"][page].message;
 	} catch {}
 
-	return res.render("./lessons/" + page + ".njk", { title: title, id: req.query.page });
+	var lessons = [];
+	var objKeys = Object.keys(locales["ro"]);
+
+	objKeys.forEach((key) => {
+		var elem = ro.locales["ro"][key];
+		if (elem.tag == "lesson") lessons.push({ id: key, text: elem.message });
+	});
+
+	return res.render("./lessons/" + page + ".njk", {
+		title: title,
+		id: req.query.page,
+		lessons: lessons,
+	});
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("App available on http://localhost:3000"));

@@ -1,13 +1,17 @@
 /* Title & Header section */
 
-.title-wraper {
+header {
+	position:sticky;
+	top: 0px;
+	z-index: 100;
+
     background-color: #4d7b96;
     padding: 1px 0px;
     text-align: center;
     color: white;
 }
 
-.title-wraper h1 {
+header h1 {
     margin-top: 2em;
     margin-bottom: 1em;
 }
@@ -27,30 +31,7 @@
 /* Main article */
 
 .nav-wrapper {
-	position: absolute;
+	position: relative;
 	left: 50%;
-	transform: translate(-30%, 0);
-}
-
-menu.main-menu {
-    margin: 0px 1.2em 1.2em 1.2em;
-    list-style: none;
-}
-
-menu.main-menu li {
-    margin: 1.2em 0px;
-}
-
-menu.main-menu a {
-    color: black;
-    text-align: left;
-
-    display: block;
-    margin: auto;
-
-    font-size: 1em;
-}
-
-menu.main-menu a:hover {
-    text-decoration: underline;
+	transform: translate(-35%, 0);
 }

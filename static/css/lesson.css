@@ -4,6 +4,10 @@ header {
     font-size: 1rem;
     background-color: #245571;
     padding: .5em .5em;
+
+	position: sticky;
+	top: 0px;
+	z-index: 999;
 }
 
 header a {
@@ -52,13 +56,6 @@ li {
 b {
     font-weight: 600;
     color: #4d7b96;
-}
-
-.article-mp {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 2rem;
 }
 
 .dropdown {
