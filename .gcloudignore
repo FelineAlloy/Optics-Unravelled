@@ -33,3 +33,7 @@ node_modules/
 # VSCode
 
 .vscode
+
+# Copiled binaries
+
+dist/
