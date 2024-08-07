@@ -1,5 +1,5 @@
 objTypes["planeMirror"] = {
-	create: function (point1, point2, dashLength = 10, uid) {
+	create: function (point1, point2, dashLength = 10, uid = uidGen()) {
 		return {
 			type: "planeMirror",
 			l1: graphs.line(point1, point2),

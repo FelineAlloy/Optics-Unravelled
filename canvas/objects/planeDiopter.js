@@ -1,5 +1,5 @@
 objTypes["planeDiopter"] = {
-	create: function (p1, p2, n1, n2, uid) {
+	create: function (p1, p2, n1, n2, uid = uidGen()) {
 		return { type: "planeDiopter", l1: graphs.line(p1, p2), n1: n1, n2: n2, uid: uid };
 	},
 
@@ -92,10 +92,10 @@ objTypes["planeDiopter"] = {
 			//console.log(i * 180 / Math.PI, r * 180 / Math.PI);
 		}
 
-        p4 = graphs.rotate_point(p3, colPoint, r);
-        if (isNaN(r)) {
-            p4 = graphs.rotate_point(p3, colPoint, i - Math.PI/2);
-        }
+		p4 = graphs.rotate_point(p3, colPoint, r);
+		if (isNaN(r)) {
+			p4 = graphs.rotate_point(p3, colPoint, i - Math.PI / 2);
+		}
 
 		// c.stroke();
 		// c.beginPath();

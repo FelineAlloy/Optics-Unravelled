@@ -1,5 +1,5 @@
 objTypes["screen"] = {
-	create: function (point1, point2, uid) {
+	create: function (point1, point2, uid = uidGen()) {
 		return { type: "screen", l1: graphs.line(point1, point2), uid: uid };
 	},
 

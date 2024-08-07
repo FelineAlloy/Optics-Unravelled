@@ -1,5 +1,5 @@
 objTypes["rayObject"] = {
-	create: function (p1, p2, uid, track_deflection = false) {
+	create: function (p1, p2, uid = uidGen(), track_deflection = false) {
 		return {
 			type: "rayObject",
 			ray: graphs.ray(p1, p2),

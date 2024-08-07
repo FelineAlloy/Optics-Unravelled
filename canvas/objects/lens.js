@@ -1,5 +1,5 @@
 objTypes["lens"] = {
-	create: function (point1, point2, f, uid) {
+	create: function (point1, point2, f, uid = uidGen()) {
 		const l1 = graphs.line(point1, point2);
 		const normal = graphs.perpendicular_bisector(l1);
 		const midpoint = graphs.midpoint(l1);

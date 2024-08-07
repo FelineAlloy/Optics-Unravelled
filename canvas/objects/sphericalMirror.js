@@ -1,5 +1,5 @@
 objTypes["sphericalMirror"] = {
-	create: function (point1, point2, angle, convex, dashLength = 10, uid) {
+	create: function (point1, point2, angle, convex, dashLength = 10, uid = uidGen()) {
 		return {
 			type: "sphericalMirror",
 			c1: graphs.circle(point1, point2),
