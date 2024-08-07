@@ -112,7 +112,21 @@ objTypes["sphericalDiopter_real"] = {
 		let dist = 0;
 
 		if (Math.abs(alpha1) <= obj.angle / 2 && Math.abs(alpha2) <= obj.angle / 2) {
-			if (dist1 < dist2) {
+			if (
+				dist1 <= 1 ||
+				!graphs.intersection_is_on_ray(colPoints[1], ray1) ||
+				!colPoints[1].exist
+			) {
+				colPoint = colPoints[2];
+				dist = dist2;
+			} else if (
+				dist2 <= 1 ||
+				!graphs.intersection_is_on_ray(colPoints[2], ray1) ||
+				!colPoints[2].exist
+			) {
+				colPoint = colPoints[1];
+				dist = dist1;
+			} else if (dist1 < dist2) {
 				colPoint = colPoints[1];
 				dist = dist1;
 			} else {
@@ -161,39 +175,45 @@ objTypes["sphericalDiopter_real"] = {
 	},
 };
 
-objTypes["sphericalDiopter"] = {...objTypes["sphericalDiopter_real"],
-	create: function (point1, point2, angle, n1, n2, uid) {
-		return {
-			type: "sphericalDiopter",
-			c1: graphs.circle(point1, point2),
-			angle: angle,
-			n1: n1,
-			n2: n2,
-			uid: uid,
-		};
-	},
+// objTypes["sphericalDiopter"] = {
+// 	...objTypes["sphericalDiopter_real"],
+// 	create: function (point1, point2, angle, n1, n2, uid) {
+// 		return {
+// 			type: "sphericalDiopter",
+// 			c1: graphs.circle(point1, point2),
+// 			angle: angle,
+// 			n1: n1,
+// 			n2: n2,
+// 			uid: uid,
+// 		};
+// 	},
 
-	getNewRay: function (obj, ray1, colPoint) {
+// 	getNewRay: function (obj, ray1, colPoint) {
+// 		const p1 = graphs.intersection(obj.c1.r, graphs.line(ray1.p1, ray1.p2));
+// 		const vert = graphs.parallel(graphs.perpendicular_bisector(obj.c1.r), obj.c1.r.p2);
 
-        const p1 = graphs.intersection(obj.c1.r, graphs.line(ray1.p1, ray1.p2));
-        const vert = graphs.parallel(graphs.perpendicular_bisector(obj.c1.r), obj.c1.r.p2);
-        
-        let x1 = Math.sign(graphs.get_angle(vert.p1, obj.c1.r.p2, p1))*graphs.length(p1, obj.c1.r.p2);
-        if(isNaN(p1.y)){
-            x1 = Math.sign(graphs.get_angle(vert.p1, obj.c1.r.p2, ray1.p1)) * 1e9;
-        }
+// 		const v1 = graphs.point();
 
-        const r = graphs.length_segment(obj.c1.r);
+// 		let x1 =
+// 			Math.sign(graphs.get_angle(vert.p1, obj.c1.r.p2, p1)) * graphs.length(p1, obj.c1.r.p2);
+// 		if (isNaN(p1.y)) {
+// 			x1 = Math.sign(graphs.get_angle(vert.p1, obj.c1.r.p2, ray1.p1)) * 1e9;
+// 		}
 
-        const x2 = obj.n2 * x1 * r / (x1*(obj.n2-obj.n1) + r*obj.n1);
-        
-        let p2 = graphs.addPointAlongSegment(obj.c1.r.p2, obj.c1.r.p1, -x2)
-        if(Math.abs(graphs.get_angle(p2, colPoint, ray1.p1)) < Math.PI/2) {
-            p2 = graphs.rotate_point(p2, colPoint, Math.PI);
-        }
+// 		const r = graphs.length_segment(obj.c1.r);
 
-		const newRay = graphs.ray(colPoint, p2);
+// 		const x2 = (obj.n2 * x1 * r) / (x1 * (obj.n2 - obj.n1) + r * obj.n1);
+// 		console.log(x1, x2);
 
-		return newRay;
-	},
-};
+// 		let p2 = graphs.addPointAlongSegment(obj.c1.r.p2, obj.c1.r.p1, -x2);
+// 		if (Math.abs(graphs.get_angle(p2, colPoint, ray1.p1)) < Math.PI / 2) {
+// 			p2 = graphs.rotate_point(p2, colPoint, Math.PI);
+// 		}
+
+// 		const newRay = graphs.ray(colPoint, p2);
+
+// 		return newRay;
+// 	},
+// };
+
+// e prea greu sa implementez asa ceva cum trebuie (trebuia sa modeleze dioptrul sferic in aproximatie gausiana)
