@@ -10,7 +10,7 @@ objTypes["lens"] = {
 			f: Math.abs(f),
 			fp1: graphs.addPointAlongSegment(midpoint, normal.p1, f),
 			fp2: graphs.addPointAlongSegment(midpoint, normal.p2, f),
-			convergent: Math.sgn(f),
+			convergent: Math.sign(f),
 			uid: uid,
 		};
 	},
