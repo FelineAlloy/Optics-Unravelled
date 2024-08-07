@@ -7,9 +7,10 @@ objTypes["lens"] = {
 		return {
 			type: "lens",
 			l1: l1,
-			f: f,
+			f: Math.abs(f),
 			fp1: graphs.addPointAlongSegment(midpoint, normal.p1, f),
 			fp2: graphs.addPointAlongSegment(midpoint, normal.p2, f),
+			convergent: Math.sgn(f),
 			uid: uid,
 		};
 	},
@@ -101,8 +102,8 @@ objTypes["lens"] = {
 			const midpoint = graphs.midpoint(obj.l1);
 			const alpha = graphs.get_angle(obj.fp1, midpoint, p0);
 
-			obj.f = graphs.length(midpoint, obj.fp1);
-			obj.fp2 = graphs.addPointAlongSegment(midpoint, obj.fp1, -obj.f);
+			obj.f = graphs.length(midpoint, obj.fp1) * obj.convergent;
+			obj.fp2 = graphs.addPointAlongSegment(midpoint, obj.fp1, -obj.f * obj.convergent);
 
 			obj.l1.p1 = graphs.rotate_point(obj.l1.p1, midpoint, alpha);
 			obj.l1.p2 = graphs.rotate_point(obj.l1.p2, midpoint, alpha);
@@ -115,8 +116,8 @@ objTypes["lens"] = {
 			const midpoint = graphs.midpoint(obj.l1);
 			const alpha = graphs.get_angle(obj.fp2, midpoint, p0);
 
-			obj.f = graphs.length(midpoint, obj.fp2);
-			obj.fp1 = graphs.addPointAlongSegment(midpoint, obj.fp2, -obj.f);
+			obj.f = graphs.length(midpoint, obj.fp2) * obj.convergent;
+			obj.fp1 = graphs.addPointAlongSegment(midpoint, obj.fp2, -obj.f * obj.convergent);
 
 			obj.l1.p1 = graphs.rotate_point(obj.l1.p1, midpoint, alpha);
 			obj.l1.p2 = graphs.rotate_point(obj.l1.p2, midpoint, alpha);
@@ -132,31 +133,30 @@ objTypes["lens"] = {
 		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
 		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
 
-		const sgnf = Math.sign(obj.f);
 		const angle = Math.atan2(obj.l1.p1.y - obj.l1.p2.y, obj.l1.p1.x - obj.l1.p2.x);
 
 		c.moveTo(
-			obj.l1.p1.x - sgnf * 15 * Math.cos(angle - Math.PI / 6),
-			obj.l1.p1.y - sgnf * 15 * Math.sin(angle - Math.PI / 6)
+			obj.l1.p1.x - obj.convergent * 15 * Math.cos(angle - Math.PI / 6),
+			obj.l1.p1.y - obj.convergent * 15 * Math.sin(angle - Math.PI / 6)
 		);
 
 		c.lineTo(obj.l1.p1.x, obj.l1.p1.y);
 
 		c.lineTo(
-			obj.l1.p1.x - sgnf * 15 * Math.cos(angle + Math.PI / 6),
-			obj.l1.p1.y - sgnf * 15 * Math.sin(angle + Math.PI / 6)
+			obj.l1.p1.x - obj.convergent * 15 * Math.cos(angle + Math.PI / 6),
+			obj.l1.p1.y - obj.convergent * 15 * Math.sin(angle + Math.PI / 6)
 		);
 
 		c.moveTo(
-			obj.l1.p2.x + sgnf * 15 * Math.cos(angle - Math.PI / 6),
-			obj.l1.p2.y + sgnf * 15 * Math.sin(angle - Math.PI / 6)
+			obj.l1.p2.x + obj.convergent * 15 * Math.cos(angle - Math.PI / 6),
+			obj.l1.p2.y + obj.convergent * 15 * Math.sin(angle - Math.PI / 6)
 		);
 
 		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
 
 		c.lineTo(
-			obj.l1.p2.x + sgnf * 15 * Math.cos(angle + Math.PI / 6),
-			obj.l1.p2.y + sgnf * 15 * Math.sin(angle + Math.PI / 6)
+			obj.l1.p2.x + obj.convergent * 15 * Math.cos(angle + Math.PI / 6),
+			obj.l1.p2.y + obj.convergent * 15 * Math.sin(angle + Math.PI / 6)
 		);
 
 		c.stroke();
@@ -211,7 +211,7 @@ objTypes["lens"] = {
 		// c.beginPath();
 
 		const newRay = graphs.ray(colPoint, graphs.intersection(parallelRay, focusPlane));
-		if (obj.f < 0) {
+		if (obj.convergent < 0) {
 			newRay.p2 = graphs.rotate_point(newRay.p2, newRay.p1, Math.PI);
 		}
 
