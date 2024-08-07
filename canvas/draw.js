@@ -38,6 +38,10 @@ const artist = {
 	},
 
 	draw_control_point: function (type, x, y, angle = 0) {
+		c.strokeStyle = colors.selectables;
+		c.fillStyle = colors.selectables;
+		c.lineWidth = 2;
+
 		if (type == "point") {
 			c.beginPath();
 			c.arc(x, y, 4.5, 0, 2 * Math.PI);
