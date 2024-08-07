@@ -1,9 +1,11 @@
 objTypes["arrow"] = {
-	create: function (point1, point2, uid = uidGen()) {
+	create: function (point1, point2, thickness = 3, color = colors.objects, uid = uidGen()) {
 		return {
 			type: "arrow",
 			l1: graphs.line(point1, point2),
-			iod: uid,
+			thickness: thickness,
+			color: color,
+			uid: uid,
 		};
 	},
 
@@ -44,8 +46,8 @@ objTypes["arrow"] = {
 	draw: function (obj) {
 		c.beginPath();
 
-		c.strokeStyle = colors.objects;
-		c.lineWidth = 3;
+		c.strokeStyle = obj.color;
+		c.lineWidth = obj.thickness;
 
 		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
 		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
