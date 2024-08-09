@@ -84,8 +84,20 @@ const artist = {
 		}
 
 		for (const rayObj of rays) {
-			drawBuffer.push(rayObj.ray);
-			drawBufferRoots.push({ ...rayObj, depth: 0 });
+			if (rayObj.type === "rayObject") {
+				drawBuffer.push(rayObj.ray);
+				drawBufferRoots.push({ ...rayObj, depth: 0 });
+			} else {
+				for (const ray of rayObj.rays) {
+					drawBuffer.push(ray);
+					drawBufferRoots.push({
+						type: rayObj.type,
+						ray: ray,
+						track_deflection: rayObj.track_deflection,
+						depth: 0,
+					});
+				}
+			}
 		}
 
 		// since ik rays will only use stroke, i group them toghether.
