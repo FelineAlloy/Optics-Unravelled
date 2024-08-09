@@ -94,6 +94,7 @@ const artist = {
 						type: rayObj.type,
 						ray: ray,
 						track_deflection: rayObj.track_deflection,
+						uid: rayObj.uid,
 						depth: 0,
 					});
 				}

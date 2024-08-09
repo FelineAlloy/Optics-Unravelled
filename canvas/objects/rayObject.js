@@ -9,6 +9,10 @@ objTypes["rayObject"] = {
 	},
 
 	selected: function (obj, mouse, selected) {
+		if (mouseOnSegment(mouse, obj.ray)) {
+			selected.part = 0;
+			return true;
+		}
 		if (
 			mouseOnPoint(mouse, obj.ray.p1) &&
 			graphs.length_squared(mouse, obj.ray.p1) <= graphs.length_squared(mouse, obj.ray.p2)
@@ -23,7 +27,12 @@ objTypes["rayObject"] = {
 	},
 
 	c_mousemove: function (obj, dx, dy) {
-		if (selected.part == 1) {
+		if (selected.part == 0) {
+			obj.ray.p1.x += dx;
+			obj.ray.p1.y += dy;
+			obj.ray.p2.x += dx;
+			obj.ray.p2.y += dy;
+		} else if (selected.part == 1) {
 			obj.ray.p1.x += dx;
 			obj.ray.p1.y += dy;
 		} else if (selected.part == 2) {

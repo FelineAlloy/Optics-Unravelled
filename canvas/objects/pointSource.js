@@ -13,6 +13,7 @@ objTypes["pointSource"] = {
 	},
 
 	create: function (p1, p2, p3, rayNr = 2, uid = uidGen(), track_deflection = false) {
+		// track_deflection is not supported for pointSource
 		return {
 			type: "pointSource",
 			p1: p1,
@@ -26,6 +27,13 @@ objTypes["pointSource"] = {
 	},
 
 	selected: function (obj, mouse, selected) {
+		if (
+			mouseOnSegment(mouse, graphs.segment(obj.p1, obj.p2)) ||
+			mouseOnSegment(mouse, graphs.segment(obj.p1, obj.p3))
+		) {
+			selected.part = 0;
+			return true;
+		}
 		if (
 			mouseOnPoint(mouse, obj.p1) &&
 			graphs.length_squared(mouse, obj.p1) <= graphs.length_squared(mouse, obj.p2)
@@ -44,7 +52,14 @@ objTypes["pointSource"] = {
 	},
 
 	c_mousemove: function (obj, dx, dy) {
-		if (selected.part == 1) {
+		if (selected.part == 0) {
+			obj.p1.x += dx;
+			obj.p1.y += dy;
+			obj.p2.x += dx;
+			obj.p2.y += dy;
+			obj.p3.x += dx;
+			obj.p3.y += dy;
+		} else if (selected.part == 1) {
 			obj.p1.x += dx;
 			obj.p1.y += dy;
 		} else if (selected.part == 2) {
