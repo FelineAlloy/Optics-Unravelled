@@ -52,19 +52,18 @@ objTypes["arrow"] = {
 		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
 		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
 
-		const sgnf = 1;
 		const angle = Math.atan2(obj.l1.p1.y - obj.l1.p2.y, obj.l1.p1.x - obj.l1.p2.x);
 
 		c.moveTo(
-			obj.l1.p1.x - sgnf * 15 * Math.cos(angle - Math.PI / 6),
-			obj.l1.p1.y - sgnf * 15 * Math.sin(angle - Math.PI / 6)
+			obj.l1.p1.x - 15 * Math.cos(angle - Math.PI / 6),
+			obj.l1.p1.y - 15 * Math.sin(angle - Math.PI / 6)
 		);
 
 		c.lineTo(obj.l1.p1.x, obj.l1.p1.y);
 
 		c.lineTo(
-			obj.l1.p1.x - sgnf * 15 * Math.cos(angle + Math.PI / 6),
-			obj.l1.p1.y - sgnf * 15 * Math.sin(angle + Math.PI / 6)
+			obj.l1.p1.x - 15 * Math.cos(angle + Math.PI / 6),
+			obj.l1.p1.y - 15 * Math.sin(angle + Math.PI / 6)
 		);
 
 		c.stroke();
