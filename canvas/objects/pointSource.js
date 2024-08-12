@@ -8,7 +8,6 @@ objTypes["pointSource"] = {
 			rays.push(graphs.ray(p1, p));
 		}
 
-		console.log(rays);
 		return rays;
 	},
 
@@ -28,13 +27,6 @@ objTypes["pointSource"] = {
 
 	selected: function (obj, mouse, selected) {
 		if (
-			mouseOnSegment(mouse, graphs.segment(obj.p1, obj.p2)) ||
-			mouseOnSegment(mouse, graphs.segment(obj.p1, obj.p3))
-		) {
-			selected.part = 0;
-			return true;
-		}
-		if (
 			mouseOnPoint(mouse, obj.p1) &&
 			graphs.length_squared(mouse, obj.p1) <= graphs.length_squared(mouse, obj.p2)
 		) {
@@ -47,6 +39,13 @@ objTypes["pointSource"] = {
 		}
 		if (mouseOnPoint(mouse, obj.p3)) {
 			selected.part = 3;
+			return true;
+		}
+		if (
+			mouseOnSegment(mouse, graphs.segment(obj.p1, obj.p2)) ||
+			mouseOnSegment(mouse, graphs.segment(obj.p1, obj.p3))
+		) {
+			selected.part = 0;
 			return true;
 		}
 	},
