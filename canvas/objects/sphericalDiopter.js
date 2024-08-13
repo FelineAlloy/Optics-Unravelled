@@ -169,6 +169,9 @@ objTypes["sphericalDiopter_real"] = {
 		}
 
 		p4 = graphs.rotate_point(p3, colPoint, r);
+		if (isNaN(r)) {
+			p4 = graphs.rotate_point(p3, colPoint, -i - Math.PI);
+		}
 		const newRay = graphs.ray(colPoint, p4);
 
 		return newRay;

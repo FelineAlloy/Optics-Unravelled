@@ -94,9 +94,10 @@ objTypes["planeDiopter"] = {
 
 		p4 = graphs.rotate_point(p3, colPoint, r);
 		if (isNaN(r)) {
-			p4 = graphs.rotate_point(p3, colPoint, i - Math.PI / 2);
+			p4 = graphs.rotate_point(p3, colPoint, -i - Math.PI);
 		}
 
+		// console.log((i * 180) / Math.PI);
 		// c.stroke();
 		// c.beginPath();
 		// c.moveTo(colPoint.x, colPoint.y);

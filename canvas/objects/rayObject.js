@@ -9,10 +9,6 @@ objTypes["rayObject"] = {
 	},
 
 	selected: function (obj, mouse, selected) {
-		if (mouseOnSegment(mouse, obj.ray)) {
-			selected.part = 0;
-			return true;
-		}
 		if (
 			mouseOnPoint(mouse, obj.ray.p1) &&
 			graphs.length_squared(mouse, obj.ray.p1) <= graphs.length_squared(mouse, obj.ray.p2)
@@ -22,6 +18,10 @@ objTypes["rayObject"] = {
 		}
 		if (mouseOnPoint(mouse, obj.ray.p2)) {
 			selected.part = 2;
+			return true;
+		}
+		if (mouseOnSegment(mouse, obj.ray)) {
+			selected.part = 0;
 			return true;
 		}
 	},

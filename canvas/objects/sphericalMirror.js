@@ -169,11 +169,14 @@ objTypes["sphericalMirror"] = {
 
 	getNewRay: function (obj, ray1, colPoint) {
 		let i = graphs.get_angle(ray1.p1, colPoint, obj.c1.c);
+		// console.log((i * 180) / Math.PI);
 
 		if (obj.convex == 1) {
-			if (Math.abs(i) < Math.PI / 2) return { exist: false };
+			if (Math.abs(i) < Math.PI / 2) {
+				return { exist: false };
+			}
 
-			i = i - Math.PI / 2;
+			i = i - Math.sign(i) * Math.PI;
 		} else if (Math.abs(i) > Math.PI / 2) return { exist: false };
 
 		const p3 = graphs.rotate_point(ray1.p1, colPoint, -i * 2);
