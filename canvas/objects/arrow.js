@@ -73,14 +73,15 @@ objTypes["arrow"] = {
 		const colPoint = graphs.intersection(ray1, obj.l1);
 		const dist = graphs.length(ray1.p1, colPoint);
 
-		if (
-			graphs.intersection_is_on_ray(colPoint, ray1) &&
-			graphs.intersection_is_on_segment(colPoint, obj.l1) &&
-			graphs.length_squared(colPoint, obj.l1.p1) < 25 &&
-			dist > 1
-		) {
-			return { point: colPoint, dist: dist };
-		}
+		// this section makes it such that only the tip of the arrow blocks rays.
+		// if (
+		// 	graphs.intersection_is_on_ray(colPoint, ray1) &&
+		// 	graphs.intersection_is_on_segment(colPoint, obj.l1) &&
+		// 	graphs.length_squared(colPoint, obj.l1.p1) < 25 &&
+		// 	dist > 1
+		// ) {
+		// 	return { point: colPoint, dist: dist };
+		// }
 
 		colPoint.exist = false;
 		return { point: colPoint, dist: dist };

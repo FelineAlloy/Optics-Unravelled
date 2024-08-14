@@ -52,7 +52,9 @@ const artist = {
 		dx = ((ray1.p2.x - ray1.p1.x) / distance) * interval;
 		dy = ((ray1.p2.y - ray1.p1.y) / distance) * interval;
 
-		for (let i = 1; i <= 100; i += 2) {
+		const d = canvas.width;
+
+		for (let i = 1; i <= d / interval; i += 2) {
 			c.moveTo(ray1.p1.x + dx * i, ray1.p1.y + dy * i);
 			c.lineTo(ray1.p1.x + dx * (i + 1), ray1.p1.y + dy * (i + 1));
 		}
@@ -116,10 +118,11 @@ const artist = {
 				for (const ray of object_rays) {
 					drawBuffer.push(ray);
 					drawBufferRoots.push({
-						type: rayObj.type,
+						type: "rayObject",
 						ray: ray,
 						track_deflection: rayObj.track_deflection,
-						uid: rayObj.uid,
+						track_extended: rayObj.track_extended,
+						uid: uidGen(),
 						depth: 0,
 					});
 				}
@@ -222,6 +225,17 @@ const artist = {
 							)
 						);
 					}
+				}
+
+				if (drawBufferRoots[i].track_extended && drawBufferRoots[i].ray != ray) {
+					const uid = uidGen();
+					overlayBuffer.push(
+						objTypes["rayObject_dt"].create(
+							ray.p1,
+							graphs.rotate_point(ray.p2, ray.p1, Math.PI),
+							uid
+						)
+					);
 				}
 			}
 		}

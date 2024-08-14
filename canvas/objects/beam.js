@@ -16,13 +16,21 @@ objTypes["beam"] = {
 		return rays;
 	},
 
-	create: function (p1, p2, rayNr = 2, uid = uidGen(), track_deflection = false) {
+	create: function (
+		p1,
+		p2,
+		rayNr = 2,
+		track_deflection = false,
+		track_extended = false,
+		uid = uidGen()
+	) {
 		// track_deflection is not supported for beam
 		return {
 			type: "beam",
 			l1: graphs.segment(p1, p2),
 			rayNr: rayNr,
 			track_deflection: track_deflection,
+			track_extended: track_extended,
 			uid: uid,
 		};
 	},
