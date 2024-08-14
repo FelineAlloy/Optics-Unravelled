@@ -1,1 +1,205 @@
-{"rays":[{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":0,"y":100,"exist":true},"p2":{"type":1,"x":340,"y":100,"exist":true},"exist":true}},{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":0,"y":70,"exist":true},"p2":{"type":1,"x":340,"y":70,"exist":true},"exist":true}},{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":0,"y":130,"exist":true},"p2":{"type":1,"x":340,"y":130,"exist":true},"exist":true}},{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":0,"y":300,"exist":true},"p2":{"type":1,"x":340,"y":300,"exist":true},"exist":true}},{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":0,"y":270,"exist":true},"p2":{"type":1,"x":340,"y":270,"exist":true},"exist":true}},{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":0,"y":330,"exist":true},"p2":{"type":1,"x":340,"y":330,"exist":true},"exist":true}}],"objects":[{"type":"screen","l1":{"type":2,"p1":{"type":1,"x":0,"y":200,"exist":true},"p2":{"type":1,"x":1020,"y":200,"exist":true},"exist":true}},{"type":"lens","l1":{"type":2,"p1":{"type":1,"x":510,"y":50,"exist":true},"p2":{"type":1,"x":510,"y":150,"exist":true},"exist":true},"f":200,"fp1":{"type":1,"x":710,"y":100,"exist":true},"fp2":{"type":1,"x":310,"y":100,"exist":true}, "convergent":1},{"type":"lens","l1":{"type":2,"p1":{"type":1,"x":510,"y":250,"exist":true},"p2":{"type":1,"x":510,"y":350,"exist":true},"exist":true},"f":-200,"fp1":{"type":1,"x":310,"y":300,"exist":true},"fp2":{"type":1,"x":710,"y":300,"exist":true}, "convergent":-1}]}
+{
+  "rays": [
+    {
+      "type": "rayObject",
+      "ray": {
+        "type": 3,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 100,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 340,
+          "y": 100,
+          "exist": true
+        },
+        "exist": true
+      }
+    },
+    {
+      "type": "rayObject",
+      "ray": {
+        "type": 3,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 70,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 340,
+          "y": 70,
+          "exist": true
+        },
+        "exist": true
+      }
+    },
+    {
+      "type": "rayObject",
+      "ray": {
+        "type": 3,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 130,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 340,
+          "y": 130,
+          "exist": true
+        },
+        "exist": true
+      }
+    },
+    {
+      "type": "rayObject",
+      "ray": {
+        "type": 3,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 300,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 340,
+          "y": 300,
+          "exist": true
+        },
+        "exist": true
+      }
+    },
+    {
+      "type": "rayObject",
+      "ray": {
+        "type": 3,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 270,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 340,
+          "y": 270,
+          "exist": true
+        },
+        "exist": true
+      }
+    },
+    {
+      "type": "rayObject",
+      "ray": {
+        "type": 3,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 330,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 340,
+          "y": 330,
+          "exist": true
+        },
+        "exist": true
+      }
+    }
+  ],
+  "objects": [
+    {
+      "type": "screen",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 200,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 1020,
+          "y": 200,
+          "exist": true
+        },
+        "exist": true
+      }
+    },
+    {
+      "type": "lens",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 510,
+          "y": 50,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 510,
+          "y": 150,
+          "exist": true
+        },
+        "exist": true
+      },
+      "f": 200,
+      "fp1": {
+        "type": 1,
+        "x": 710,
+        "y": 100,
+        "exist": true
+      },
+      "fp2": {
+        "type": 1,
+        "x": 310,
+        "y": 100,
+        "exist": true
+      },
+      "convergent": 1
+    },
+    {
+      "type": "lens",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 510,
+          "y": 250,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 510,
+          "y": 350,
+          "exist": true
+        },
+        "exist": true
+      },
+      "f": -200,
+      "fp1": {
+        "type": 1,
+        "x": 310,
+        "y": 300,
+        "exist": true
+      },
+      "fp2": {
+        "type": 1,
+        "x": 710,
+        "y": 300,
+        "exist": true
+      },
+      "convergent": -1
+    }
+  ]
+}

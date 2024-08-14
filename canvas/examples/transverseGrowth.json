@@ -1,1 +1,164 @@
-{"rays":[{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":10,"y":160,"exist":true},"p2":{"type":1,"x":340,"y":160,"exist":true},"exist":true}},{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":10,"y":160,"exist":true},"p2":{"type":1,"x":510,"y":200,"exist":true},"exist":true}}],"objects":[{"type":"screen","l1":{"type":2,"p1":{"type":1,"x":10,"y":160,"exist":true},"p2":{"type":1,"x":10,"y":200,"exist":true},"exist":true}},{"type":"screen","l1":{"type":2,"p1":{"type":1,"x":973,"y":225.66666666666666,"exist":true},"p2":{"type":1,"x":973,"y":199,"exist":true},"exist":true}},{"type":"sphericalDiopter_real","c1":{"type":5,"c":{"type":1,"x":610,"y":200,"exist":true},"r":{"type":4,"p1":{"type":1,"x":610,"y":200,"exist":true},"p2":{"type":1,"x":510,"y":200,"exist":true},"exist":true},"exist":true},"angle":1.3089969389957472,"n1":1,"n2":1.5}, {"type":"line","l1":{"type":2,"p1":{"type":1,"x":0,"y":200,"exist":true},"p2":{"type":1,"x":1020,"y":200,"exist":true},"exist":true},"spaceLength":10,"dashLength":15,"thickness":1,"color":"black","uid":"uid-ld3wh2"}]}
+{
+  "rays": [
+    {
+      "type": "pointSource",
+      "p1": {
+        "type": 1,
+        "x": 10,
+        "y": 100,
+        "exist": true
+      },
+      "p2": {
+        "type": 1,
+        "x": 310,
+        "y": 150,
+        "exist": true
+      },
+      "p3": {
+        "type": 1,
+        "x": 510,
+        "y": 175,
+        "exist": true
+      },
+      "rayNr": 2,
+      "rays": [
+        {
+          "type": 3,
+          "p1": {
+            "type": 1,
+            "x": 10,
+            "y": 100,
+            "exist": true
+          },
+          "p2": {
+            "type": 1,
+            "x": 310,
+            "y": 150,
+            "exist": true
+          },
+          "exist": true
+        },
+        {
+          "type": 3,
+          "p1": {
+            "type": 1,
+            "x": 10,
+            "y": 100,
+            "exist": true
+          },
+          "p2": {
+            "type": 1,
+            "x": 510,
+            "y": 175,
+            "exist": true
+          },
+          "exist": true
+        }
+      ],
+      "track_deflection": false,
+      "uid": "uid-dnjk7"
+    }
+  ],
+  "objects": [
+    {
+      "type": "arrow",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 10,
+          "y": 100,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 10,
+          "y": 200,
+          "exist": true
+        },
+        "exist": true
+      },
+      "thickness": 3,
+      "color": "black",
+      "uid": "uid-hg6wl0"
+    },
+    {
+      "type": "arrow",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 1010,
+          "y": 265.66666666666666,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 1010,
+          "y": 199,
+          "exist": true
+        },
+        "exist": true
+      },
+      "thickness": 3,
+      "color": "black",
+      "uid": "uid-ptwma9"
+    },
+    {
+      "type": "sphericalDiopter_real",
+      "c1": {
+        "type": 5,
+        "c": {
+          "type": 1,
+          "x": 610,
+          "y": 200,
+          "exist": true
+        },
+        "r": {
+          "type": 4,
+          "p1": {
+            "type": 1,
+            "x": 610,
+            "y": 200,
+            "exist": true
+          },
+          "p2": {
+            "type": 1,
+            "x": 510,
+            "y": 200,
+            "exist": true
+          },
+          "exist": true
+        },
+        "exist": true
+      },
+      "angle": 1.3089969389957472,
+      "n1": 1,
+      "n2": 1.5
+    },
+    {
+      "type": "line",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 0,
+          "y": 200,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 1020,
+          "y": 200,
+          "exist": true
+        },
+        "exist": true
+      },
+      "spaceLength": 10,
+      "dashLength": 15,
+      "thickness": 1,
+      "color": "black",
+      "uid": "uid-ld3wh2"
+    }
+  ]
+}
