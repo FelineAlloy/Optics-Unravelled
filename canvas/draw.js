@@ -39,7 +39,7 @@ const artist = {
 	},
 
 	draw_ray_dotted: function (ray1) {
-		c.strokeStyle = colors.rays;
+		c.strokeStyle = colors.extended;
 		c.lineWidth = ray_thickness;
 		c.globalAlpha = ray_alpha;
 		c.beginPath();
