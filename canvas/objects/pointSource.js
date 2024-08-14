@@ -1,11 +1,11 @@
 objTypes["pointSource"] = {
-	gen_rays: function (p1, p2, p3, rayNr) {
+	get_rays: function (obj) {
 		let rays = [];
-		const angle = graphs.get_angle(p3, p1, p2);
+		const angle = graphs.get_angle(obj.p3, obj.p1, obj.p2);
 
-		for (let i = 0; i < rayNr; i++) {
-			let p = graphs.rotate_point(p2, p1, (i * angle) / (rayNr - 1));
-			rays.push(graphs.ray(p1, p));
+		for (let i = 0; i < obj.rayNr; i++) {
+			let p = graphs.rotate_point(obj.p2, obj.p1, (i * angle) / (obj.rayNr - 1));
+			rays.push(graphs.ray(obj.p1, p));
 		}
 
 		return rays;
@@ -19,7 +19,6 @@ objTypes["pointSource"] = {
 			p2: p2,
 			p3: p3,
 			rayNr: rayNr,
-			rays: this.gen_rays(p1, p2, p3, rayNr),
 			track_deflection: track_deflection,
 			uid: uid,
 		};
@@ -68,8 +67,6 @@ objTypes["pointSource"] = {
 			obj.p3.x += dx;
 			obj.p3.y += dy;
 		}
-
-		obj.rays = this.gen_rays(obj.p1, obj.p2, obj.p3, obj.rayNr);
 	},
 
 	draw: function (obj) {

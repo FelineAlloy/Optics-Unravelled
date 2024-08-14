@@ -20,41 +20,7 @@
         "y": 175,
         "exist": true
       },
-      "rayNr": 2,
-      "rays": [
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 10,
-            "y": 100,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 310,
-            "y": 150,
-            "exist": true
-          },
-          "exist": true
-        },
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 10,
-            "y": 100,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 510,
-            "y": 175,
-            "exist": true
-          },
-          "exist": true
-        }
-      ],
+      "rayNr": 5,
       "track_deflection": false,
       "uid": "uid-dnjk7"
     }

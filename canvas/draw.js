@@ -8,11 +8,24 @@ const artist = {
 	},
 
 	draw_segment: function (seg1) {
+		c.strokeStyle = colors.rays;
+		c.lineWidth = ray_thickness;
+		c.globalAlpha = ray_alpha;
+		c.beginPath();
+
 		c.moveTo(seg1.p1.x, seg1.p1.y);
 		c.lineTo(seg1.p2.x, seg1.p2.y);
+
+		c.stroke();
+		c.globalAlpha = 1;
 	},
 
 	draw_ray: function (ray1) {
+		c.strokeStyle = colors.rays;
+		c.lineWidth = ray_thickness;
+		c.globalAlpha = ray_alpha;
+		c.beginPath();
+
 		c.moveTo(ray1.p1.x, ray1.p1.y);
 
 		const d = canvas.height * canvas.height + canvas.width * canvas.width;
@@ -20,9 +33,17 @@ const artist = {
 		const y = ((ray1.p2.y - ray1.p1.y) / graphs.length(ray1.p1, ray1.p2)) * d;
 
 		c.lineTo(x, y);
+
+		c.stroke();
+		c.globalAlpha = 1;
 	},
 
 	draw_ray_dotted: function (ray1) {
+		c.strokeStyle = colors.rays;
+		c.lineWidth = ray_thickness;
+		c.globalAlpha = ray_alpha;
+		c.beginPath();
+
 		c.moveTo(ray1.p1.x, ray1.p1.y);
 
 		const distance = graphs.length(ray1.p1, ray1.p2);
@@ -35,6 +56,9 @@ const artist = {
 			c.moveTo(ray1.p1.x + dx * i, ray1.p1.y + dy * i);
 			c.lineTo(ray1.p1.x + dx * (i + 1), ray1.p1.y + dy * (i + 1));
 		}
+
+		c.stroke();
+		c.globalAlpha = 1;
 	},
 
 	draw_control_point: function (type, x, y, angle = 0) {
@@ -88,7 +112,8 @@ const artist = {
 				drawBuffer.push(rayObj.ray);
 				drawBufferRoots.push({ ...rayObj, depth: 0 });
 			} else {
-				for (const ray of rayObj.rays) {
+				const object_rays = objTypes[rayObj.type].get_rays(rayObj);
+				for (const ray of object_rays) {
 					drawBuffer.push(ray);
 					drawBufferRoots.push({
 						type: rayObj.type,
@@ -101,9 +126,11 @@ const artist = {
 			}
 		}
 
-		// since ik rays will only use stroke, i group them toghether.
-		c.strokeStyle = colors.rays;
-		c.lineWidth = 3;
+		// we don't group rays togheter so that their transparencies overlap
+		// c.strokeStyle = colors.rays;
+		// c.lineWidth = 2;
+		// c.globalAlpha = 0.75;
+		// c.globalCompositeOperation = "darken";
 
 		c.beginPath();
 
@@ -199,7 +226,9 @@ const artist = {
 			}
 		}
 
-		c.stroke();
+		// c.stroke();
+		// c.globalAlpha = 1;
+		//c.globalCompositeOperation = "source-over";
 
 		// draw overlays: angles, construction lines etc...
 		for (const obj of overlayBuffer) {

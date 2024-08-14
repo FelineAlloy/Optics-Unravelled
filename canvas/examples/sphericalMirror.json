@@ -20,57 +20,7 @@
         "y": 220,
         "exist": true
       },
-      "rayNr": 3,
-      "rays": [
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 510,
-            "y": 200,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 610,
-            "y": 180,
-            "exist": true
-          },
-          "exist": true
-        },
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 510,
-            "y": 200,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 610,
-            "y": 200,
-            "exist": true
-          },
-          "exist": true
-        },
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 510,
-            "y": 200,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 610,
-            "y": 220,
-            "exist": true
-          },
-          "exist": true
-        }
-      ],
+      "rayNr": 5,
       "track_deflection": false,
       "uid": "uid-dnk10f"
     }

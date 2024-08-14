@@ -11,6 +11,10 @@ const colors = {
 	selectables: "black",
 	background: "white",
 };
+
+const ray_thickness = 2;
+const ray_alpha = 0.3;
+
 const clickExtent_point = 15;
 const clickExtent_line = 5;
 

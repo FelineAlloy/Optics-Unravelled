@@ -18,57 +18,7 @@
         },
         "exist": true
       },
-      "rayNr": 3,
-      "rays": [
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 50,
-            "y": 230,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 80,
-            "y": 230,
-            "exist": true
-          },
-          "exist": true
-        },
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 50,
-            "y": 200,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 80,
-            "y": 200,
-            "exist": true
-          },
-          "exist": true
-        },
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 50.00000000000001,
-            "y": 170,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 80,
-            "y": 170,
-            "exist": true
-          },
-          "exist": true
-        }
-      ],
+      "rayNr": 17,
       "track_deflection": false,
       "uid": "uid-rbkmrh"
     }

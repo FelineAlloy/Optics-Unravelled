@@ -20,41 +20,9 @@
         "y": 180,
         "exist": true
       },
-      "rayNr": 2,
-      "rays": [
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 310,
-            "y": 160,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 410,
-            "y": 160,
-            "exist": true
-          },
-          "exist": true
-        },
-        {
-          "type": 3,
-          "p1": {
-            "type": 1,
-            "x": 310,
-            "y": 160,
-            "exist": true
-          },
-          "p2": {
-            "type": 1,
-            "x": 410,
-            "y": 180,
-            "exist": true
-          },
-          "exist": true
-        }
-      ]
+      "rayNr": 5,
+	  "track_deflection": false,
+      "uid": "uid-koisu6"
     }
   ],
   "objects": [

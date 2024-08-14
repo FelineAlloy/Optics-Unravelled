@@ -1,14 +1,14 @@
 objTypes["beam"] = {
-	gen_rays: function (l1, rayNr) {
+	get_rays: function (obj) {
 		let rays = [];
-		const dist = graphs.length_segment(l1) / (rayNr - 1);
-		const angle = Math.atan2(l1.p2.y - l1.p1.y, l1.p2.x - l1.p1.x);
+		const dist = graphs.length_segment(obj.l1) / (obj.rayNr - 1);
+		const angle = Math.atan2(obj.l1.p2.y - obj.l1.p1.y, obj.l1.p2.x - obj.l1.p1.x);
 		const rayAngle = Math.PI / 2 + angle;
 		const distx = dist * Math.cos(angle);
 		const disty = dist * Math.sin(angle);
 
-		for (let i = 0; i < rayNr; i++) {
-			let p = graphs.point(l1.p1.x + i * distx, l1.p1.y + i * disty);
+		for (let i = 0; i < obj.rayNr; i++) {
+			let p = graphs.point(obj.l1.p1.x + i * distx, obj.l1.p1.y + i * disty);
 			let pp = graphs.point(p.x + dist * Math.cos(rayAngle), p.y + dist * Math.sin(rayAngle));
 			rays.push(graphs.ray(p, pp));
 		}
@@ -22,7 +22,6 @@ objTypes["beam"] = {
 			type: "beam",
 			l1: graphs.segment(p1, p2),
 			rayNr: rayNr,
-			rays: this.gen_rays(graphs.segment(p1, p2), rayNr),
 			track_deflection: track_deflection,
 			uid: uid,
 		};
@@ -59,8 +58,6 @@ objTypes["beam"] = {
 			obj.l1.p2.x += dx;
 			obj.l1.p2.y += dy;
 		}
-
-		obj.rays = this.gen_rays(obj.l1, obj.rayNr);
 	},
 
 	draw: function (obj) {
