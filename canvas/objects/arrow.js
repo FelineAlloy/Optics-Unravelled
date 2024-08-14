@@ -44,10 +44,10 @@ objTypes["arrow"] = {
 	},
 
 	draw: function (obj) {
-		c.beginPath();
-
 		c.strokeStyle = obj.color;
 		c.lineWidth = obj.thickness;
+
+		c.beginPath();
 
 		c.moveTo(obj.l1.p1.x, obj.l1.p1.y);
 		c.lineTo(obj.l1.p2.x, obj.l1.p2.y);
