@@ -6,7 +6,7 @@ canvas.height = canvas.parentElement.clientHeight;
 
 const colors = {
 	rays: "red",
-	extended: "red",
+	extended: "orange",
 	objects: "black",
 	text: "black",
 	selectables: "black",
