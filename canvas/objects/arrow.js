@@ -1,5 +1,17 @@
 objTypes["arrow"] = {
-	create: function (point1, point2, thickness = 3, color = colors.objects, uid = uidGen()) {
+	create: function (
+		point1 = graphs.point(
+			canvas.width / 2 - c.getTransform().e,
+			canvas.height / 3 - c.getTransform().f
+		),
+		point2 = graphs.point(
+			canvas.width / 2 - c.getTransform().e,
+			(canvas.height * 2) / 3 - c.getTransform().f
+		),
+		thickness = 3,
+		color = colors.objects,
+		uid = uidGen()
+	) {
 		return {
 			type: "arrow",
 			l1: graphs.line(point1, point2),

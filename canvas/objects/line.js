@@ -1,9 +1,12 @@
 objTypes["line"] = {
 	create: function (
-		point1,
-		point2,
+		point1 = graphs.point(-c.getTransform().e, canvas.height / 2 - c.getTransform().f),
+		point2 = graphs.point(
+			canvas.width - c.getTransform().e,
+			canvas.height / 2 - c.getTransform().f
+		),
 		spaceLength = 10,
-		dashLength = 10,
+		dashLength = 15,
 		thickness = 1,
 		color = colors.objects,
 		uid = uidGen()
@@ -51,7 +54,6 @@ objTypes["line"] = {
 			obj.l1.p2.x += dx;
 			obj.l1.p2.y += dy;
 		}
-		console.log("test");
 	},
 
 	draw: function (obj) {

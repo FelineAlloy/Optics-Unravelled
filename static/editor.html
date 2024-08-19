@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+	<link rel="stylesheet" href="css/editor.css">
+
+    <title>Editor</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand">Optics Unravelled</a>
+			<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+	
+			<div class="navbar-collapse collapse" id="navbarsExample07">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="/">Acasa</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="despre.html">Despre</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<canvas id="editor"></canvas>
+
+	<div id="toolbar" class="fixed-bottom container-fluid d-none d-lg-block bg-dark-subtle">
+		<div class="container-xxl">
+			<div class="row justify-content-between">
+				<div class="col-auto">
+					<div class="row justify-content-center title" data-text="File: ">Fișier</div>
+					<div class="row">
+						<div class="btn-group" role="group">
+							<div class="dropup">
+								<button class="btn shadow-none btn-secondary dropdown-toggle" type="button"
+									id="Load" data-bs-toggle="dropdown" aria-expanded="false">
+									Exemple
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" id="fromFile">Încarcă din fișier</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" id="ex_reflectionLaws">Legile reflexiei</a></li>
+									<li><a class="dropdown-item" id="ex_opticalPrism">Prisma optică</a></li>
+									<li><a class="dropdown-item" id="ex_sphericalDiopter">Dioptrul sferic</a></li>
+									<li><a class="dropdown-item" id="ex_objectFocus">Focar obiect</a></li>
+									<li><a class="dropdown-item" id="ex_imageFocus">Focar imagine</a></li>
+									<li><a class="dropdown-item" id="ex_transverseGrowth">Marirea liniară transversală</a></li>
+									<li><a class="dropdown-item" id="ex_planeDiopter">Dioptrul plan</a></li>
+									<li><a class="dropdown-item" id="ex_sphericalMirror">Oglinzi sferice</a></li>
+									<li><a class="dropdown-item" id="ex_lenses">Lentile subțiri</a></li>
+									<li><a class="dropdown-item" id="ex_magnifyingGlass">Lupa</a></li>
+									<li><a class="dropdown-item" id="ex_microscope">Microscopul</a></li>
+								</ul>
+							</div>
+							<button type="button" class="btn shadow-none btn-secondary" id="export" data-title="export">
+								Salvare
+							</button>
+							<button type="button" class="btn shadow-none btn-secondary" id="reset" data-title="reset">
+								Resetare
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-auto">
+					<div class="row justify-content-center title" data-text="File: ">Adaugă elemente</div>
+					<div class="row">
+						<div class="btn-group" role="group">
+							<div class="dropup">
+								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="rays" data-bs-toggle="dropdown"
+									aria-expanded="false">Fascicule</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" id="obj_rayObject">Fascicul</a></li>
+									<li><a class="dropdown-item" id="obj_pointSource">Fascicul divergent</a></li>
+									<li><a class="dropdown-item" id="obj_beam">Fascicul paralel</a></li>
+								</ul>
+							</div>
+							<div class="dropup">
+								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="mirrors" data-bs-toggle="dropdown"
+									aria-expanded="false">Oglinzi</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" id="obj_planeMirror">Oglindă plană</a></li>
+									<li><a class="dropdown-item" id="obj_sphericalMirror">Oglindă sferică</a></li>
+								</ul>
+							</div>
+							<div class="dropup">
+								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="diopters" data-bs-toggle="dropdown"
+									aria-expanded="false">Dioptre &amp lentile</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" id="obj_sphericalDiopter_real">Dioptru sferic</a></li>
+									<li><a class="dropdown-item" id="obj_planeDiopter">Dioptru plan</a></li>
+									<li><a class="dropdown-item" id="obj_lens">Lentilă</a></li>
+								</ul>
+							</div>
+							<div class="dropup">
+								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="other" data-bs-toggle="dropdown"
+									aria-expanded="false">Altele</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" id="obj_arrow">Săgeată</a></li>
+									<li><a class="dropdown-item" id="obj_line">Linie</a></li>
+									<li><a class="dropdown-item" id="obj_screen">Ecran</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+     
+
+	<!-- Global variables -->
+	<script src="/canvas/global.js"></script>
+
+	<!-- Geometric constructions -->
+    <script src="/canvas/graphs.js"></script>
+
+    <!-- Various functions -->
+    <script src="/canvas/draw.js"></script>
+    <script src="/canvas/export.js"></script>
+	<script src="/canvas/import.js"></script>
+	<script src="/canvas/editor.js"></script>
+
+	<!-- Objects -->
+	<script src="/canvas/objects/rayObject.js"></script>
+	<script src="/canvas/objects/pointSource.js"></script>
+	<script src="/canvas/objects/beam.js"></script>
+
+	<script src="/canvas/objects/screen.js"></script>
+	<script src="/canvas/objects/arrow.js"></script>
+	<script src="/canvas/objects/line.js"></script>
+
+    <script src="/canvas/objects/angle.js"></script>
+
+    <script src="/canvas/objects/planeDiopter.js"></script>
+    <script src="/canvas/objects/sphericalDiopter.js"></script>
+    <script src="/canvas/objects/lens.js"></script>
+    <script src="/canvas/objects/planeMirror.js"></script>
+	<script src="/canvas/objects/sphericalMirror.js"></script>
+    
+	<!-- Main workflow -->
+    <script src="/canvas/main.js"></script>
+
+	<!-- Bootstrap dependencies -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,5 +1,17 @@
 objTypes["planeDiopter"] = {
-	create: function (p1, p2, n1, n2, uid = uidGen()) {
+	create: function (
+		p1 = graphs.point(
+			canvas.width / 2 - c.getTransform().e,
+			canvas.height / 3 - c.getTransform().f
+		),
+		p2 = graphs.point(
+			canvas.width / 2 - c.getTransform().e,
+			(canvas.height * 2) / 3 - c.getTransform().f
+		),
+		n1 = 1,
+		n2 = 1.5,
+		uid = uidGen()
+	) {
 		return { type: "planeDiopter", l1: graphs.line(p1, p2), n1: n1, n2: n2, uid: uid };
 	},
 

@@ -17,9 +17,15 @@ objTypes["beam"] = {
 	},
 
 	create: function (
-		p1,
-		p2,
-		rayNr = 2,
+		p1 = graphs.point(
+			canvas.width / 2 - c.getTransform().e,
+			(canvas.height * 2) / 3 - c.getTransform().f
+		),
+		p2 = graphs.point(
+			canvas.width / 2 - c.getTransform().e,
+			canvas.height / 3 - c.getTransform().f
+		),
+		rayNr = 5,
 		track_deflection = false,
 		track_extended = false,
 		uid = uidGen()

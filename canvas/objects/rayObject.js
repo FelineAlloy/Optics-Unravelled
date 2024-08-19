@@ -1,5 +1,17 @@
 objTypes["rayObject"] = {
-	create: function (p1, p2, track_deflection = false, track_extended = false, uid = uidGen()) {
+	create: function (
+		p1 = graphs.point(
+			canvas.width / 3 - c.getTransform().e,
+			canvas.height / 2 - c.getTransform().f
+		),
+		p2 = graphs.point(
+			(canvas.width * 2) / 3 - c.getTransform().e,
+			canvas.height / 2 - c.getTransform().f
+		),
+		track_deflection = false,
+		track_extended = false,
+		uid = uidGen()
+	) {
 		return {
 			type: "rayObject",
 			ray: graphs.ray(p1, p2),

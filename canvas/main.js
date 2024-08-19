@@ -1,4 +1,4 @@
-// ------- Dropdown Hadling -------
+// ------- Dropdown Handling -------
 
 respondToVisibility = function (element, callback) {
 	var options = {
@@ -23,12 +23,14 @@ respondToVisibility(canvas, (visible) => {
 });
 
 window.addEventListener("resize", () => {
+	const t = c.getTransform();
 	canvas.height = canvas.parentElement.clientHeight;
 	canvas.width = canvas.parentElement.clientWidth;
+	c.setTransform(t.a, t.b, t.c, t.d, t.e, t.f);
 	updateSimulation();
 });
 
-// ------- Mouse Event Hadling -------
+// ------- Mouse Event Handling -------
 
 let rect = canvas.getBoundingClientRect();
 let mouse = graphs.point(0, 0);
@@ -64,8 +66,8 @@ function getMosuePositionOnCanvas(event) {
 	const clientX = event.clientX || event.touches[0].clientX;
 	const clientY = event.clientY || event.touches[0].clientY;
 	rect = canvas.getBoundingClientRect();
-	const canvasX = clientX - rect.left;
-	const canvasY = clientY - rect.top;
+	const canvasX = clientX - rect.left - c.getTransform().e;
+	const canvasY = clientY - rect.top - c.getTransform().f;
 
 	return { x: canvasX, y: canvasY };
 }
@@ -151,27 +153,13 @@ canvas.addEventListener("touchmove", mouse_move, { passive: false });
 canvas.addEventListener("touchend", mouse_up, { passive: false });
 canvas.addEventListener("touchcancel", mouse_out, { passive: false });
 
-// ------- /Mouse Event Hadling -------
+// ------- /Mouse Event Handling -------
 
 // ------- Simulation Init -------
 
-if (canvas.id == "example") {
-
-    const p1 = graphs.point(canvas.width/2 - Math.tan(Math.PI/6) * (canvas.height-100), canvas.height-50);
-    const p2 = graphs.point(canvas.width/2 + Math.tan(Math.PI/6) * (canvas.height-100), canvas.height-50);
-    const p3 = graphs.point(canvas.width/2, 50);
-
-    const ray = objTypes["rayObject"].create(graphs.point(100, 100), graphs.point(200, 200), 0, true);
-	const d1 = objTypes["planeDiopter"].create(p1, p3, 1, 1.5, 1);
-    const d2 = objTypes["planeDiopter"].create(p2, p3, 1.5, 1, 2);
-    const d3 = objTypes["planeDiopter"].create(p1, p2, 1.5, 1, 2);
-    const alpha = objTypes["angle"].create([1, 1, 2], ["l1.p1", "l1.p2", "l1.p1"], 69);
-
-    rays.push(ray);
-    objects.push(d1);
-    objects.push(d2);
-    objects.push(d3);
-    objects.push(alpha);
+if (canvas.id === "editor") {
+	c.translate(canvas.width / 2 - 510, canvas.height / 2 - 200);
+	updateSimulation();
 } else {
 	importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {
 		rays = data["rays"];
@@ -182,7 +170,7 @@ if (canvas.id == "example") {
 
 function updateSimulation() {
 	artist.clear();
-	artist.draw(100);
+	artist.draw(1000);
 }
 
 // ------- /Simulation Init -------

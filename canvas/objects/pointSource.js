@@ -12,9 +12,18 @@ objTypes["pointSource"] = {
 	},
 
 	create: function (
-		p1,
-		p2,
-		p3,
+		p1 = graphs.point(
+			canvas.width / 3 - c.getTransform().e,
+			canvas.height / 2 - c.getTransform().f
+		),
+		p2 = graphs.point(
+			(canvas.width * 2) / 3 - c.getTransform().e,
+			canvas.height / 2 + 50 - c.getTransform().f
+		),
+		p3 = graphs.point(
+			(canvas.width * 2) / 3 - c.getTransform().e,
+			canvas.height / 2 - 50 - c.getTransform().f
+		),
 		rayNr = 2,
 		track_deflection = false,
 		track_extended = false,

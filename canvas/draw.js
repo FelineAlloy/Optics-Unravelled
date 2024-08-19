@@ -2,9 +2,9 @@ const artist = {
 	// Drawing functions
 
 	clear: function () {
-		c.clearRect(0, 0, canvas.width, canvas.height);
+		c.clearRect(-c.getTransform().e, -c.getTransform().f, canvas.width, canvas.height);
 		c.fillStyle = colors.background;
-		c.fillRect(0, 0, canvas.width, canvas.height);
+		c.fillRect(-c.getTransform().e, -c.getTransform().f, canvas.width, canvas.height);
 	},
 
 	draw_segment: function (seg1) {

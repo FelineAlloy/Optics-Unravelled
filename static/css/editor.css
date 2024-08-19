@@ -1,0 +1,43 @@
+html,
+body {
+	margin: 0;
+	height: 100%;
+}
+
+canvas {
+	background-color: transparent;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+#toolbar {
+	padding-top: 7px;
+	padding-bottom: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.title {
+	font-size: 10pt;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+/* modifications to Bootstrap style */
+
+.btn-group {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.btn-group>.dropup:not(:last-child)>.btn {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.btn-group>.dropup:nth-child(n+3)>.btn,
+.btn-group>:not(.btn-check)+.dropup>.btn {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}

@@ -1,5 +1,18 @@
 objTypes["sphericalDiopter_real"] = {
-	create: function (point1, point2, angle, n1, n2, uid = uidGen()) {
+	create: function (
+		point1 = graphs.point(
+			canvas.width / 3 - c.getTransform().e,
+			canvas.height / 2 - c.getTransform().f
+		),
+		point2 = graphs.point(
+			(canvas.width * 2) / 3 - c.getTransform().e,
+			canvas.height / 2 - c.getTransform().f
+		),
+		angle = Math.PI / 6,
+		n1 = 1,
+		n2 = 1.5,
+		uid = uidGen()
+	) {
 		return {
 			type: "sphericalDiopter_real",
 			c1: graphs.circle(point1, point2),

@@ -2,7 +2,7 @@ function exportContent() {
 	const jsonData = { rays: rays, objects: objects };
 	const jsonString = JSON.stringify(jsonData);
 
-	const fileName = prompt("Enter a file name:", "exported-content.json");
+	const fileName = prompt("Numele fișierului salvat:", "exported-content.json");
 
 	if (fileName) {
 		const blob = new Blob([jsonString], { type: "application/json" });
@@ -18,6 +18,3 @@ function exportContent() {
 		document.body.removeChild(a);
 	}
 }
-
-const exportButton = document.getElementById("export-button");
-exportButton.onclick = exportContent;
