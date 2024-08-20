@@ -37,82 +37,158 @@
 
 	<canvas id="editor"></canvas>
 
-	<div id="toolbar" class="fixed-bottom container-fluid d-none d-lg-block bg-dark-subtle">
-		<div class="container-xxl">
-			<div class="row justify-content-between">
-				<div class="col-auto">
-					<div class="row justify-content-center title" data-text="File: ">Fișier</div>
-					<div class="row">
-						<div class="btn-group" role="group">
-							<div class="dropup">
-								<button class="btn shadow-none btn-secondary dropdown-toggle" type="button"
-									id="Load" data-bs-toggle="dropdown" aria-expanded="false">
-									Exemple
+	<div class="fixed-bottom">
+		<div class="d-flex justify-content-center">
+			<div class="obj-bar" id="obj_bar" style="display: none;">
+				<span class="d-none d-lg-inline" id="obj_name" style="padding-right:5px"></span>
+				<span id="obj_bar_main"></span>
+				<span style="white-space: nowrap;">
+					<span class="d-none d-lg-inline">
+						<span id="apply_to_all_box">
+							<input type="checkbox" class="btn-check" id="apply_to_all" autocomplete="off">
+							<label class="btn btn-outline-secondary" for="apply_to_all">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+									viewBox="0 0 16 16">
+									<path
+										d="m11.5 11.932a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0h2.05v1h-2.05a2.5 2.5 0 0 1-4.9 0h-9.05v-1z">
+									</path>
+									<path
+										d="m11.5 1.1864a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0h2.05v1h-2.05a2.5 2.5 0 0 1-4.9 0h-9.05v-1z">
+									</path>
+									<path d="m10.049 6.3809v3.1367h1v-3.1367z"></path>
+									<path d="m11.82 6.3809v3.1367h1v-3.1367z"></path>
+								</svg>
+							</label>
+						</span>
+						<!-- <button class="btn" data-title="duplicate" id="copy" title="" data-bs-toggle="tooltip" data-bs-trigger="hover"
+								data-bs-placement="bottom" data-bs-original-title="Duplicate">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+									viewBox="0 0 9.766 9.766">
+									<g transform="matrix(.01973 0 0 .01973 .0020532 .061476)">
+										<path
+											d="m314.25 85.4h-227c-21.3 0-38.6 17.3-38.6 38.6v325.7c0 21.3 17.3 38.6 38.6 38.6h227c21.3 0 38.6-17.3 38.6-38.6v-325.7c-0.1-21.3-17.4-38.6-38.6-38.6zm11.5 364.2c0 6.4-5.2 11.6-11.6 11.6h-227c-6.4 0-11.6-5.2-11.6-11.6v-325.6c0-6.4 5.2-11.6 11.6-11.6h227c6.4 0 11.6 5.2 11.6 11.6z">
+										</path>
+										<path
+											d="m401.05 0h-227c-21.3 0-38.6 17.3-38.6 38.6 0 7.5 6 13.5 13.5 13.5s13.5-6 13.5-13.5c0-6.4 5.2-11.6 11.6-11.6h227c6.4 0 11.6 5.2 11.6 11.6v325.7c0 6.4-5.2 11.6-11.6 11.6-7.5 0-13.5 6-13.5 13.5s6 13.5 13.5 13.5c21.3 0 38.6-17.3 38.6-38.6v-325.7c0-21.3-17.3-38.6-38.6-38.6z">
+										</path>
+									</g>
+								</svg>
+							</button> -->
+						<button class="btn" id="delete">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
+								viewBox="0 0 16 16">
+								<path
+									d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+								</path>
+							</svg>
+						</button>
+						<button class="btn" id="unselect">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+								viewBox="0 0 16 16">
+								<path
+									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+								</path>
+							</svg>
+						</button>
+					</span>
+				</span>
+			</div>
+		</div>
+
+		<div id="toolbar" class="container-fluid">
+			<div class="container-xxl">
+				<div class="row justify-content-center gap-5">
+					<div class="col-auto">
+						<div class="row justify-content-center title" data-text="File: ">Fișier</div>
+						<div class="row">
+							<div class="btn-group" role="group">
+								<div class="dropup">
+									<button class="btn shadow-none btn-secondary dropdown-toggle" type="button" id="Load"
+										data-bs-toggle="dropdown" aria-expanded="false">
+										Exemple
+									</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" id="fromFile">Încarcă din fișier</a></li>
+										<li>
+											<hr class="dropdown-divider">
+										</li>
+										<li><a class="dropdown-item" id="_ex_reflectionLaws">Legile reflexiei</a></li>
+										<li><a class="dropdown-item" id="_ex_opticalPrism">Prisma optică</a></li>
+										<li><a class="dropdown-item" id="_ex_sphericalDiopter">Dioptrul sferic</a></li>
+										<li><a class="dropdown-item" id="_ex_objectFocus">Focar obiect</a></li>
+										<li><a class="dropdown-item" id="_ex_imageFocus">Focar imagine</a></li>
+										<li><a class="dropdown-item" id="_ex_transverseGrowth">Marirea liniară transversală</a>
+										</li>
+										<li><a class="dropdown-item" id="_ex_planeDiopter">Dioptrul plan</a></li>
+										<li><a class="dropdown-item" id="_ex_sphericalMirror">Oglinzi sferice</a></li>
+										<li><a class="dropdown-item" id="_ex_lenses">Lentile subțiri</a></li>
+										<li><a class="dropdown-item" id="_ex_magnifyingGlass">Lupa</a></li>
+										<li><a class="dropdown-item" id="_ex_microscope">Microscopul</a></li>
+									</ul>
+								</div>
+								<button type="button" class="btn shadow-none btn-secondary" id="export" data-title="export">
+									Salvare
 								</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" id="fromFile">Încarcă din fișier</a></li>
-									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" id="ex_reflectionLaws">Legile reflexiei</a></li>
-									<li><a class="dropdown-item" id="ex_opticalPrism">Prisma optică</a></li>
-									<li><a class="dropdown-item" id="ex_sphericalDiopter">Dioptrul sferic</a></li>
-									<li><a class="dropdown-item" id="ex_objectFocus">Focar obiect</a></li>
-									<li><a class="dropdown-item" id="ex_imageFocus">Focar imagine</a></li>
-									<li><a class="dropdown-item" id="ex_transverseGrowth">Marirea liniară transversală</a></li>
-									<li><a class="dropdown-item" id="ex_planeDiopter">Dioptrul plan</a></li>
-									<li><a class="dropdown-item" id="ex_sphericalMirror">Oglinzi sferice</a></li>
-									<li><a class="dropdown-item" id="ex_lenses">Lentile subțiri</a></li>
-									<li><a class="dropdown-item" id="ex_magnifyingGlass">Lupa</a></li>
-									<li><a class="dropdown-item" id="ex_microscope">Microscopul</a></li>
-								</ul>
+								<button type="button" class="btn shadow-none btn-secondary" id="reset" data-title="reset">
+									Resetare
+								</button>
 							</div>
-							<button type="button" class="btn shadow-none btn-secondary" id="export" data-title="export">
-								Salvare
-							</button>
-							<button type="button" class="btn shadow-none btn-secondary" id="reset" data-title="reset">
-								Resetare
-							</button>
 						</div>
 					</div>
-				</div>
-				<div class="col-auto">
-					<div class="row justify-content-center title" data-text="File: ">Adaugă elemente</div>
-					<div class="row">
-						<div class="btn-group" role="group">
-							<div class="dropup">
-								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="rays" data-bs-toggle="dropdown"
-									aria-expanded="false">Fascicule</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" id="obj_rayObject">Fascicul</a></li>
-									<li><a class="dropdown-item" id="obj_pointSource">Fascicul divergent</a></li>
-									<li><a class="dropdown-item" id="obj_beam">Fascicul paralel</a></li>
-								</ul>
+
+					<div class="col-auto">
+						<div class="row justify-content-center title" data-text="File: ">Adaugă elemente</div>
+						<div class="row">
+							<div class="btn-group" role="group">
+								<div class="dropup">
+									<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="rays"
+										data-bs-toggle="dropdown" aria-expanded="false">Surse</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" id="_obj_rayObject">Rază</a></li>
+										<li><a class="dropdown-item" id="_obj_pointSource">Fascicul divergent</a></li>
+										<li><a class="dropdown-item" id="_obj_beam">Fascicul paralel</a></li>
+									</ul>
+								</div>
+								<div class="dropup">
+									<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="mirrors"
+										data-bs-toggle="dropdown" aria-expanded="false">Oglinzi</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" id="_obj_planeMirror">Oglindă plană</a></li>
+										<li><a class="dropdown-item" id="_obj_sphericalMirror">Oglindă sferică</a></li>
+									</ul>
+								</div>
+								<div class="dropup">
+									<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="diopters"
+										data-bs-toggle="dropdown" aria-expanded="false">Dioptre &amp lentile</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" id="_obj_sphericalDiopter_real">Dioptru sferic</a></li>
+										<li><a class="dropdown-item" id="_obj_planeDiopter">Dioptru plan</a></li>
+										<li><a class="dropdown-item" id="_obj_lens">Lentilă</a></li>
+									</ul>
+								</div>
+								<div class="dropup">
+									<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="other"
+										data-bs-toggle="dropdown" aria-expanded="false">Altele</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" id="_obj_arrow">Săgeată</a></li>
+										<li><a class="dropdown-item" id="_obj_line">Linie</a></li>
+										<li><a class="dropdown-item" id="_obj_screen">Ecran</a></li>
+									</ul>
+								</div>
 							</div>
-							<div class="dropup">
-								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="mirrors" data-bs-toggle="dropdown"
-									aria-expanded="false">Oglinzi</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" id="obj_planeMirror">Oglindă plană</a></li>
-									<li><a class="dropdown-item" id="obj_sphericalMirror">Oglindă sferică</a></li>
-								</ul>
-							</div>
-							<div class="dropup">
-								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="diopters" data-bs-toggle="dropdown"
-									aria-expanded="false">Dioptre &amp lentile</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" id="obj_sphericalDiopter_real">Dioptru sferic</a></li>
-									<li><a class="dropdown-item" id="obj_planeDiopter">Dioptru plan</a></li>
-									<li><a class="dropdown-item" id="obj_lens">Lentilă</a></li>
-								</ul>
-							</div>
-							<div class="dropup">
-								<button class="btn shadow-none btn-primary dropdown-toggle" type="button" id="other" data-bs-toggle="dropdown"
-									aria-expanded="false">Altele</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" id="obj_arrow">Săgeată</a></li>
-									<li><a class="dropdown-item" id="obj_line">Linie</a></li>
-									<li><a class="dropdown-item" id="obj_screen">Ecran</a></li>
-								</ul>
-							</div>
+						</div>
+					</div>
+
+					<div class="col-auto">
+						<div class="row justify-content-center title" data-text="File: ">Deplasează</div>
+						<div class="row">
+							<button type="button" class="btn btn-primary" data-bs-toggle="button" id="move">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrows-move"
+									viewBox="0 0 16 16">
+									<path fill-rule="evenodd"
+										d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
+								</svg>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -132,6 +208,7 @@
     <script src="/canvas/draw.js"></script>
     <script src="/canvas/export.js"></script>
 	<script src="/canvas/import.js"></script>
+	<script src="canvas/objBar.js"></script>
 	<script src="/canvas/editor.js"></script>
 
 	<!-- Objects -->

@@ -94,9 +94,22 @@ const mouse_down = function (event) {
 
 	mouse_prev = graphs.point(mouse.x, mouse.y);
 
+	const obj_prev = selected.obj;
+
 	selected.obj = getSelectedObject(mouse);
 	if (selected.obj != null) {
 		isDragging = true;
+	}
+
+	if (selected.obj == null) {
+		document.getElementById("obj_bar").style.display = "none";
+	} else if (obj_prev == null) {
+		load_objectBar(selected);
+	} else {
+		if (obj_prev.uid == null) obj_prev.uid = uidGen();
+		if (selected.obj.uid == null) selected.obj.uid = uidGen();
+
+		if (obj_prev.uid != selected.obj.uid) load_objectBar(selected);
 	}
 
 	updateSimulation();
@@ -109,7 +122,7 @@ const mouse_up = function (event) {
 
 	event.preventDefault();
 	isDragging = false;
-	selected.obj = null;
+	// selected.obj = null;
 	updateSimulation();
 };
 
