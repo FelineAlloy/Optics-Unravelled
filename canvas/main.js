@@ -33,7 +33,7 @@ window.addEventListener("resize", () => {
 // ------- Mouse Event Handling -------
 
 let rect = canvas.getBoundingClientRect();
-let mouse = graphs.point(0, 0);
+let mouse = graphs.point(0, 0); // these coordinates are in screen space (without cavas transforms applied)
 let mouse_prev = graphs.point(0, 0);
 
 const selected = { obj: undefined, part: undefined };
@@ -62,12 +62,13 @@ function mouseOnSegment(mouse, segment) {
 	);
 }
 
-function getMosuePositionOnCanvas(event) {
+// return mouse position relative to canvas without taking into account transforms (this is needed for move tool)
+function getMousePositionOnCanvas(event) {
 	const clientX = event.clientX || event.touches[0].clientX;
 	const clientY = event.clientY || event.touches[0].clientY;
 	rect = canvas.getBoundingClientRect();
-	const canvasX = clientX - rect.left - c.getTransform().e;
-	const canvasY = clientY - rect.top - c.getTransform().f;
+	const canvasX = clientX - rect.left;
+	const canvasY = clientY - rect.top;
 
 	return { x: canvasX, y: canvasY };
 }
@@ -90,26 +91,36 @@ function getSelectedObject(mouse) {
 const mouse_down = function (event) {
 	event.preventDefault();
 
-	mouse = getMosuePositionOnCanvas(event);
+	mouse = getMousePositionOnCanvas(event);
 
 	mouse_prev = graphs.point(mouse.x, mouse.y);
 
 	const obj_prev = selected.obj;
 
-	selected.obj = getSelectedObject(mouse);
+	selected.obj = getSelectedObject(
+		graphs.point(mouse.x - c.getTransform().e, mouse.y - c.getTransform().f) // get the coresponding position inside canvas space
+	);
+
 	if (selected.obj != null) {
+		isDragging = true;
+	} else if (
+		canvas.id === "editor" &&
+		document.getElementById("move").getAttribute("aria-pressed") == "true"
+	) {
 		isDragging = true;
 	}
 
-	if (selected.obj == null) {
-		document.getElementById("obj_bar").style.display = "none";
-	} else if (obj_prev == null) {
-		load_objectBar(selected);
-	} else {
-		if (obj_prev.uid == null) obj_prev.uid = uidGen();
-		if (selected.obj.uid == null) selected.obj.uid = uidGen();
+	if (canvas.id === "editor") {
+		if (selected.obj == null) {
+			document.getElementById("obj_bar").style.display = "none";
+		} else if (obj_prev == null) {
+			load_objectBar(selected);
+		} else {
+			if (obj_prev.uid == null) obj_prev.uid = uidGen();
+			if (selected.obj.uid == null) selected.obj.uid = uidGen();
 
-		if (obj_prev.uid != selected.obj.uid) load_objectBar(selected);
+			if (obj_prev.uid != selected.obj.uid) load_objectBar(selected);
+		}
 	}
 
 	updateSimulation();
@@ -122,7 +133,6 @@ const mouse_up = function (event) {
 
 	event.preventDefault();
 	isDragging = false;
-	// selected.obj = null;
 	updateSimulation();
 };
 
@@ -133,14 +143,13 @@ const mouse_out = function (event) {
 
 	event.preventDefault();
 	isDragging = false;
-	selected.obj = null;
 	updateSimulation();
 };
 
 const mouse_move = function (event) {
 	event.preventDefault();
 
-	mouse = getMosuePositionOnCanvas(event);
+	mouse = getMousePositionOnCanvas(event);
 
 	updateSimulation();
 
@@ -151,7 +160,14 @@ const mouse_move = function (event) {
 	let dx = mouse.x - mouse_prev.x;
 	let dy = mouse.y - mouse_prev.y;
 
-	objTypes[selected.obj.type].c_mousemove(selected.obj, dx, dy);
+	if (selected.obj != null) {
+		objTypes[selected.obj.type].c_mousemove(selected.obj, dx, dy);
+	} else if (
+		canvas.id === "editor" &&
+		document.getElementById("move").getAttribute("aria-pressed") == "true"
+	) {
+		c.translate(dx, dy);
+	}
 
 	mouse_prev = graphs.point(mouse.x, mouse.y);
 };
@@ -171,7 +187,7 @@ canvas.addEventListener("touchcancel", mouse_out, { passive: false });
 // ------- Simulation Init -------
 
 if (canvas.id === "editor") {
-	c.translate(canvas.width / 2 - 510, canvas.height / 2 - 200);
+	c.setTransform(1, 0, 0, 1, canvas.width / 2 - 510, canvas.height / 2 - 200);
 	updateSimulation();
 } else {
 	importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {

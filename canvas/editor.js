@@ -63,6 +63,7 @@ document.getElementById("reset").addEventListener("click", function () {
 	rays = [];
 	objects = [];
 	artist.clear();
+	c.setTransform(1, 0, 0, 1, canvas.width / 2 - 510, canvas.height / 2 - 200);
 });
 
 document.getElementById("delete").addEventListener("click", function () {
@@ -247,6 +248,19 @@ function load_objectBar(selected) {
 				obj.fp2 = graphs.addPointAlongSegment(midpoint, normal.p2, obj.f);
 			}
 		);
+	}
+
+	if (selected.obj.type === "planeMirror") {
+		document.getElementById("obj_name").innerHTML = "Oglindă plană";
+	}
+	if (selected.obj.type === "arrow") {
+		document.getElementById("obj_name").innerHTML = "Săgeată";
+	}
+	if (selected.obj.type === "line") {
+		document.getElementById("obj_name").innerHTML = "Linie";
+	}
+	if (selected.obj.type === "screen") {
+		document.getElementById("obj_name").innerHTML = "Ecran";
 	}
 
 	document.getElementById("obj_bar").style.display = "block";

@@ -75,7 +75,11 @@ objTypes["sphericalMirror"] = {
 			obj.c1.r.p2.x += dx;
 			obj.c1.r.p2.y += dy;
 		} else if (selected.part == 3 || selected.part == 4) {
-			obj.angle = 2 * Math.abs(graphs.get_angle(mouse, obj.c1.c, obj.c1.r.p2));
+			const mouse_t = graphs.point(
+				mouse.x - c.getTransform().e,
+				mouse.y - c.getTransform().f
+			);
+			obj.angle = 2 * Math.abs(graphs.get_angle(mouse_t, obj.c1.c, obj.c1.r.p2));
 		}
 	},
 
