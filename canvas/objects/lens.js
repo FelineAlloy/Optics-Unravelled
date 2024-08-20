@@ -18,10 +18,10 @@ objTypes["lens"] = {
 		return {
 			type: "lens",
 			l1: l1,
-			f: Math.abs(f),
+			f: f, // f is signed (f<0 means divergent lens and f>0 means convergent lens)
 			fp1: graphs.addPointAlongSegment(midpoint, normal.p1, f),
 			fp2: graphs.addPointAlongSegment(midpoint, normal.p2, f),
-			convergent: Math.sign(f),
+			convergent: Math.sign(f), // convergent only keeps track of the sign of f
 			uid: uid,
 		};
 	},
@@ -75,13 +75,10 @@ objTypes["lens"] = {
 			obj.fp2.x += dx;
 			obj.fp2.y += dy;
 		} else if (selected.part == 1) {
-			const p0 = graphs.point(obj.l1.p1.x, obj.l1.p1.y);
+			const midpoint = graphs.midpoint(obj.l1);
 
 			obj.l1.p1.x += dx;
 			obj.l1.p1.y += dy;
-
-			const midpoint = graphs.midpoint(obj.l1);
-			const alpha = graphs.get_angle(obj.l1.p1, midpoint, p0);
 
 			const len = graphs.length(midpoint, obj.l1.p1);
 			obj.l1.p2 = graphs.addPointAlongSegment(midpoint, obj.l1.p1, -len);
@@ -90,17 +87,14 @@ objTypes["lens"] = {
 			obj.fp1 = graphs.addPointAlongSegment(midpoint, normal.p1, obj.f);
 			obj.fp2 = graphs.addPointAlongSegment(midpoint, normal.p2, obj.f);
 		} else if (selected.part == 2) {
-			const p0 = graphs.point(obj.l1.p2.x, obj.l1.p2.y);
+			const midpoint = graphs.midpoint(obj.l1);
 
 			obj.l1.p2.x += dx;
 			obj.l1.p2.y += dy;
 
-			const midpoint = graphs.midpoint(obj.l1);
-			const alpha = graphs.get_angle(obj.l1.p2, midpoint, p0);
-			const normal = graphs.perpendicular_bisector(obj.l1);
-
 			const len = graphs.length(midpoint, obj.l1.p2);
 			obj.l1.p1 = graphs.addPointAlongSegment(midpoint, obj.l1.p2, -len);
+			const normal = graphs.perpendicular_bisector(obj.l1);
 
 			obj.fp1 = graphs.addPointAlongSegment(midpoint, normal.p1, obj.f);
 			obj.fp2 = graphs.addPointAlongSegment(midpoint, normal.p2, obj.f);
@@ -114,7 +108,7 @@ objTypes["lens"] = {
 			const alpha = graphs.get_angle(obj.fp1, midpoint, p0);
 
 			obj.f = graphs.length(midpoint, obj.fp1) * obj.convergent;
-			obj.fp2 = graphs.addPointAlongSegment(midpoint, obj.fp1, -obj.f * obj.convergent);
+			obj.fp2 = graphs.addPointAlongSegment(midpoint, obj.fp1, -Math.abs(obj.f));
 
 			obj.l1.p1 = graphs.rotate_point(obj.l1.p1, midpoint, alpha);
 			obj.l1.p2 = graphs.rotate_point(obj.l1.p2, midpoint, alpha);
@@ -128,7 +122,7 @@ objTypes["lens"] = {
 			const alpha = graphs.get_angle(obj.fp2, midpoint, p0);
 
 			obj.f = graphs.length(midpoint, obj.fp2) * obj.convergent;
-			obj.fp1 = graphs.addPointAlongSegment(midpoint, obj.fp2, -obj.f * obj.convergent);
+			obj.fp1 = graphs.addPointAlongSegment(midpoint, obj.fp2, -Math.abs(obj.f));
 
 			obj.l1.p1 = graphs.rotate_point(obj.l1.p1, midpoint, alpha);
 			obj.l1.p2 = graphs.rotate_point(obj.l1.p2, midpoint, alpha);
