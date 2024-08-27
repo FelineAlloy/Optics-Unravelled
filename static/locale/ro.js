@@ -21,7 +21,7 @@ locales["ro"] = {
 		message: "Legile refracției",
 		tag: "lesson",
 	},
-	reflexionLaws: {
+	reflectionLaws: {
 		message: "Legile reflexiei",
 		tag: "lesson",
 	},

@@ -1,92 +1,168 @@
+:root {
+	/* Primary: Diver Lady */
+	--primary-100: #F2F7FF;
+	--primary-200: #C8E0FD;
+	--primary-300: #97C3ED;
+	--primary-400: #5D98C3;
+	--primary-500: #245470;
+	--primary-600: #13475E;
+	--primary-700: #0B3B4B;
+	--primary-800: #072F39;
+	--primary-900: #052226;
+
+	/* Accent: Fuego Nuevo */
+	--accent-100: #FFFAF2;
+	--accent-200: #FFE1BE;
+	--accent-300: #FDC189;
+	--accent-400: #F99A53;
+	--accent-500: #F06C1F;
+	--accent-600: #BD420A;
+	--accent-700: #8B2402;
+	--accent-800: #591100;
+	--accent-900: #260500;
+
+	/* Neutral */
+	--neutral-100: #FAFBFC;
+	--neutral-200: #EAECEE;
+	--neutral-300: #DADDE0;
+	--neutral-400: #CACFD2;
+	--neutral-500: #BBC1C4;
+	--neutral-600: #939A9D;
+	--neutral-700: #6D7375;
+	--neutral-800: #474D4E;
+	--neutral-900: #222626;
+}
+
+html {
+	overflow-x: auto;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+body {
+	padding-top: 3.5rem;
+	padding-bottom: 2em;
+
+	font-family: 'Ubuntu', var(--bs-body-font-family);
+	color: var(--neutral-900);
+}
+
+.canvas-wrapper {
+	height: 400px;
+	width: 100%;
+}
+
+iframe {
+	width: 100%;
+	object-fit: cover;
+}
+
 /* Header section */
 
-header {
-    font-size: 1rem;
-    background-color: #245571;
-    padding: .5em .5em;
-
-	position: sticky;
-	top: 0px;
-	z-index: 999;
+.navbar-blue {
+	background-color: var(--primary-500);
+	--bs-navbar-color: var(--neutral-300);
+	--bs-navbar-hover-color: var(--neutral-100);
+	--bs-navbar-disabled-color: var(--neutral-600);
+	--bs-navbar-active-color: var(--primary-100);
+	--bs-navbar-brand-color: var(--primary-100);
+	--bs-navbar-brand-hover-color: var(--primary-100);
+	--bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1);
+	--bs-navbar-toggler-icon-bg: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
 }
 
-header a {
-	display: block;
-    font-size: 1.2em;
-    float: left;
-    text-align: center;
-    padding: .25em 1.2em .25em 0;
+.fa-regular {
+	line-height: inherit;
 }
 
-.trigger {
-	position: relative;
+.tooltip {
+	--bs-tooltip-bg: var(--primary-100);
+	--bs-tooltip-color: var(--primary-900);
+
 }
 
-.popup {
-	position: absolute;
-	width: 14rem;
-	left: -7rem;
-	top: 105%;
+/* Side menu styles */
 
-	background-color: #f9f9f9;
-	border: 1px solid #ccc;
-	padding: 10px;
-	border-radius: 10px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	z-index: 1000; /* Ensure popup is above other elements */
-	display: none; /* Initially hide the popup */
-
-	font-size: 1rem;
-	text-align: center;
-	color: black;
+#side-menu a {
+	color: var(--neutral-700);
+	text-decoration: none;
 }
 
-/* .trigger:hover .popup {
-	display: block;
-} */
-
-/* Content section */
-
-li {
-    margin-left: 1rem;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+#side-menu a:hover {
+	color: var(--neutral-800);
+	text-decoration: underline;
 }
 
-b {
-    font-weight: 600;
-    color: #4d7b96;
+/* Content styles */
+
+#content {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+#content h1 {
+	font-size: 2rem;
+}
+
+#content h2 {
+	font-size: 1.5rem;
+}
+
+#content ul {
+	padding-left: 0px;
+	margin-left: 1rem;
+}
+
+#content li {
+	margin-left: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+#content b {
+	font-weight: 600;
+	color: var(--primary-400);
 }
 
 .dropdown {
-    font-size: 1rem;
-    color: white;
-    background-color: #4d7b96;
-    height: 2em;
-    border-radius: .1em;
-    margin: 0px -5px 0px -5px;
+	font-size: 1rem;
+	background-color: var(--primary-400);
+	height: 2em;
+	border-radius: .25em;
+	margin: 0px -5px 0px -5px;
 }
 
 .dropdown a {
-    font-size: 1.2em;
-    float: right;
-    padding: .25em .75em;
+	color: var(--primary-100);
+	/* font-size: 1.2em; */
+	float: right;
+	padding: .25em .75em;
 }
 
 .dropdown p {
-    font-size: 1.1em;
-    float: left;
-    margin: 0;
-    padding: .25em .75em;
+	font-family: 'Verdana', var(--bs-body-font-family);
+	color: var(--primary-100);
+	/* font-size: 1.1em; */
+	float: left;
+	margin: 0;
+	padding: .25em .75em;
 }
 
 .dropdown-content {
-    margin: 0;
-    padding: .5rem 0;
-    display: none;
-    border-color: #e3ecf5;
+	margin: 0;
+	padding: .5rem 0;
+	display: none;
 }
 
 .show {
-    display: block;
+	display: block;
+}
+
+/* Styles specifically for about page */
+
+@media (min-width: 992px) {
+	.container-tiny {
+		width: 720px;
+	}
 }

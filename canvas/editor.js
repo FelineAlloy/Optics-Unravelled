@@ -62,8 +62,17 @@ document.getElementById("export").addEventListener("click", exportContent);
 document.getElementById("reset").addEventListener("click", function () {
 	rays = [];
 	objects = [];
-	artist.clear();
+
+	document.getElementById("obj_bar").style.display = "none";
+	selected.obj = null;
+	selected.part = null;
+
+	ray_alpha = 0.3;
+	document.getElementById("rayAlpha").value = ray_alpha;
+
 	c.setTransform(1, 0, 0, 1, canvas.width / 2 - 510, canvas.height / 2 - 200);
+
+	updateSimulation();
 });
 
 document.getElementById("delete").addEventListener("click", function () {
@@ -89,6 +98,29 @@ document.getElementById("unselect").addEventListener("click", function () {
 	document.getElementById("obj_bar").style.display = "none";
 	selected.obj = null;
 	selected.part = null;
+
+	updateSimulation();
+});
+
+/* Initialize and add event listener for ray options */
+document.getElementById("rayAlpha").addEventListener("input", function (event) {
+	ray_alpha = event.target.value;
+
+	updateSimulation();
+});
+
+document.getElementById("rayAlphaPlus").addEventListener("click", function (event) {
+	ray_alpha += 0.1;
+	if (ray_alpha > 1) ray_alpha = 1;
+	document.getElementById("rayAlpha").value = ray_alpha;
+
+	updateSimulation();
+});
+
+document.getElementById("rayAlphaMinus").addEventListener("click", function (event) {
+	ray_alpha -= 0.1;
+	if (ray_alpha < 0) ray_alpha = 0;
+	document.getElementById("rayAlpha").value = ray_alpha;
 
 	updateSimulation();
 });
@@ -250,14 +282,27 @@ function load_objectBar(selected) {
 		);
 	}
 
+	if (selected.obj.type === "line") {
+		document.getElementById("obj_name").innerHTML = "Linie";
+
+		objBar.createNumber(
+			"Greutate",
+			1,
+			5,
+			1,
+			selected.obj.thickness,
+			function (obj, value) {
+				obj.thickness = value;
+			},
+			false
+		);
+	}
+
 	if (selected.obj.type === "planeMirror") {
 		document.getElementById("obj_name").innerHTML = "Oglindă plană";
 	}
 	if (selected.obj.type === "arrow") {
 		document.getElementById("obj_name").innerHTML = "Săgeată";
-	}
-	if (selected.obj.type === "line") {
-		document.getElementById("obj_name").innerHTML = "Linie";
 	}
 	if (selected.obj.type === "screen") {
 		document.getElementById("obj_name").innerHTML = "Ecran";

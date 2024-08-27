@@ -1,1 +1,120 @@
-{"rays":[{"type":"rayObject","ray":{"type":3,"p1":{"type":1,"x":154,"y":16,"exist":true},"p2":{"type":1,"x":407,"y":197,"exist":true},"exist":true}}],"objects":[{"type":"planeMirror","l1":{"type":2,"p1":{"type":1,"x":1020,"y":266.6666666666667,"exist":true},"p2":{"type":1,"x":0,"y":266.6666666666667,"exist":true},"exist":true},"dashLength":10}]}
+{
+  "rays": [
+    {
+      "type": "pointSource",
+      "p1": {
+        "type": 1,
+        "x": 160,
+        "y": 70,
+        "exist": true
+      },
+      "p2": {
+        "type": 1,
+        "x": 490,
+        "y": 263,
+        "exist": true
+      },
+      "p3": {
+        "type": 1,
+        "x": 490,
+        "y": 17,
+        "exist": true
+      },
+      "rayNr": 7,
+      "track_deflection": false,
+      "track_extended": true,
+      "uid": "uid-eeppm"
+    }
+  ],
+  "objects": [
+    {
+      "type": "line",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": -770,
+          "y": 200,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 1790,
+          "y": 200,
+          "exist": true
+        },
+        "exist": true
+      },
+      "spaceLength": 10,
+      "dashLength": 15,
+      "thickness": 1,
+      "color": "black",
+      "uid": "uid-8x0te"
+    },
+    {
+      "type": "arrow",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 160,
+          "y": 70,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 160,
+          "y": 200,
+          "exist": true
+        },
+        "exist": true
+      },
+      "thickness": 3,
+      "color": "black",
+      "uid": "uid-t58zj4"
+    },
+    {
+      "type": "arrow",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 860,
+          "y": 70,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 860,
+          "y": 200,
+          "exist": true
+        },
+        "exist": true
+      },
+      "thickness": 3,
+      "color": "black",
+      "uid": "uid-seg4qr"
+    },
+    {
+      "type": "planeMirror",
+      "l1": {
+        "type": 2,
+        "p1": {
+          "type": 1,
+          "x": 510,
+          "y": -18.833333333333314,
+          "exist": true
+        },
+        "p2": {
+          "type": 1,
+          "x": 510,
+          "y": 418.83333333333337,
+          "exist": true
+        },
+        "exist": true
+      },
+      "dashLength": 10,
+      "uid": "uid-k40jdl"
+    }
+  ]
+}
