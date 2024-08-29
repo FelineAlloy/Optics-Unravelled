@@ -2,9 +2,18 @@ const artist = {
 	// Drawing functions
 
 	clear: function () {
-		c.clearRect(-c.getTransform().e, -c.getTransform().f, canvas.width, canvas.height);
+		const t = c.getTransform();
+		c.clearRect(
+			...reverseTransform(0, 0),
+			canvas.width / window.devicePixelRatio,
+			canvas.height / window.devicePixelRatio
+		);
 		c.fillStyle = colors.background;
-		c.fillRect(-c.getTransform().e, -c.getTransform().f, canvas.width, canvas.height);
+		c.fillRect(
+			...reverseTransform(0, 0),
+			canvas.width / window.devicePixelRatio,
+			canvas.height / window.devicePixelRatio
+		);
 	},
 
 	draw_segment: function (seg1) {

@@ -1,13 +1,7 @@
 objTypes["lens"] = {
 	create: function (
-		point1 = graphs.point(
-			canvas.width / 2 - c.getTransform().e,
-			canvas.height / 3 - c.getTransform().f
-		),
-		point2 = graphs.point(
-			canvas.width / 2 - c.getTransform().e,
-			(canvas.height * 2) / 3 - c.getTransform().f
-		),
+		point1 = graphs.point(...reverseTransform(dispalyWidth / 2, displayHeight / 3)),
+		point2 = graphs.point(...reverseTransform(dispalyWidth / 2, (displayHeight * 2) / 3)),
 		f = 200,
 		uid = uidGen()
 	) {

@@ -1,13 +1,7 @@
 objTypes["planeDiopter"] = {
 	create: function (
-		p1 = graphs.point(
-			canvas.width / 2 - c.getTransform().e,
-			canvas.height / 3 - c.getTransform().f
-		),
-		p2 = graphs.point(
-			canvas.width / 2 - c.getTransform().e,
-			(canvas.height * 2) / 3 - c.getTransform().f
-		),
+		p1 = graphs.point(...reverseTransform(dispalyWidth / 2, displayHeight / 3)),
+		p2 = graphs.point(...reverseTransform(dispalyWidth / 2, (displayHeight * 2) / 3)),
 		n1 = 1,
 		n2 = 1.5,
 		uid = uidGen()

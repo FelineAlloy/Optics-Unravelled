@@ -17,14 +17,8 @@ objTypes["beam"] = {
 	},
 
 	create: function (
-		p1 = graphs.point(
-			canvas.width / 2 - c.getTransform().e,
-			(canvas.height * 2) / 3 - c.getTransform().f
-		),
-		p2 = graphs.point(
-			canvas.width / 2 - c.getTransform().e,
-			canvas.height / 3 - c.getTransform().f
-		),
+		p1 = graphs.point(...reverseTransform(dispalyWidth / 2, (displayHeight * 2) / 3)),
+		p2 = graphs.point(...reverseTransform(dispalyWidth / 2, displayHeight / 3)),
 		rayNr = 5,
 		track_deflection = false,
 		track_extended = false,

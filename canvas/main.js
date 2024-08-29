@@ -16,17 +16,26 @@ respondToVisibility = function (element, callback) {
 
 respondToVisibility(canvas, (visible) => {
 	if (visible) {
-		canvas.height = canvas.parentElement.clientHeight;
-		canvas.width = canvas.parentElement.clientWidth;
+		canvas_resize();
 		updateSimulation();
 	}
 });
 
 window.addEventListener("resize", () => {
-	const t = c.getTransform();
-	canvas.height = canvas.parentElement.clientHeight;
-	canvas.width = canvas.parentElement.clientWidth;
-	c.setTransform(t.a, t.b, t.c, t.d, t.e, t.f);
+	dispalyWidth = canvas.parentElement.clientWidth;
+	displayHeight = canvas.parentElement.clientHeight;
+	canvas_resize();
+	if (canvas.id === "editor") {
+		const t = c.getTransform();
+		c.setTransform(
+			t.a,
+			t.b,
+			t.c,
+			t.d,
+			canvas.width / 2 - 483 * window.devicePixelRatio,
+			canvas.height / 2 - 200 * window.devicePixelRatio
+		);
+	}
 	updateSimulation();
 });
 
@@ -98,7 +107,7 @@ const mouse_down = function (event) {
 	const obj_prev = selected.obj;
 
 	selected.obj = getSelectedObject(
-		graphs.point(mouse.x - c.getTransform().e, mouse.y - c.getTransform().f) // get the coresponding position inside canvas space
+		graphs.point(...reverseTransform(mouse.x, mouse.y)) // get the coresponding position inside canvas space
 	);
 
 	if (selected.obj != null) {
@@ -187,7 +196,15 @@ canvas.addEventListener("touchcancel", mouse_out, { passive: false });
 // ------- Simulation Init -------
 
 if (canvas.id === "editor") {
-	c.setTransform(1, 0, 0, 1, canvas.width / 2 - 510, canvas.height / 2 - 200);
+	const t = c.getTransform();
+	c.setTransform(
+		t.a,
+		t.b,
+		t.c,
+		t.d,
+		canvas.width / 2 - 483 * window.devicePixelRatio,
+		canvas.height / 2 - 200 * window.devicePixelRatio
+	);
 	updateSimulation();
 } else {
 	importContent("./canvas/examples/" + canvas.id + ".json").then((data) => {

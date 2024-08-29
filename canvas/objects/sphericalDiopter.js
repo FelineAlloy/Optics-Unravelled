@@ -1,13 +1,7 @@
 objTypes["sphericalDiopter_real"] = {
 	create: function (
-		point1 = graphs.point(
-			canvas.width / 3 - c.getTransform().e,
-			canvas.height / 2 - c.getTransform().f
-		),
-		point2 = graphs.point(
-			(canvas.width * 2) / 3 - c.getTransform().e,
-			canvas.height / 2 - c.getTransform().f
-		),
+		point1 = graphs.point(...reverseTransform(dispalyWidth / 3, displayHeight / 2)),
+		point2 = graphs.point(...reverseTransform((dispalyWidth * 2) / 3, displayHeight / 2)),
 		angle = Math.PI / 6,
 		n1 = 1,
 		n2 = 1.5,

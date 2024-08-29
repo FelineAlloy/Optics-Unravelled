@@ -70,7 +70,15 @@ document.getElementById("reset").addEventListener("click", function () {
 	ray_alpha = 0.3;
 	document.getElementById("rayAlpha").value = ray_alpha;
 
-	c.setTransform(1, 0, 0, 1, canvas.width / 2 - 510, canvas.height / 2 - 200);
+	const t = c.getTransform();
+	c.setTransform(
+		t.a,
+		0,
+		0,
+		t.d,
+		canvas.width / 2 - 483 * window.devicePixelRatio,
+		canvas.height / 2 - 200 * window.devicePixelRatio
+	);
 
 	updateSimulation();
 });

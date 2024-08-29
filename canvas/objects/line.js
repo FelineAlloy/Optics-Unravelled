@@ -1,10 +1,7 @@
 objTypes["line"] = {
 	create: function (
-		point1 = graphs.point(-c.getTransform().e, canvas.height / 2 - c.getTransform().f),
-		point2 = graphs.point(
-			canvas.width - c.getTransform().e,
-			canvas.height / 2 - c.getTransform().f
-		),
+		point1 = graphs.point(...reverseTransform(0, displayHeight / 2)),
+		point2 = graphs.point(...reverseTransform(dispalyWidth, displayHeight / 2)),
 		spaceLength = 10,
 		dashLength = 15,
 		thickness = 1,

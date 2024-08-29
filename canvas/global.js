@@ -1,8 +1,9 @@
 const canvas = document.getElementsByTagName("canvas")[0]; // due to how other parts are implemented we only suport one canmvas per page
 const c = canvas.getContext("2d");
 
-canvas.width = canvas.parentElement.clientWidth;
-canvas.height = canvas.parentElement.clientHeight;
+let dispalyWidth = canvas.parentElement.clientWidth;
+let displayHeight = canvas.parentElement.clientHeight;
+canvas_resize();
 
 const colors = {
 	rays: "red",
