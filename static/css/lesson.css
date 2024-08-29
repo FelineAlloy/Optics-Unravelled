@@ -75,10 +75,15 @@ iframe {
 	line-height: inherit;
 }
 
+/* Popup styles */
 .tooltip {
 	--bs-tooltip-bg: var(--primary-100);
 	--bs-tooltip-color: var(--primary-900);
+	opacity: 1 !important;
+}
 
+.popup-img {
+	max-width: 180px;
 }
 
 /* Side menu styles */
@@ -123,6 +128,10 @@ iframe {
 #content b {
 	font-weight: 600;
 	color: var(--primary-400);
+}
+
+#content h2 a {
+	text-decoration: none;
 }
 
 .dropdown {
