@@ -10,8 +10,11 @@ function canvas_resize() {
 	canvas.width = canvas.parentElement.clientWidth * dpr;
 	canvas.height = canvas.parentElement.clientHeight * dpr;
 
+	// Scale down for smaller devices
+	if (canvas.parentElement.clientWidth < 966) scale = canvas.parentElement.clientWidth / 966;
+
 	// Scale the context to ensure correct drawing operations
-	c.setTransform(dpr, t.b, t.c, dpr, t.e, t.f);
+	c.setTransform(dpr * scale, t.b, t.c, dpr * scale, t.e, t.f);
 
 	// "Drawn" size of the canvas will be 100%, as set by CSS
 }

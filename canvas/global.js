@@ -3,6 +3,7 @@ const c = canvas.getContext("2d");
 
 let dispalyWidth = canvas.parentElement.clientWidth;
 let displayHeight = canvas.parentElement.clientHeight;
+let scale = 1;
 canvas_resize();
 
 const colors = {

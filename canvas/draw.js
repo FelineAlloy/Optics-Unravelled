@@ -5,14 +5,14 @@ const artist = {
 		const t = c.getTransform();
 		c.clearRect(
 			...reverseTransform(0, 0),
-			canvas.width / window.devicePixelRatio,
-			canvas.height / window.devicePixelRatio
+			canvas.width / window.devicePixelRatio / scale,
+			canvas.height / window.devicePixelRatio / scale
 		);
 		c.fillStyle = colors.background;
 		c.fillRect(
 			...reverseTransform(0, 0),
-			canvas.width / window.devicePixelRatio,
-			canvas.height / window.devicePixelRatio
+			canvas.width / window.devicePixelRatio / scale,
+			canvas.height / window.devicePixelRatio / scale
 		);
 	},
 
