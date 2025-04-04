@@ -16,7 +16,7 @@ Optics Unravelled este o platforma ce facilitează procesul de învățare și p
 -   [Node.js](https://nodejs.org/en) - completarea template-urilor pe partea de server
 -   [Nunjucks](https://mozilla.github.io/nunjucks/) - crearea și utilizarea de template-uri pentru construcția eficientă a lecțiilor
 -   [Mathjax](https://www.mathjax.org/) - Redarea formulelor matematice
--   [ray-optics](https://github.com/ricktu288/ray-optics) - proiect open source bazat pe elementul `<canvas>` pentru funcționalitatea de simulări optice
+-   [ray-optics](https://github.com/ricktu288/ray-optics) - proiect open source bazat pe elementul `<canvas>` pentru funcționalitatea de simulări optice (folosit ca inspiratie pentru implementarea proprie)
 
 ## Realizatori
 
@@ -27,7 +27,8 @@ Optics Unravelled este o platforma ce facilitează procesul de învățare și p
 
 ## Contribuții Originale
 
-Cu excepția modulului ray-optics preluat cu liceență open-source, toate materialele sunt originale și create de autor, inclusiv exemplele de simulări din fiecare lecție.
+Simularile interactive sunt implementate de autor, cu cateva concepte preluate din modululu ray-optics cu liceență open-source. \
+Toate materialele sunt originale și create de autor, inclusiv exemplele de simulări din fiecare lecție.
 
 ## Instructiuni
 
